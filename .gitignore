@@ -1,0 +1,17 @@
+# build output
+build/
+dist/
+*.class
+*.jar
+*.zip
+
+# headless test run directories
+*testrun/
+testserver/
+diagtest/
+logitestrun/
+cmdtestrun/
+maptestrun/
+
+# local toolchain
+.cache/

@@ -1,0 +1,164 @@
+Singularity v8.3-beta — 测试记录 / test log (Mindustry v160.5 official headless server)
+生成时间: 2026-10-07 04:43 UTC
+
+================================================================================
+1) test_server.sh — 全量套件 + v8.3 新增探针
+================================================================================
+[10-07-2026 04:25:18] [I] v7.8 content: loom="Cycle Turret" well="Gravity Well" replacement unit="Aurora Heavy" hp=9000, renamed heavy="Detainer" -> one of each, old unit deleted
+[10-07-2026 04:25:20] [I] v7.8 detainer price: auritex4320 resonance-shardx4480 prism-alloyx2540 concord-corex1150 -> cost value 18380 vs a vanilla T5 reconstructor run 2635 -> far above a vanilla T5
+[10-07-2026 04:25:22] [I] power nodes: small[range=6.5 links=10 size=1] large[range=16 links=24 size=2] -> the large node is a real upgrade
+[10-07-2026 04:25:24] [I] resonance hub staged: radius 27 tiles, bank 0/1000, 3 friendly sentries vs 5 hostiles in range, one wall at 200/400 hp
+[10-07-2026 04:25:44] [I] resonance field: fighting charged the hub to 516/1000 (already pulsed and recharging=false, cooldown 7 s), pulse -> 3 friendly units overloaded, damaged wall 200 -> 248 hp -> the new mechanic charges from combat and pays out
+[10-07-2026 04:25:48] [I] v7.8 units: prism-scout[moved 138 shots 6 hp 480] aurite-lancer[moved 93 shots 3 hp 1750] resonance-siege[moved 58 shots 1 hp 4200] lumen-courier[moved 366 shots 0 hp 620] aurora-sentry[moved 492 shots 16 hp 560] 
+[10-07-2026 04:25:52] [I] v8.0 campaign: 32 sectors, duplicate ids=0, landable sectors=32, landable outside the campaign=0, threat curve 10:0.19 41:0.22 83:0.19 11:0.28 18:0.3 32:0.31 13:0.27 59:0.29 30:0.4 52:0.34 33:0.36 4:0.38 50:0.49 24:0.51 89:0.47 5:0.5 87:0.52 1:0.59 14:0.59 17:0.58 21:0.68 61:0.7 81:0.73 73:0.74 37:0.74 60:0.78 80:0.82 47:0.84 72:0.8 91:0.84 43:0.91 65:0.9 -> at least 30 unique playable sectors
+[10-07-2026 04:25:56] [I] [blackhole/aurelia] campaign sector 10 (280x280) generated: 3 spawns in the fair band, about 103 tiles out, 2115 aurite, 1828 lumenite, 1914 resonance, 1304 bed, 8998 water, 25485 silt, ore per quadrant 1396/1778/1400/1440, 6 pockets joined, 53054 new-ground tiles in 7 kinds, 157 wall ore, all connected.
+[10-07-2026 04:25:56] [I] [blackhole/aurelia] campaign sector 18 (284x284) generated: 2 spawns in the fair band, about 105 tiles out, 1863 aurite, 1673 lumenite, 1504 resonance, 1333 bed, 23199 water, 23573 silt, ore per quadrant 1230/1229/1512/1219, 8 pockets joined, 43316 new-ground tiles in 7 kinds, 150 wall ore, all connected.
+[10-07-2026 04:25:57] [I] [blackhole/aurelia] campaign sector 30 (300x300) generated: 3 spawns in the fair band, about 111 tiles out, 1795 aurite, 1708 lumenite, 1681 resonance, 1281 bed, 20879 water, 26970 silt, ore per quadrant 1601/1247/1304/1236, 3 pockets joined, 53770 new-ground tiles in 7 kinds, 204 wall ore, all connected.
+[10-07-2026 04:25:58] [I] [blackhole/aurelia] campaign sector 50 (292x292) generated: 4 spawns in the fair band, about 108 tiles out, 1668 aurite, 1477 lumenite, 1048 resonance, 1299 bed, 19726 water, 22864 silt, ore per quadrant 966/1132/1041/1209, 5 pockets joined, 46958 new-ground tiles in 7 kinds, 155 wall ore, all connected.
+[10-07-2026 04:25:59] [I] [blackhole/aurelia] campaign sector 87 (316x316) generated: 3 spawns in the fair band, about 116 tiles out, 1435 aurite, 1530 lumenite, 1187 resonance, 1297 bed, 21088 water, 31528 silt, ore per quadrant 1011/1015/1231/1077, 4 pockets joined, 61911 new-ground tiles in 7 kinds, 182 wall ore, all connected.
+[10-07-2026 04:25:59] [I] [blackhole/aurelia] campaign sector 21 (320x320) generated: 5 spawns in the fair band, about 118 tiles out, 2021 aurite, 1588 lumenite, 1624 resonance, 1270 bed, 28113 water, 29835 silt, ore per quadrant 1249/1548/1262/1369, 17 pockets joined, 56231 new-ground tiles in 7 kinds, 195 wall ore, all connected.
+[10-07-2026 04:26:00] [I] [blackhole/aurelia] campaign sector 37 (316x316) generated: 4 spawns in the fair band, about 116 tiles out, 1598 aurite, 1399 lumenite, 1230 resonance, 1325 bed, 25228 water, 25949 silt, ore per quadrant 1297/1037/1055/1020, 6 pockets joined, 55045 new-ground tiles in 7 kinds, 182 wall ore, all connected.
+[10-07-2026 04:26:01] [I] [blackhole/aurelia] campaign sector 72 (328x328) generated: 5 spawns in the fair band, about 121 tiles out, 1503 aurite, 1509 lumenite, 1049 resonance, 1309 bed, 20279 water, 30914 silt, ore per quadrant 1048/1064/1080/1080, 12 pockets joined, 66470 new-ground tiles in 7 kinds, 211 wall ore, all connected.
+[10-07-2026 04:26:01] [I] v8.0 sampled maps: [10 280x280 spawns=3 dist 102-106 open middle=2068 ore/quad 1373/1703/1382/1399 kinds=7 wallore=157 sig=592701213] [18 284x284 spawns=2 dist 100-101 open middle=1953 ore/quad 1199/1210/1460/1171 kinds=7 wallore=150 sig=351786578] [30 300x300 spawns=3 dist 108-116 open middle=1585 ore/quad 1516/1211/1255/1202 kinds=7 wallore=204 sig=673200173] [50 292x292 spawns=4 dist 91-125 open middle=1900 ore/quad 926/1119/997/1151 kinds=7 wallore=155 sig=567341398] [87 316x316 spawns=3 dist 112-123 open middle=1683 ore/quad 970/941/1187/1054 kinds=7 wallore=182 sig=817478564] [21 320x320 spawns=5 dist 106-127 open middle=2014 ore/quad 1202/1494/1222/1315 kinds=7 wallore=195 sig=994766794] [37 316x316 spawns=4 dist 111-125 open middle=1754 ore/quad 1228/996/1007/996 kinds=7 wallore=182 sig=670678364] [72 328x328 spawns=5 dist 120-138 open middle=1997 ore/quad 979/970/1062/1050 kinds=7 wallore=211 sig=324720385] -> every sampled sector is unique and balanced: fair spawn distances, open middle, even ore
+[10-07-2026 04:28:25] [I] collector staged at 146,144: ground levelled to bare plate, lumenite field to the east, aurite field to the north, facing east
+[10-07-2026 04:28:28] [I] v7.9 collector selector: facing east offers[ lumenite ] mining lumenite, turned north offers[ aurite ] mining aurite -> the choices are the ground in the cone, live
+[10-07-2026 04:28:31] [I] v7.9 collector on bare ground: offers 0 ores, mining nothing -> an empty cone offers nothing instead of a hard-coded list
+[10-07-2026 04:28:33] [I] v7.9 wall ore: 25 solid wall tiles carrying aurite, wallDrop=aurite, collector offers[ aurite ], locks on 3 wall tiles and lifted 1 aurite out of the rock after 7 ticks -> walls with ore in them are mineable
+[10-07-2026 04:28:37] [I] v7.9 terrain: 7 new floors [ Salt Flat Ember Ash Frost Crust Aurite Gravel Resonance Silt Plasma Vent Basalt Shelf ], 3 rock walls, 3 wall ores -> all present and typed correctly
+[10-07-2026 04:28:39] [I] v7.9 units: terra-borer[hp 1900 40s] glass-harrier[hp 430 28s] basalt-guard[hp 5200 85s] vent-caller[hp 2400 70s], borer mineWalls=true tier=5 -> four new units, all printable and researched
+[10-07-2026 04:28:41] [I] v7.9 new units live: terra-borer[moved 72 shots 4 hp 1900] glass-harrier[moved 615 shots 20 hp 430] basalt-guard[moved 68 shots 4 hp 5200] vent-caller[moved 205 shots 2 hp 2400] 
+[10-07-2026 04:28:45] [I] v7.9 cleanup: 4 smart transport blocks removed, leftover bundle keys=0 -> gone from content and from the bundles
+[10-07-2026 04:28:47] [I] probe state: playing paused=false delta=1 core=true unit cap=200 units alive=5
+[10-07-2026 04:28:49] [I] v8.0 blocks: wall-bore[2x2 production lumenitex120,auritex95,prism-glassx55] lumen-cargo-station[3x3 distribution lumenitex180,auritex120,resonance-shardx30,prism-alloyx45] lumen-cargo-point[1x1 distribution lumenitex24,prism-glassx16] lumen-mend-dome[3x3 effect lumenitex160,prism-glassx70,resonance-shardx25,prism-alloyx60] lumen-accumulator[3x3 power lumenitex120,auritex160,prism-glassx60,resonance-shardx20] ground-well[2x2 liquid lumenitex60,auritex45,prism-glassx30] -> all present, aurelia priced, researched, in the database
+[10-07-2026 04:28:51] [I] v8.0 retrofit: unloader category=distribution group=transportation, aurelia buildSpeedMultiplier=2 -> unloader is a transport block, building is 2x
+[10-07-2026 04:28:53] [I] v8.0 wall bore: 12 ore-bearing wall tiles in front, canPlaceOn=true, lasers lock on [150,145 150,146], lifted 2 aurite out of the rock after 190 ticks -> the wall drill works
+[10-07-2026 04:28:59] [I] v8.0 absorber wall: ceiling=2600 absorbed damage, cooling 21/s; took 2406 shots in 1203 ticks (charge 0) -> went inert at heat 2600, power while inert=0 (peak output before that 2.58), came back after 480 ticks -> bounded: it overheats, goes dead, then recovers
+[10-07-2026 04:29:09] [I] v8.1 logistics hub: drone type=lumen-drone built in 960 ticks -> 1 drone(s), controller PorterAI, hp 180, request pad asks for lumenite, nodes seen=1 -> the drone network is online
+[10-07-2026 04:29:13] [I] Game over! Reached wave 2 with 0 players online on map Aurelia; Sector 72.
+[10-07-2026 04:29:13] [I] Selected next map to be Molten Lake.
+[10-07-2026 04:29:17] [I] v8.0 support tier: mender range 5 tiles 3.6 %/s vs dome range 20 tiles 12 %/s; cell buffer 1200 vs accumulator 14000 (11.7x) -> the large versions are a real step up
+[10-07-2026 04:29:19] [I] v8.0 repair dome: wall at 160/400 hp -> 400 hp after 257 ticks -> it repairs buildings
+[10-07-2026 04:29:25] [I] v8.0 ground well on frost-crust (water attribute 0.3, liquid tiles under it 0, efficiency 1): pumped 1 tidewater in 5 ticks -> water on dry land, away from any lake
+[10-07-2026 04:29:31] [I] v8.0 unit control: 39 units checked, 6 start working on their own; workers: lumen-pilot[move,mine,rebuild,assist,enterPayload,loadUnits,loadBlocks,unloadPayload,loopPayload default=move] mote[move,mine,rebuild,assist,enterPayload,loadUnits,loadBlocks,unloadPayload,loopPayload default=move] bastion-pilot[move,mine,rebuild,assist,enterPayload,loadUnits,loadBlocks,unloadPayload,loopPayload default=mine] lumen-courier[move,mine,rebuild,assist,enterPayload,loadUnits,loadBlocks,unloadPayload,loopPayload default=mine] terra-borer[move,mine,rebuild,assist,enterPayload,loadUnits,loadBlocks,unloadPayload,loopPayload default=mine] lumen-medic[move,rebuild,assist,repair,enterPayload,loadUnits,loadBlocks,unloadPayload,loopPayload default=rebuild] aurite-wright[move,mine,rebuild,assist,repair,enterPayload,loadUnits,loadBlocks,unloadPayload,loopPayload default=mine] citadel-pilot[move,mine,rebuild,assist,enterPayload,loadUnits,loadBlocks,unloadPayload,loopPayload default=mine] tessellus[move,mine,rebuild,assist,enterPayload default=move] -> every capability is exposed as a command
+[10-07-2026 04:29:34] [I] v8.0 new units: lumen-medic[hp 760 32s moved 328] aurite-wright[hp 1500 36s moved 66] -> printable, researched and alive
+[10-07-2026 04:29:39] [I] v8.0 rename: name="Detainer" hp=38000 speed=0.66 armor=16 T6 marked=true -> renamed, tier marking kept, stats untouched
+[10-07-2026 04:29:41] [I] v8.0 depth audit: items with a consumer=22/22, liquids with a consumer=6/6 -> nothing this mod produces is a dead end
+[10-07-2026 04:29:44] [I] v8.3 waste sources: silt-kiln[prism-glassx1 industrial-wastex1] plasma-mixer[prism-alloyx1 industrial-wastex1] prism-press[prism-glassx2 industrial-wastex1] -> waste only ever appears as a by-product of production
+[10-07-2026 04:29:46] [I] v8.3 waste chain: waste-reclaimer[1 metal-swarf in 70 ticks] swarf-furnace[1 aurite in 81 ticks] leach-tower[0.15 lumen-slurry in 1 ticks] slurry-crystalliser[2 lumenite in 76 ticks] resonance-resynthesiser[1 resonance-shard in 151 ticks] prism-reformer[2 prism-alloy in 121 ticks]
+[10-07-2026 04:29:58] [I] v8.3 chain depth: 6 machines from waste to prism alloy: waste-reclaimer{industrial-wastex4 -> metal-swarf,slag-dust} swarf-furnace{metal-swarfx3 -> aurite,aurite} leach-tower{slag-dustx3,tidewaterx14/s -> lumen-slurry} slurry-crystalliser{lumen-slurryx12/s -> lumenite,lumenite} resonance-resynthesiser{lumenitex4,auritex3,lumen-slurryx16/s -> resonance-shard,resonance-shard} prism-reformer{resonance-shardx2,prism-glassx6,lumen-slurryx10/s -> prism-alloy,prism-alloy} -> deep chain, no single machine turns waste into everything
+[10-07-2026 04:30:01] [I] v8.3 waste silo: capacity 900 accepts waste=true accepts lumenite=false stored=500 -> a dedicated buffer for the recycling line
+[10-07-2026 04:30:04] [I] v8.3 core mining: ores=lumenite(h2),aurite(h2),resonance-shard(h4) aurelia-core/lumen-pilot[tier 3 walls=false -> lumenite,aurite] aurelia-bastion/bastion-pilot[tier 3 walls=false -> lumenite,aurite] aurelia-citadel/citadel-pilot[tier 3 walls=true -> lumenite,aurite] best drill tier=5 hardest ore=4 -> no core mines every grade, drills still cover them all
+[10-07-2026 04:30:07] [I] v8.3 pilots: lumen[tier 3 speed 6.2] bastion[tier 3 speed 11] citadel[tier 3 speed 12 walls=true] -> each pilot has its own niche, resonance always needs a drill
+[10-07-2026 04:30:09] [I] v8.3 citadel core: size 4->5->6 storage 8000->16000->26000 unitCap +54 hp 28000 pilot=citadel-pilot cost=lumenitex9000,auritex7000,resonance-shardx2400,prism-alloyx3000,concord-corex1200 -> a real tier-3 core, priced in aurelia items
+[10-07-2026 04:30:11] [I] v8.3 citadel pilot: plan 70s [lumenitex420,auritex320,prism-alloyx140,resonance-shardx90] hp 1500 moved 367 shots 0 -> printable, flies and shoots
+[10-07-2026 04:30:15] [I] v8.3 citadel placed at 150,146: build=AureliaCoreBuild storage=26000 team unit cap now 62 alive=true -> the tier-3 core stands and counts
+[10-07-2026 04:30:19] [I] v8.3 ward dome stats: radius 26 tiles, bank 7000, regen 9/s, break cooldown 14 s, coolant=aurora-coolant(+8 tiles, x1.899999976158142), item=resonance-shard(+5200 for 22 s) -> bounded: a cap and a cool-down, both finite
+[10-07-2026 04:30:21] [I] v8.3 ward dome live: regen 9/s, bank filled to 7000 -> took 294 hostile shots in 147 ticks, swallowed 7000 damage, broke=true (cooldown 14 s), dead 120 ticks later=true, came back empty after 720 more ticks with bank 0 -> it shields, the bank runs out, the dome goes down and returns
+[10-07-2026 04:30:35] [I] v8.3 ward dome boosts: radius 26 -> 34 tiles with coolant, bank 7000 -> 12200 with a shard (22 s left) -> both upgrades work and both are capped
+[10-07-2026 04:30:39] [I] v8.3 ground well: pumps 17.5/s (8.2 was 7.00/s, x2.5), base efficiency 0.4000000059604645 -> runs on every floor
+[10-07-2026 04:30:41] [I] v8.3 astro restored: AstroUI=true PanelView=true TacticalBrain=true TacticalCommander=true warp targeting=true command block=astro-commander[3x3] name="Tactical Command Core" panel="DETAINER" settings="Detainer pilot panel" factory="Lumen Superfactory" -> panel, settings, warp picker and the tactical brain are all back
+[10-07-2026 04:30:43] [I] v8.3 tactical command core: placed at 149,140 build=CommanderBuild alive after 240 ticks=true -> the restored command block runs
+[10-07-2026 04:30:46] [I] Saved to config/saves/1.msav.
+[10-07-2026 04:30:49] [I] Stopped server.
+[10-07-2026 04:30:51] [I] Save loaded.
+[10-07-2026 04:30:51] [I] Opened a server on port 6567.
+[10-07-2026 04:31:01] [I] after reload: {} fabricator=null
+[10-07-2026 04:31:03] [I] Shutting down server.
+TEST PASSED: Singularity v8.3-beta on v160.5 headless
+
+================================================================================
+2) cmdtest.sh — v8.2 指挥 / 投影仪 / 泰坦套件（回归）
+================================================================================
+================ RESULTS ================
+[10-07-2026 04:32:31] [I] v8.2 blocks: lumen-accelerator[2x2 effect hp320 lumenitex130,auritex60,prism-glassx75] prism-overcharger[3x3 effect hp760 lumenitex320,auritex210,resonance-shardx60,prism-alloyx95] -> present, aurelia priced, researched, named
+[10-07-2026 04:32:34] [I] v8.2 titan: Prism Monolith hp=24000 armor=15 speed=0.44 hitSize=44 range=310 rotateSpeed=0.8 weapons=3 abilities=1 flying=false targetAir=true plan=150s lumenitex1100,auritex850,prism-alloyx420,resonance-shardx220 -> ok
+[10-07-2026 04:32:37] [I] v8.2 balance: monolith hp=24000 armor=15 rawDps=344 | detainer hp=38000 armor=16 rawDps=694 -> titan sits under the detainer
+[10-07-2026 04:32:40] [I] v8.2 titan spawned: hp=24000 at 155,146 target at 170,146 mounts=3
+[10-07-2026 04:32:43] [I] v8.2 lance vent: shots over 1200 ticks=8 trace[0:1 150:2 300:3 450:4 600:5 750:6 900:7 1050:8]  -> fires in bursts, vents between them (bounded)
+[10-07-2026 04:32:49] [I] v8.2 air pods: shots over 300 ticks=13 (both shoulder pods live)
+[10-07-2026 04:32:53] [I] v8.2 accelerator: victim=prism-press baseScale=1 boosted=1.5 range=11 tiles
+[10-07-2026 04:32:57] [I] v8.2 overcharger: stacked scale=2.1 hard cap=2.6 -> capped, projectors do not stack past the ceiling
+[10-07-2026 04:33:01] [I] v8.2 drone flags: playerControllable=true logicControllable=true allowChangeCommands=true commands=6 -> controllable
+[10-07-2026 04:33:04] [I] v8.2 hub drone: lumen-drone controller=PorterAI commandable=true -> can be selected and ordered
+[10-07-2026 04:33:09] [I] v8.2 drone order: ordered 24.2 tiles away, closest approach 0.6 tiles, back home at 22.3 tiles, controller=PorterAI -> flew to the ordered point, then returned to hauling
+[10-07-2026 04:33:14] [I] v8.2 drone release: controller=PorterAI carrying=0 -> back on the logistics network
+[10-07-2026 04:33:18] [I] v8.2 conservation start: total items in the network=120
+[10-07-2026 04:33:22] [I] v8.2 conservation after 30s: total=120 (start 120) supply=120 vault=0 hub=0 dispatched=0 -> nothing created, nothing voided
+[10-07-2026 04:33:28] [I] v8.2 hub removed: items before=120 accounted after=120 in network (core holds 480)  -> cargo was handed over, not voided
+[10-07-2026 04:33:34] [I] v8.2 loop probe: vault 200, request pad asking for lumenite
+[10-07-2026 04:33:38] [I] v8.2 loop check: dispatch counts per 10s [1 1 1 1 1 1] deltas [0 0 0 0 0] vault=140 pad=60 -> the network settles, no endless shuttling
+[10-07-2026 04:33:48] [I] v8.2 launch loadout: registered=1 schematic(s), universe picks Aurelia Core costing [lumenitex3000 auritex2000 prism-alloyx600] valid=true -> paid for in Aurelia resources
+[10-07-2026 04:33:53] [I] v8.2 launch payload cleanup: carried=[blackhole-lumenitex200] -> vanilla items are stripped from the Aurelia launch payload
+[10-07-2026 04:33:57] [I] v8.2 launch items offered on aurelia=22 [degenerate-matter hawking-dust singularity-core aegis-alloy signal-core lumenite...] vanilla among them=0
+[10-07-2026 04:34:01] [I] v8.2 text audit: 242 own content, missing/raw=0
+================ VERDICT ================
+CMDTEST PASSED: Singularity v8.3-beta command suite
+
+================================================================================
+3) logitest.sh — v8.1 物流守恒套件（回归）
+================================================================================
+v8.1 blocks: lumen-supply-post[2x2 distribution lumenitex55,prism-glassx30] lumen-buffer-post[2x2 distribution lumenitex80,auritex40,prism-glassx35] lumen-logistics-vault[3x3 distribution lumenitex210,auritex140,prism-alloyx40] lumen-liquid-relay[2x2 liquid lumenitex70,prism-glassx45,resonance-shardx12] lumen-tank[2x2 liquid lumenitex60,prism-glassx40] lumen-reservoir[3x3 liquid lumenitex180,auritex90,prism-alloyx30] lumen-overflow-gate[1x1 distribution lumenitex14,prism-glassx8] lumen-underflow-gate[1x1 distribution lumenitex14,prism-glassx10] -> all present, aurelia priced, researched, in the database
+v8.1 hub: built 1 drone(s) in 960 ticks, type=lumen-drone, tethered=true, controller=PorterAI
+v8.1 network laid out: supply post at 162,140 with 120 lumenite, request pad at 144,144 asking for lumenite, drone at 150,140
+v8.1 haul after 25s: nodes seen=3 requests=0, drone moved 8 world units, carrying nothing, supply post has 60, request pad has 60, hub dispatched 1 hauls -> the drones transport
+v8.1 haul after 45s: supply post 60 left, request pad holds 60, hub dispatched 1 hauls, drones=1
+v8.1 vault placed at 157,131, hub stocked with 90 surplus aurite, vault holds 0
+v8.1 surplus: hub holds 0, vault holds 90 (90 aurite), dispatched 2 -> active provider pushes surplus into storage
+v8.1 hauler spawned unattached: controller=PorterAI home=none cap=220
+v8.1 hauler adoption: home=lumen-cargo-station at 153,140, hub drone list=2 -> a stray hauler is adopted by the nearest hub
+v8.1 liquid relay: distance 16 tiles with no pipe, source 291, far relay received 9 after 1 ticks, links=1 -> wireless liquid transport works
+v8.1 liquid stores: tank 2x2 1500 units, reservoir 3x3 6500 units (4.3x)
+v8.1 gates: overflow invert=false class=ModelOverflowGate, underflow invert=true -> vanilla overflow mechanics, both 3D
+v8.1 overflow gate live: accepts=false, items held=0 -> it passes rather than hoards
+v8.1 lattice stats: bank=1400, intake ceiling=3000, cooling 24/s, overload downtime 7s, wave lockout 5s
+v8.1 lattice nerf: took 126 shots in 42 ticks, 1 discharge(s) -> field collapsed (downtime 420 ticks), recovered after 420 ticks, fieldUp now=true -> bounded, it can no longer tank forever
+v8.1 detainer: name=
+v8.1 text audit: 231 own content checked, missing/raw names or descriptions=0, abilities showing a class name=0 -> every ability is named
+v8.1 rename: astro-fabricator is now 
+v8.1 new units: lumen-hauler[hp 520 34s in aurelia-fabricator] aurite-vanguard[hp 4200 52s in aurelia-fabricator] tide-tender[hp 980 40s in tide-dock] -> all three printable and researched
+v8.1 new units live: aurite-vanguard[moved 69 shots 10 hp 4200] lumen-hauler[moved 291 shots 0 hp 520] 
+v8.1 tide tender: naval=true on aurora-sand-water shots 2 alive
+v8.1 unit audit: 40 own units, not printable anywhere=2 (lumen-pilot bastion-pilot) -> every visible unit has a factory
+---- exceptions ----
+LOGITEST PASSED: Singularity v8.3-beta logistics suite
+
+================================================================================
+4) maptest.sh — 战役地形生成（回归，仅尾部）
+================================================================================
+[10-07-2026 04:37:44] [I] sector 1 316x316 ms=931 wall=22192(22%) water=10550 deep=2958 spawns=4 kinds=14 ore={"wall-ore-resonance":43,"ore-lumenite":2078,"ore-aurite":2702,"wall-ore-aurite":61,"wall-ore-lumenite":67,"ore-resonance":2140} core=142,148
+[10-07-2026 04:37:50] [I] sector 4 292x292 ms=514 wall=19139(22%) water=24591 deep=9796 spawns=3 kinds=14 ore={"wall-ore-aurite":44,"ore-aurite":1675,"ore-resonance":1238,"wall-ore-lumenite":56,"ore-lumenite":1682,"wall-ore-resonance":57} core=130,115
+[10-07-2026 04:37:57] [I] sector 5 300x300 ms=642 wall=20520(23%) water=13489 deep=1995 spawns=4 kinds=14 ore={"ore-aurite":1850,"wall-ore-resonance":53,"ore-lumenite":1608,"wall-ore-aurite":72,"wall-ore-lumenite":54,"ore-resonance":1402} core=176,128
+[10-07-2026 04:38:04] [I] sector 10 280x280 ms=430 wall=17544(22%) water=8998 deep=1746 spawns=3 kinds=14 ore={"wall-ore-resonance":55,"ore-resonance":1914,"wall-ore-aurite":53,"wall-ore-lumenite":49,"ore-aurite":2115,"ore-lumenite":1828} core=142,139
+[10-07-2026 04:38:11] [I] sector 11 288x288 ms=432 wall=19587(24%) water=22007 deep=10743 spawns=2 kinds=14 ore={"wall-ore-lumenite":49,"wall-ore-aurite":60,"ore-aurite":2156,"wall-ore-resonance":41,"ore-resonance":1715,"ore-lumenite":1818} core=122,146
+[10-07-2026 04:38:18] [I] sector 13 300x300 ms=444 wall=19494(22%) water=17610 deep=6276 spawns=2 kinds=14 ore={"ore-aurite":1793,"wall-ore-lumenite":80,"wall-ore-aurite":44,"wall-ore-resonance":46,"ore-resonance":864,"ore-lumenite":1656} core=173,176
+[10-07-2026 04:38:25] [I] sector 14 312x312 ms=437 wall=21512(22%) water=10297 deep=1563 spawns=3 kinds=14 ore={"ore-aurite":1760,"ore-lumenite":1823,"wall-ore-lumenite":53,"wall-ore-aurite":70,"wall-ore-resonance":51,"ore-resonance":1376} core=158,146
+[10-07-2026 04:38:32] [I] sector 17 316x316 ms=449 wall=21018(21%) water=18615 deep=5760 spawns=3 kinds=14 ore={"wall-ore-resonance":40,"wall-ore-lumenite":67,"wall-ore-aurite":88,"ore-lumenite":1260,"ore-resonance":1283,"ore-aurite":1690} core=163,154
+[10-07-2026 04:38:39] [I] sector 18 284x284 ms=328 wall=19248(24%) water=23199 deep=7402 spawns=2 kinds=14 ore={"ore-resonance":1504,"ore-lumenite":1673,"ore-aurite":1863,"wall-ore-resonance":52,"wall-ore-aurite":49,"wall-ore-lumenite":49} core=129,117
+[10-07-2026 04:38:46] [I] sector 21 320x320 ms=435 wall=22194(22%) water=28113 deep=10416 spawns=5 kinds=14 ore={"ore-resonance":1624,"ore-aurite":2021,"wall-ore-aurite":70,"wall-ore-lumenite":68,"ore-lumenite":1588,"wall-ore-resonance":57} core=156,120
+[10-07-2026 04:38:53] [I] sector 24 304x304 ms=392 wall=20336(22%) water=25967 deep=9770 spawns=3 kinds=14 ore={"wall-ore-resonance":37,"ore-resonance":1327,"ore-lumenite":1806,"ore-aurite":1774,"wall-ore-aurite":58,"wall-ore-lumenite":55} core=133,163
+[10-07-2026 04:39:00] [I] sector 30 300x300 ms=380 wall=21149(23%) water=20879 deep=9519 spawns=3 kinds=14 ore={"wall-ore-aurite":81,"wall-ore-resonance":46,"wall-ore-lumenite":77,"ore-resonance":1681,"ore-lumenite":1708,"ore-aurite":1795} core=188,173
+[10-07-2026 04:39:07] [I] sector 32 292x292 ms=366 wall=21029(25%) water=17407 deep=4189 spawns=2 kinds=14 ore={"ore-aurite":2106,"wall-ore-resonance":49,"wall-ore-aurite":60,"ore-lumenite":1766,"wall-ore-lumenite":44,"ore-resonance":1449} core=181,175
+[10-07-2026 04:39:14] [I] sector 33 292x292 ms=364 wall=19135(22%) water=16173 deep=6136 spawns=4 kinds=14 ore={"wall-ore-aurite":78,"ore-aurite":1956,"wall-ore-lumenite":50,"wall-ore-resonance":39,"ore-resonance":1597,"ore-lumenite":1859} core=133,127
+[10-07-2026 04:39:21] [I] sector 37 316x316 ms=430 wall=23121(23%) water=25228 deep=10393 spawns=4 kinds=14 ore={"wall-ore-aurite":75,"wall-ore-lumenite":75,"wall-ore-resonance":32,"ore-resonance":1230,"ore-aurite":1598,"ore-lumenite":1399} core=175,190
+[10-07-2026 04:39:28] [I] sector 41 272x272 ms=334 wall=18184(25%) water=17637 deep=7174 spawns=2 kinds=14 ore={"ore-aurite":1718,"wall-ore-aurite":55,"wall-ore-resonance":60,"wall-ore-lumenite":35,"ore-lumenite":1476,"ore-resonance":1355} core=120,144
+[10-07-2026 04:39:35] [I] sector 43 348x348 ms=528 wall=26858(22%) water=12052 deep=1973 spawns=5 kinds=14 ore={"wall-ore-aurite":89,"wall-ore-resonance":81,"wall-ore-lumenite":76,"ore-aurite":1757,"ore-lumenite":1465,"ore-resonance":1546} core=146,194
+[10-07-2026 04:39:42] [I] sector 47 340x340 ms=493 wall=26041(23%) water=20591 deep=2869 spawns=5 kinds=14 ore={"ore-aurite":1862,"wall-ore-aurite":60,"wall-ore-resonance":42,"wall-ore-lumenite":76,"ore-resonance":1372,"ore-lumenite":1776} core=142,190
+[10-07-2026 04:39:49] [I] sector 50 292x292 ms=375 wall=19567(23%) water=19726 deep=4003 spawns=4 kinds=14 ore={"ore-lumenite":1477,"ore-resonance":1048,"ore-aurite":1668,"wall-ore-resonance":45,"wall-ore-lumenite":48,"wall-ore-aurite":62} core=154,106
+[10-07-2026 04:39:56] [I] sector 52 296x296 ms=369 wall=17285(20%) water=21063 deep=7639 spawns=4 kinds=14 ore={"wall-ore-aurite":58,"ore-lumenite":1868,"wall-ore-resonance":43,"ore-aurite":2059,"ore-resonance":1550,"wall-ore-lumenite":70} core=144,132
+[10-07-2026 04:40:03] [I] sector 59 288x288 ms=351 wall=20108(24%) water=17056 deep=3033 spawns=3 kinds=14 ore={"wall-ore-resonance":43,"ore-lumenite":1723,"wall-ore-aurite":65,"ore-aurite":2166,"wall-ore-lumenite":42,"ore-resonance":1129} core=146,104
+[10-07-2026 04:40:10] [I] sector 60 336x336 ms=468 wall=26635(24%) water=34111 deep=17501 spawns=4 kinds=14 ore={"wall-ore-resonance":48,"wall-ore-aurite":84,"ore-aurite":1611,"wall-ore-lumenite":84,"ore-lumenite":1479,"ore-resonance":1017} core=164,164
+[10-07-2026 04:40:17] [I] sector 61 312x312 ms=411 wall=22583(23%) water=16522 deep=828 spawns=4 kinds=14 ore={"ore-aurite":1948,"ore-resonance":1605,"wall-ore-resonance":44,"wall-ore-aurite":62,"ore-lumenite":2014,"wall-ore-lumenite":49} core=173,170
+[10-07-2026 04:40:24] [I] sector 65 336x336 ms=478 wall=23786(21%) water=26525 deep=9918 spawns=5 kinds=14 ore={"wall-ore-resonance":71,"ore-resonance":1304,"ore-lumenite":1479,"wall-ore-aurite":100,"wall-ore-lumenite":65,"ore-aurite":2007} core=149,128
+[10-07-2026 04:40:31] [I] sector 72 328x328 ms=467 wall=24379(23%) water=20279 deep=6676 spawns=5 kinds=14 ore={"wall-ore-aurite":84,"ore-aurite":1503,"ore-lumenite":1509,"wall-ore-resonance":55,"wall-ore-lumenite":72,"ore-resonance":1049} core=154,157
+[10-07-2026 04:40:38] [I] sector 73 324x324 ms=451 wall=24642(23%) water=19514 deep=4622 spawns=4 kinds=14 ore={"wall-ore-lumenite":69,"ore-aurite":1715,"wall-ore-aurite":70,"ore-lumenite":1670,"wall-ore-resonance":33,"ore-resonance":1409} core=155,125
+[10-07-2026 04:40:45] [I] sector 80 332x332 ms=484 wall=26674(24%) water=16324 deep=3333 spawns=4 kinds=14 ore={"ore-resonance":1520,"wall-ore-aurite":78,"ore-lumenite":2117,"ore-aurite":1893,"wall-ore-lumenite":69,"wall-ore-resonance":60} core=183,144
+[10-07-2026 04:40:52] [I] sector 81 312x312 ms=427 wall=22383(23%) water=18593 deep=5403 spawns=4 kinds=14 ore={"wall-ore-aurite":89,"ore-lumenite":2057,"wall-ore-resonance":31,"ore-aurite":2147,"ore-resonance":1662,"wall-ore-lumenite":71} core=149,131
+[10-07-2026 04:40:59] [I] sector 83 284x284 ms=336 wall=17813(22%) water=19679 deep=5695 spawns=2 kinds=14 ore={"ore-resonance":1693,"ore-aurite":2136,"wall-ore-resonance":49,"wall-ore-aurite":43,"ore-lumenite":2019,"wall-ore-lumenite":58} core=150,132
+[10-07-2026 04:41:06] [I] sector 87 316x316 ms=429 wall=21845(22%) water=21088 deep=5809 spawns=3 kinds=14 ore={"wall-ore-resonance":47,"wall-ore-lumenite":65,"ore-resonance":1187,"wall-ore-aurite":70,"ore-aurite":1435,"ore-lumenite":1530} core=127,142
+[10-07-2026 04:41:13] [I] sector 89 308x308 ms=401 wall=21463(23%) water=29002 deep=13328 spawns=4 kinds=14 ore={"wall-ore-lumenite":49,"wall-ore-aurite":48,"wall-ore-resonance":56,"ore-aurite":1840,"ore-resonance":1596,"ore-lumenite":1890} core=177,174
+[10-07-2026 04:41:20] [I] sector 91 340x340 ms=516 wall=26903(23%) water=12901 deep=387 spawns=5 kinds=14 ore={"wall-ore-lumenite":70,"wall-ore-aurite":67,"wall-ore-resonance":73,"ore-lumenite":1809,"ore-aurite":1911,"ore-resonance":1103} core=157,160
+[10-07-2026 04:41:27] [I] dumped map-a.txt 340x340
+[10-07-2026 04:41:31] [I] sector 21 320x320 ms=426 wall=22194(22%) water=28113 deep=10416 spawns=5 kinds=14 ore={"ore-resonance":1624,"ore-aurite":2021,"wall-ore-aurite":70,"wall-ore-lumenite":68,"ore-lumenite":1588,"wall-ore-resonance":57} core=156,120
+[10-07-2026 04:41:39] [I] dumped map-b.txt 320x320
+[10-07-2026 04:41:43] [I] sector 59 288x288 ms=351 wall=20108(24%) water=17056 deep=3033 spawns=3 kinds=14 ore={"wall-ore-resonance":43,"ore-lumenite":1723,"wall-ore-aurite":65,"ore-aurite":2166,"wall-ore-lumenite":42,"ore-resonance":1129} core=146,104
+[10-07-2026 04:41:51] [I] dumped map-c.txt 288x288

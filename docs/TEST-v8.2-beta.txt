@@ -1,0 +1,77 @@
+Singularity v8.2-beta — headless test record (Mindustry v160.5 server-release.jar)
+date: 2026-10-06T20:51Z  jdk: 17  suites: cmdtest / logitest / test_server / maptest
+
+=========== build gates ===========
+ModelCheck: 88 block models, 15 icons, 0 problems
+bake: problems: 0 (88 blocks + 22 units incl. prism-monolith)
+AssetCheck: 400 sprites checked, 0 missing
+jar: dist/Singularity-v8.2-beta.jar
+
+=========== cmdtest.sh (v8.2 feature suite) ===========
+v8.2 blocks: lumen-accelerator[2x2 effect hp320 lumenitex130,auritex60,prism-glassx75] prism-overcharger[3x3 effect hp760 lumenitex320,auritex210,resonance-shardx60,prism-alloyx95] -> present, aurelia priced, researched, named
+v8.2 titan: Prism Monolith hp=24000 armor=15 speed=0.44 hitSize=44 range=310 rotateSpeed=0.8 weapons=3 abilities=1 flying=false targetAir=true plan=150s lumenitex1100,auritex850,prism-alloyx420,resonance-shardx220 -> ok
+v8.2 balance: monolith hp=24000 armor=15 rawDps=344 | detainer hp=38000 armor=16 rawDps=694 -> titan sits under the detainer
+v8.2 titan spawned: hp=24000 at 155,146 target at 170,146 mounts=3
+v8.2 lance vent: shots over 1200 ticks=8 trace[0:1 150:2 300:3 450:4 600:5 750:6 900:7 1050:8]  -> fires in bursts, vents between them (bounded)
+v8.2 air pods: shots over 300 ticks=13 (both shoulder pods live)
+v8.2 accelerator: victim=prism-press baseScale=1 boosted=1.5 range=11 tiles
+v8.2 overcharger: stacked scale=2.1 hard cap=2.6 -> capped, projectors do not stack past the ceiling
+v8.2 drone flags: playerControllable=true logicControllable=true allowChangeCommands=true commands=6 -> controllable
+v8.2 hub drone: lumen-drone controller=PorterAI commandable=true -> can be selected and ordered
+v8.2 drone order: ordered 24.2 tiles away, closest approach 0.6 tiles, back home at 21.4 tiles, controller=PorterAI -> flew to the ordered point, then returned to hauling
+v8.2 drone release: controller=PorterAI carrying=0 -> back on the logistics network
+v8.2 conservation start: total items in the network=120
+v8.2 conservation after 30s: total=120 (start 120) supply=120 vault=0 hub=0 dispatched=0 -> nothing created, nothing voided
+v8.2 hub removed: items before=120 accounted after=120 in network (core holds 480)  -> cargo was handed over, not voided
+v8.2 loop probe: vault 200, request pad asking for lumenite
+v8.2 loop check: dispatch counts per 10s [1 1 1 1 1 1] deltas [0 0 0 0 0] vault=140 pad=60 -> the network settles, no endless shuttling
+v8.2 launch loadout: registered=1 schematic(s), universe picks Aurelia Core costing [lumenitex3000 auritex2000 prism-alloyx600] valid=true -> paid for in Aurelia resources
+v8.2 launch payload cleanup: carried=[blackhole-lumenitex200] -> vanilla items are stripped from the Aurelia launch payload
+v8.2 launch items offered on aurelia=19 [degenerate-matter hawking-dust singularity-core aegis-alloy signal-core lumenite...] vanilla among them=0
+v8.2 text audit: 227 own content, missing/raw=0
+CMDTEST PASSED: Singularity v8.2-beta command suite
+CMD_EXIT=0
+
+=========== logitest.sh (v8.1 regression) ===========
+v8.1 blocks: lumen-supply-post[2x2 distribution lumenitex55,prism-glassx30] lumen-buffer-post[2x2 distribution lumenitex80,auritex40,prism-glassx35] lumen-logistics-vault[3x3 distribution lumenitex210,auritex140,prism-alloyx40] lumen-liquid-relay[2x2 liquid lumenitex70,prism-glassx45,resonance-shardx12] lumen-tank[2x2 liquid lumenitex60,prism-glassx40] lumen-reservoir[3x3 liquid lumenitex180,auritex90,prism-alloyx30] lumen-overflow-gate[1x1 distribution lumenitex14,prism-glassx8] lumen-underflow-gate[1x1 distribution lumenitex14,prism-glassx10] -> all present, aurelia priced, researched, in the database
+v8.1 hub: built 1 drone(s) in 960 ticks, type=lumen-drone, tethered=true, controller=PorterAI
+v8.1 network laid out: supply post at 162,140 with 120 lumenite, request pad at 144,144 asking for lumenite, drone at 153,138
+v8.1 haul after 25s: nodes seen=3 requests=0, drone moved 14 world units, carrying nothing, supply post has 60, request pad has 60, hub dispatched 1 hauls -> the drones transport
+v8.1 haul after 45s: supply post 60 left, request pad holds 60, hub dispatched 1 hauls, drones=1
+v8.1 vault placed at 157,131, hub stocked with 90 surplus aurite, vault holds 0
+v8.1 surplus: hub holds 0, vault holds 90 (90 aurite), dispatched 2 -> active provider pushes surplus into storage
+v8.1 hauler spawned unattached: controller=PorterAI home=none cap=220
+v8.1 hauler adoption: home=lumen-cargo-station at 153,140, hub drone list=2 -> a stray hauler is adopted by the nearest hub
+v8.1 liquid relay: distance 16 tiles with no pipe, source 291, far relay received 9 after 1 ticks, links=1 -> wireless liquid transport works
+v8.1 liquid stores: tank 2x2 1500 units, reservoir 3x3 6500 units (4.3x)
+v8.1 gates: overflow invert=false class=ModelOverflowGate, underflow invert=true -> vanilla overflow mechanics, both 3D
+v8.1 overflow gate live: accepts=false, items held=0 -> it passes rather than hoards
+v8.1 lattice stats: bank=1400, intake ceiling=3000, cooling 24/s, overload downtime 7s, wave lockout 5s
+v8.1 lattice nerf: took 126 shots in 42 ticks, 1 discharge(s) -> field collapsed (downtime 420 ticks), recovered after 420 ticks, fieldUp now=true -> bounded, it can no longer tank forever
+v8.1 detainer: name=
+v8.1 text audit: 216 own content checked, missing/raw names or descriptions=0, abilities showing a class name=0 -> every ability is named
+v8.1 rename: astro-fabricator is now 
+v8.1 new units: lumen-hauler[hp 520 34s in aurelia-fabricator] aurite-vanguard[hp 4200 52s in aurelia-fabricator] tide-tender[hp 980 40s in tide-dock] -> all three printable and researched
+v8.1 new units live: aurite-vanguard[moved 69 shots 10 hp 4200] lumen-hauler[moved 291 shots 0 hp 520] 
+v8.1 tide tender: naval=true on aurora-sand-water shots 2 alive
+v8.1 unit audit: 39 own units, not printable anywhere=2 (lumen-pilot bastion-pilot) -> every visible unit has a factory
+LOGITEST PASSED: Singularity v8.2-beta logistics suite
+LT_EXIT=0
+
+=========== test_server.sh (full regression) ===========
+TEST PASSED: Singularity v8.2-beta on v160.5 headless
+TS_EXIT=0
+
+=========== maptest.sh ===========
+[10-06-2026 20:44:46] [I] sector 80 332x332 ms=477 wall=26674(24%) water=16324 deep=3333 spawns=4 kinds=14 ore={"ore-resonance":1520,"wall-ore-aurite":78,"ore-lumenite":2117,"ore-aurite":1893,"wall-ore-lumenite":69,"wall-ore-resonance":60} core=183,144
+[10-06-2026 20:44:53] [I] sector 81 312x312 ms=427 wall=22383(23%) water=18593 deep=5403 spawns=4 kinds=14 ore={"wall-ore-aurite":89,"ore-lumenite":2057,"wall-ore-resonance":31,"ore-aurite":2147,"ore-resonance":1662,"wall-ore-lumenite":71} core=149,131
+[10-06-2026 20:44:59] [I] sector 83 284x284 ms=336 wall=17813(22%) water=19679 deep=5695 spawns=2 kinds=14 ore={"ore-resonance":1693,"ore-aurite":2136,"wall-ore-resonance":49,"wall-ore-aurite":43,"ore-lumenite":2019,"wall-ore-lumenite":58} core=150,132
+[10-06-2026 20:45:07] [I] sector 87 316x316 ms=471 wall=21845(22%) water=21088 deep=5809 spawns=3 kinds=14 ore={"wall-ore-resonance":47,"wall-ore-lumenite":65,"ore-resonance":1187,"wall-ore-aurite":70,"ore-aurite":1435,"ore-lumenite":1530} core=127,142
+[10-06-2026 20:45:14] [I] sector 89 308x308 ms=406 wall=21463(23%) water=29002 deep=13328 spawns=4 kinds=14 ore={"wall-ore-lumenite":49,"wall-ore-aurite":48,"wall-ore-resonance":56,"ore-aurite":1840,"ore-resonance":1596,"ore-lumenite":1890} core=177,174
+[10-06-2026 20:45:21] [I] sector 91 340x340 ms=580 wall=26903(23%) water=12901 deep=387 spawns=5 kinds=14 ore={"wall-ore-lumenite":70,"wall-ore-aurite":67,"wall-ore-resonance":73,"ore-lumenite":1809,"ore-aurite":1911,"ore-resonance":1103} core=157,160
+[10-06-2026 20:45:27] [I] dumped map-a.txt 340x340
+[10-06-2026 20:45:32] [I] sector 21 320x320 ms=638 wall=22194(22%) water=28113 deep=10416 spawns=5 kinds=14 ore={"ore-resonance":1624,"ore-aurite":2021,"wall-ore-aurite":70,"wall-ore-lumenite":68,"ore-lumenite":1588,"wall-ore-resonance":57} core=156,120
+[10-06-2026 20:45:40] [I] dumped map-b.txt 320x320
+[10-06-2026 20:45:44] [I] sector 59 288x288 ms=614 wall=20108(24%) water=17056 deep=3033 spawns=3 kinds=14 ore={"wall-ore-resonance":43,"ore-lumenite":1723,"wall-ore-aurite":65,"ore-aurite":2166,"wall-ore-lumenite":42,"ore-resonance":1129} core=146,104
+[10-06-2026 20:45:51] [I] dumped map-c.txt 288x288
+MT_EXIT=0

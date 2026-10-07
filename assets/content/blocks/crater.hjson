@@ -1,0 +1,96 @@
+{
+  "type": "ItemTurret",
+  "name": "Crater",
+  "description": "A heavy cluster mortar. Plastanium bursts into fragments; blast compound causes a much larger explosion. Cannot fire point-blank.",
+  "category": "turret",
+  "research": {
+    "parent": "ripple",
+    "requirements": [
+      "graphite/420",
+      "titanium/350",
+      "thorium/260",
+      "plastanium/200"
+    ]
+  },
+  "size": 3,
+  "health": 1050,
+  "requirements": [
+    "graphite/180",
+    "titanium/145",
+    "thorium/110",
+    "plastanium/75"
+  ],
+  "range": 305,
+  "minRange": 52,
+  "reload": 82,
+  "rotateSpeed": 3.3,
+  "shootCone": 9,
+  "shootY": 11,
+  "recoil": 3,
+  "shake": 2.5,
+  "maxAmmo": 36,
+  "inaccuracy": 2,
+  "targetAir": false,
+  "heatColor": "eaa06c",
+  "shootSound": "shootArtillery",
+  "ammoTypes": {
+    "plastanium": {
+      "type": "ArtilleryBulletType",
+      "speed": 3.1,
+      "damage": 39,
+      "lifetime": 104,
+      "width": 12,
+      "height": 15,
+      "ammoMultiplier": 4,
+      "splashDamage": 75,
+      "splashDamageRadius": 36,
+      "hitEffect": "flakExplosionBig",
+      "frontColor": "daf3e7",
+      "backColor": "8aca9b",
+      "hitColor": "8aca9b",
+      "fragBullets": 6,
+      "fragBullet": {
+        "type": "BasicBulletType",
+        "speed": 3,
+        "damage": 12,
+        "lifetime": 17,
+        "width": 5,
+        "height": 8,
+        "collidesAir": false,
+        "frontColor": "e6f9e9",
+        "backColor": "8aca9b",
+        "hitEffect": "hitBulletColor",
+        "despawnEffect": "none"
+      }
+    },
+    "blast-compound": {
+      "type": "ArtilleryBulletType",
+      "speed": 3.2,
+      "damage": 48,
+      "lifetime": 101,
+      "width": 15,
+      "height": 18,
+      "ammoMultiplier": 3,
+      "splashDamage": 135,
+      "splashDamageRadius": 44,
+      "hitEffect": "blastExplosion",
+      "frontColor": "ffddb2",
+      "backColor": "f7a467",
+      "hitColor": "f7a467",
+      "fragBullets": 4,
+      "fragBullet": {
+        "type": "BasicBulletType",
+        "speed": 2.8,
+        "damage": 14,
+        "lifetime": 18,
+        "width": 6,
+        "height": 9,
+        "collidesAir": false,
+        "frontColor": "ffe9b5",
+        "backColor": "f7a467",
+        "hitEffect": "hitBulletColor",
+        "despawnEffect": "none"
+      }
+    }
+  }
+}

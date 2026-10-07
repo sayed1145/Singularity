@@ -1,0 +1,85 @@
+{
+  "type": "ItemTurret",
+  "name": "Sky Net",
+  "description": "A dedicated anti-air burst turret. Metaglass shells fragment into a cloud of anti-air shards.",
+  "category": "turret",
+  "research": {
+    "parent": "scatter",
+    "requirements": [
+      "copper/240",
+      "lead/260",
+      "metaglass/180",
+      "titanium/140"
+    ]
+  },
+  "size": 2,
+  "health": 570,
+  "requirements": [
+    "copper/95",
+    "lead/105",
+    "metaglass/70",
+    "titanium/50"
+  ],
+  "range": 240,
+  "reload": 29,
+  "rotateSpeed": 12,
+  "shootCone": 24,
+  "shootY": 8,
+  "recoil": 1.1,
+  "inaccuracy": 8,
+  "maxAmmo": 48,
+  "targetGround": false,
+  "heatColor": "e9c87c",
+  "shootSound": "shootScatter",
+  "shoot": {
+    "shots": 2,
+    "shotDelay": 4
+  },
+  "ammoTypes": {
+    "lead": {
+      "type": "FlakBulletType",
+      "speed": 4.5,
+      "damage": 5,
+      "lifetime": 54,
+      "width": 7,
+      "height": 9,
+      "splashDamage": 31,
+      "splashDamageRadius": 25,
+      "ammoMultiplier": 5,
+      "hitEffect": "flakExplosion",
+      "frontColor": "e5e2cf",
+      "backColor": "aaa99d",
+      "hitColor": "e5e2cf"
+    },
+    "metaglass": {
+      "type": "FlakBulletType",
+      "speed": 4.8,
+      "damage": 7,
+      "lifetime": 52,
+      "width": 8,
+      "height": 10,
+      "splashDamage": 46,
+      "splashDamageRadius": 30,
+      "ammoMultiplier": 5,
+      "hitEffect": "flakExplosionBig",
+      "frontColor": "f7f3db",
+      "backColor": "e4c77d",
+      "hitColor": "e4c77d",
+      "fragBullets": 5,
+      "fragBullet": {
+        "type": "BasicBulletType",
+        "speed": 3.1,
+        "damage": 7,
+        "lifetime": 18,
+        "width": 4,
+        "height": 7,
+        "collidesGround": false,
+        "collidesTiles": false,
+        "frontColor": "f7f3db",
+        "backColor": "e4c77d",
+        "hitEffect": "hitBulletColor",
+        "despawnEffect": "none"
+      }
+    }
+  }
+}

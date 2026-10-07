@@ -1,0 +1,83 @@
+{
+  "type": "ItemTurret",
+  "name": "Boreline",
+  "description": "Fires two narrow piercing bolts in succession. Tungsten rounds strike harder and can pass through more targets.",
+  "category": "turret",
+  "research": {
+    "parent": "breach",
+    "requirements": [
+      "beryllium/370",
+      "graphite/160",
+      "silicon/260",
+      "tungsten/190"
+    ]
+  },
+  "size": 2,
+  "health": 760,
+  "requirements": [
+    "beryllium/175",
+    "graphite/75",
+    "silicon/120",
+    "tungsten/90"
+  ],
+  "range": 235,
+  "reload": 31,
+  "rotateSpeed": 6,
+  "shootCone": 10,
+  "shootY": 9,
+  "recoil": 1.4,
+  "maxAmmo": 42,
+  "heatColor": "82cbaa",
+  "shootSound": "shootBreach",
+  "shoot": {
+    "type": "ShootAlternate",
+    "barrels": 2,
+    "spread": 8,
+    "shots": 2,
+    "shotDelay": 5
+  },
+  "ammoTypes": {
+    "beryllium": {
+      "type": "BasicBulletType",
+      "speed": 6.4,
+      "damage": 45,
+      "lifetime": 37,
+      "width": 8,
+      "height": 14,
+      "ammoMultiplier": 4,
+      "pierce": true,
+      "pierceBuilding": true,
+      "pierceCap": 2,
+      "buildingDamageMultiplier": 0.45,
+      "trailLength": 6,
+      "trailWidth": 1.6,
+      "frontColor": "edfff1",
+      "backColor": "79b99e",
+      "trailColor": "79b99e",
+      "hitColor": "79b99e",
+      "hitEffect": "hitBulletColor",
+      "despawnEffect": "hitBulletColor"
+    },
+    "tungsten": {
+      "type": "BasicBulletType",
+      "speed": 7.1,
+      "damage": 67,
+      "lifetime": 34,
+      "width": 9,
+      "height": 16,
+      "ammoMultiplier": 4,
+      "pierce": true,
+      "pierceBuilding": true,
+      "pierceCap": 3,
+      "buildingDamageMultiplier": 0.45,
+      "trailLength": 8,
+      "trailWidth": 1.8,
+      "frontColor": "f8f8ed",
+      "backColor": "d5c5a8",
+      "trailColor": "d5c5a8",
+      "hitColor": "d5c5a8",
+      "hitEffect": "hitBulletColor",
+      "despawnEffect": "hitBulletColor"
+    }
+  }
+}
