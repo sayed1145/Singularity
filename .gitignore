@@ -4,6 +4,9 @@ dist/
 *.class
 *.jar
 *.zip
+*.dex
+*.apk
+*.aab
 
 # headless test run directories
 *testrun/

@@ -1,0 +1,3 @@
+PASS client icon lifecycle: loadIcon/load/createIcons preserve engine glyphs without Pixmap packing; base team metadata initialized
+PASS lumen-incinerator: 852 mesh faces; 351..352 visible quads; 48 unique frames; 0 region draws; rotor clearance 0.472; CPU 78.2 us/draw (mock GL, not FPS)
+PASS inverted-lumen-sorter: 308 mesh faces; 93..94 visible quads; 48 unique frames; 0 region draws; rotor clearance 0.093; CPU 19.6 us/draw (mock GL, not FPS)

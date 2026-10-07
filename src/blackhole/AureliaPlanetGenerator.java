@@ -1182,7 +1182,7 @@ public class AureliaPlanetGenerator extends PlanetGenerator{
         state.rules.waveSpacing = 60f * (sector.id == AureliaContent.aurelia.startSector ? 90f : 75f - threat * 15f);
         state.rules.initialWaveSpacing = 60f * 60f * (sector.id == AureliaContent.aurelia.startSector ? 3f : 2.5f);
         state.rules.env = sector.planet.defaultEnv;
-        state.rules.spawns = AureliaWaves.generate(threat, new arc.math.Rand(sector.id + seed));
+        // Wave schedule is installed after final water/spawn repairs below.
 
         //v8.0: guarantee the playability floor before anything is counted - a randomised sector that came out
         //poor in one resource is topped up instead of being thrown away
@@ -1190,6 +1190,22 @@ public class AureliaPlanetGenerator extends PlanetGenerator{
         ensureOre(AureliaContent.oreLumenite, 220, spawnX, spawnY);
         ensureOre(AureliaContent.oreResonance, 200, spawnX, spawnY);
         ensureWater(420, spawnX, spawnY);
+
+        //v8.4: late water/ore passes must never erase a gate or strand a 24-unit boss on a tiny island.
+        //Re-open the noise-curved approach at boss width, then clear a dry 7x7 staging area.
+        //The old single-tile flood check allowed passages too narrow for a 24-unit ground boss.
+        for(int[] ap : approach){
+            connect(ap[0],ap[1],spawnX,spawnY,4);
+            for(int dx=-3;dx<=3;dx++) for(int dy=-3;dy<=3;dy++){
+                Tile t=tiles.get(ap[0]+dx,ap[1]+dy);
+                if(t==null)continue;
+                if(t.block().isStatic())t.setBlock(Blocks.air);
+                if(t.floor().isLiquid)t.setFloor(AureliaContent.auroraPlate);
+            }
+            Tile gate=tiles.getn(ap[0],ap[1]);gate.setBlock(Blocks.air);gate.setOverlay(Blocks.spawn);
+        }
+        state.rules.spawns=AureliaCampaign.waves(pre,new arc.math.Rand(sector.id+seed),AureliaCampaign.gates());
+        state.rules.tags.put(AureliaCampaign.versionTag,"1");
 
         int beds = 0, lumenOre = 0, aurite = 0, spawnPoints = 0, waterTiles = 0, sandTiles = 0, resonanceOre = 0;
         //v7.9: how much of the new ground actually made it onto the map, and how many kinds of it

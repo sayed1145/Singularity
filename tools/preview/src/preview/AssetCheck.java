@@ -14,6 +14,11 @@ public class AssetCheck{
         List<String> missing = new ArrayList<>();
         int checked = 0;
         for(BlockModel m : Models.all()){
+            if(m instanceof UtilityModels.LiveModel){
+                for(String suffix:new String[]{"","-hd","-front-hd","-preview","-icon"})
+                    if(new File(sprites, "blocks/3d/"+m.name+suffix+".png").exists()) missing.add("forbidden baked utility sprite "+m.name+suffix);
+                continue;
+            }
             for(String suffix : new String[]{"-hd", "-preview", "-icon", ""}){
                 checked++;
                 if(!new File(sprites, "blocks/3d/" + m.name + suffix + ".png").isFile()) missing.add("blocks/3d/" + m.name + suffix + ".png");

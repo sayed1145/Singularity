@@ -18,7 +18,9 @@ public class BlackHoleMod extends Mod{
         Events.on(ContentInitEvent.class, e -> blackhole.models.Models.install());
 
         //every Aurelia sector load drops any vanilla item left in the saved launch payload
-        Events.on(WorldLoadEvent.class, e -> AureliaLaunch.sanitizeLaunchResources());
+        Events.on(WorldLoadEvent.class, e -> {
+            AureliaLaunch.sanitizeLaunchResources();
+        });
 
         Events.on(ClientLoadEvent.class, e -> {
             BHShaders.init();
@@ -37,6 +39,9 @@ public class BlackHoleMod extends Mod{
 
     @Override
     public void init(){
+        //SectorInfo.write runs during SaveLoadEvent, after WorldLoadEvent, and restores wave/winWave.
+        //Patch after that restoration, not before it, or the engine silently overwrites the new finale.
+        Events.on(SaveLoadEvent.class, e -> AureliaCampaign.upgradeLoadedSector());
         // Runs after Java and HJSON content has been created. The imported expansion
         // verifies its tech links, all three Titan Bay plans and config codecs here.
         MergedMods.init();
@@ -89,6 +94,7 @@ public class BlackHoleMod extends Mod{
 
         //v8.3：工业废料循环（六步回收链）+ 三级核心「欧雷莉亚堡垒」+ 守护力场穹顶
         AureliaCycle.load();
+        AureliaUtilities.load();
 
         //v7.4/v7.5：天文拘留者 + RBMK 白色反应堆 + 体素工业 + 体素前哨 并入本 jar
         MergedMods.loadContent();

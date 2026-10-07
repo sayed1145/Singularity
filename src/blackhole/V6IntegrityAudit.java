@@ -24,6 +24,7 @@ public final class V6IntegrityAudit{
         Seq<String> missing = new Seq<>();
         int count = 0;
         for(BlockModel m : Models.all()){
+            if(m instanceof UtilityModels.LiveModel) continue;
             String base = BlockModel.prefix + m.name;
             count += need(missing, base + "-hd", base + "-preview");
             if(m instanceof TurretModel) count += need(missing, base + "-heads");

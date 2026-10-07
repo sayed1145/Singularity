@@ -64,6 +64,7 @@ public final class Bake{
         AtomicInteger done = new AtomicInteger();
         Seq<BlockModel> models = Models.all();
         for(BlockModel m : models){
+            if(m instanceof UtilityModels.LiveModel) continue; // No sprites for v8.4 utility blocks.
             if(only != null && !m.name.equals(only) && !only.equals("blocks")) continue;
             jobs.add(ex.submit(() -> {
                 long s = System.currentTimeMillis();

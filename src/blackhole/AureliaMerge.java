@@ -421,6 +421,10 @@ public final class AureliaMerge{
         TechNode citadel = attach(aureliaNodes.get(AureliaBastion.bastionCore, AureliaTech.root), AureliaCycle.citadelCore);
         attach(citadel, AureliaCycle.citadelPilot);
 
+        //v8.4 utilities use natural, early Aurelia tech branches.
+        attach(kilnNode, AureliaUtilities.incinerator);
+        attach(aureliaNodes.get(lumenSorter, AureliaTech.root), AureliaUtilities.invertedSorter);
+
         //4. sweep: anything researchable this jar owns that is still missing gets a home by category
         ObjectMap<Category, TechNode> hubs = new ObjectMap<>();
         hubs.put(Category.turret, horizon);

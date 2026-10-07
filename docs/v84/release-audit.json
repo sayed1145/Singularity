@@ -1,0 +1,45 @@
+{
+  "jar": "Singularity-v8.4-beta.jar",
+  "bytes": 11000698,
+  "sha256": "2c234b936798970df24b1984aa77ee83f63f595c7bacffcf77e346564bbccd2a",
+  "desktop_classes": 806,
+  "dex_bytes": 1218520,
+  "dex_version": "035",
+  "dex_class_definitions": 1345,
+  "jar_crc": "PASS",
+  "class_and_asset_match": "PASS",
+  "commander_absence": "PASS",
+  "no_new_machine_sprite": "PASS",
+  "test_instrumentation_absence": "PASS",
+  "source_asset_delta_from_v83": {
+    "modified": [
+      "assets/bundles/bundle.properties",
+      "assets/bundles/bundle_zh_CN.properties",
+      "src/astro/content/AstroContent.java",
+      "src/blackhole/AureliaCycle.java",
+      "src/blackhole/AureliaMerge.java",
+      "src/blackhole/AureliaPlanetGenerator.java",
+      "src/blackhole/BlackHoleMod.java",
+      "src/blackhole/CycleParts.java",
+      "src/blackhole/MergedMods.java",
+      "src/blackhole/V6IntegrityAudit.java",
+      "src/blackhole/models/Models.java",
+      "src/rbmk/content/RbmkBlocks.java",
+      "src/voxel/content/VoxelBlocks.java"
+    ],
+    "deleted": [
+      "src/astro/ai/Micro.java",
+      "src/astro/ai/TacticalAI.java",
+      "src/astro/ai/TacticalBrain.java",
+      "src/astro/ai/Terrain.java",
+      "src/astro/ai/UnitProfile.java",
+      "src/astro/content/TacticalCommander.java"
+    ],
+    "added": [
+      "src/blackhole/AureliaCampaign.java",
+      "src/blackhole/AureliaUtilities.java",
+      "src/blackhole/models/UtilityModels.java"
+    ],
+    "unchanged": 1023
+  }
+}

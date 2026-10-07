@@ -1,0 +1,15 @@
+{
+  "jar": "Singularity-v8.4-beta.jar",
+  "bytes": 11000698,
+  "sha256": "2c234b936798970df24b1984aa77ee83f63f595c7bacffcf77e346564bbccd2a",
+  "desktop_classes": 806,
+  "dex_bytes": 1218520,
+  "dex_version": "035",
+  "dex_class_definitions": 1345,
+  "jar_crc": "PASS",
+  "class_and_asset_match": "PASS",
+  "commander_absence": "PASS",
+  "no_new_machine_sprite": "PASS",
+  "test_instrumentation_absence": "PASS"
+}
+Changed: 13 deleted: 6 added: 3 unchanged: 1023

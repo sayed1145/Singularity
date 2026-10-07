@@ -279,7 +279,7 @@ public final class AureliaCycle{
             armor = 6f;
             radius = 26f * 8f;
             shieldCapacity = 7000f;
-            regen = 9f;
+            regen = 120f;
             breakCooldown = 60f * 14f;
             consumePower(6.5f);
             //the two upgrades: coolant widens the dome and speeds the rebuild, shards deepen the bank

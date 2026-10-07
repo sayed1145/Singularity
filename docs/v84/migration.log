@@ -1,0 +1,25 @@
+[10-07-2026 14:37:33] [I] [blackhole] 奇点模组已载入类。
+[10-07-2026 14:37:34] [I] [blackhole] 正在加载内容……
+[10-07-2026 14:37:34] [I] [blackhole/aegis] 2 imported Titans, 2 materials, 2 research routes, 20 blocks registered.
+[10-07-2026 14:37:35] [I] [blackhole/merge] Astro Detainer + RBMK White Reactor + Voxel Industry + Voxel Outpost registered inside this jar
+[10-07-2026 14:37:35] [I] [blackhole/merge] re-priced 28 mod blocks in Aurelia resources (22 conversion rules)
+[10-07-2026 14:37:35] [I] [blackhole] 内容加载完成：奇点主线 + 以太泰坦矩阵 + 欧雷利亚远征已注册。
+[10-07-2026 14:37:35] [I] [blackhole] 3D drawers installed on 46 blocks (99 models)
+Oct 07, 2026 2:37:35 PM org.jline.utils.Log logr
+WARNING: Unable to create a system terminal, creating a dumb terminal (enable debug logging for more information)
+[10-07-2026 14:37:36] [I] 1 mods loaded.
+[10-07-2026 14:37:36] [I] [blackhole/aegis] checked: the Titan Bay plans and ten turrets (research lives in the Aurelia tree).
+[10-07-2026 14:37:36] [I] [blackhole/aurelia] custom core + player chassis, zero-start extractor/power chain, authored terrain, three-anchor field network, and Aurelia-only research registered.
+[10-07-2026 14:37:36] [I] [blackhole/merge] re-priced 6 mod blocks in Aurelia resources (22 conversion rules)
+[10-07-2026 14:37:36] [I] [blackhole/merge] 242 mod contents available on Aurelia (+9 vanilla sandbox sources/voids), all other vanilla content hidden there
+[10-07-2026 14:37:36] [I] [blackhole/merge] Aurelia tech tree: +143 nodes (38 research costs converted, 25 free nodes priced), tree now holds 199 nodes
+[10-07-2026 14:37:36] [I] [blackhole/merge] planet purge: 41 mod nodes removed from the Serpulo / Erekir trees, 41 contents repointed at their Aurelia node
+[10-07-2026 14:37:36] [I] [blackhole] own particle effects: 982 vanilla effect references replaced
+[10-07-2026 14:37:36] [I] [blackhole] v8.0 指挥能力：已为 40 个单位补全指令，其中 6 个出厂即自动作业。
+[10-07-2026 14:37:36] [I] [blackhole] v5 科技树、泰坦矩阵与 v6 欧雷利亚远征完整性校验通过。
+[10-07-2026 14:37:36] [I] Server loaded. Type 'help' for help.
+[10-07-2026 14:37:37] [I] [blackhole/v8.4] campaign sector 65 upgraded: 3 boss encounters, final encounter wave 102
+[10-07-2026 14:37:37] [I] [blackhole/v8.4] campaign sector 65 upgraded: 3 boss encounters, final encounter wave 102
+[10-07-2026 14:37:37] [I] [V84-PASS] ACTUAL v8.3 -> v8.4 save migration: commander becomes air, shield restored, inventory and wave100 retained, future final boss, idempotent patch
+[10-07-2026 14:37:37] [I] V84-OLD-PASSED
+[10-07-2026 14:37:37] [I] Shutting down server.

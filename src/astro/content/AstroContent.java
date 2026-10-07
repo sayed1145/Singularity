@@ -19,8 +19,6 @@ public final class AstroContent{
 
     public static DetainerType detainer;
     public static UnitFactory fabricator;
-    /** v8.3: restored from the standalone package - the command core that drives the tactical brain */
-    public static TacticalCommander commander;
     public static mindustry.type.StatusEffect warpLicense;
     /** command-menu toggle: the AI of this unit may warp by itself (off by default) */
     public static mindustry.ai.UnitStance warpStance;
@@ -142,15 +140,6 @@ public final class AstroContent{
     }
 
     public static void loadBlocks(){
-
-        //v8.3: the tactical brain is back. It is registered before the block that switches it on.
-        astro.ai.TacticalBrain.register();
-        commander = new TacticalCommander("astro-commander"){{
-            requirements(Category.units, with(Items.silicon, 300, Items.titanium, 250, Items.plastanium, 120, Items.surgeAlloy, 80));
-            health = 900;
-            consumePower(3f);
-            researchCostMultiplier = 0.2f;
-        }};
 
         fabricator = new AstroFabricator("astro-fabricator"){{
             requirements(Category.units, with(Items.silicon, 1400, Items.titanium, 1200, Items.thorium, 600, Items.plastanium, 500, Items.phaseFabric, 300, Items.surgeAlloy, 400));

@@ -1,0 +1,23 @@
+[10-07-2026 14:37:24] [I] [blackhole] 奇点模组已载入类。
+[10-07-2026 14:37:25] [I] [blackhole] 正在加载内容……
+[10-07-2026 14:37:25] [I] [blackhole/aegis] 2 imported Titans, 2 materials, 2 research routes, 20 blocks registered.
+[10-07-2026 14:37:25] [I] [blackhole/merge] Astro Detainer + RBMK White Reactor + Voxel Industry + Voxel Outpost registered inside this jar
+[10-07-2026 14:37:25] [I] [blackhole/merge] re-priced 29 mod blocks in Aurelia resources (22 conversion rules)
+[10-07-2026 14:37:25] [I] [blackhole] 内容加载完成：奇点主线 + 以太泰坦矩阵 + 欧雷利亚远征已注册。
+[10-07-2026 14:37:26] [I] [blackhole] 3D drawers installed on 46 blocks (97 models)
+Oct 07, 2026 2:37:26 PM org.jline.utils.Log logr
+WARNING: Unable to create a system terminal, creating a dumb terminal (enable debug logging for more information)
+[10-07-2026 14:37:26] [I] 1 mods loaded.
+[10-07-2026 14:37:26] [I] [blackhole/aegis] checked: the Titan Bay plans and ten turrets (research lives in the Aurelia tree).
+[10-07-2026 14:37:26] [I] [blackhole/aurelia] custom core + player chassis, zero-start extractor/power chain, authored terrain, three-anchor field network, and Aurelia-only research registered.
+[10-07-2026 14:37:26] [I] [blackhole/merge] re-priced 6 mod blocks in Aurelia resources (22 conversion rules)
+[10-07-2026 14:37:26] [I] [blackhole/merge] 241 mod contents available on Aurelia (+9 vanilla sandbox sources/voids), all other vanilla content hidden there
+[10-07-2026 14:37:26] [I] [blackhole/merge] Aurelia tech tree: +142 nodes (39 research costs converted, 25 free nodes priced), tree now holds 198 nodes
+[10-07-2026 14:37:26] [I] [blackhole/merge] planet purge: 42 mod nodes removed from the Serpulo / Erekir trees, 42 contents repointed at their Aurelia node
+[10-07-2026 14:37:27] [I] [blackhole] own particle effects: 979 vanilla effect references replaced
+[10-07-2026 14:37:27] [I] [blackhole] v8.0 指挥能力：已为 40 个单位补全指令，其中 6 个出厂即自动作业。
+[10-07-2026 14:37:27] [I] [blackhole] v5 科技树、泰坦矩阵与 v6 欧雷利亚远征完整性校验通过。
+[10-07-2026 14:37:27] [I] Server loaded. Type 'help' for help.
+[10-07-2026 14:37:29] [I] [blackhole/aurelia] campaign sector 65 (336x336) generated: 5 spawns in the fair band, about 124 tiles out, 2007 aurite, 1479 lumenite, 1304 resonance, 1325 bed, 26525 water, 26998 silt, ore per quadrant 1188/1164/1227/1447, 11 pockets joined, 66114 new-ground tiles in 7 kinds, 236 wall ore, all connected.
+[10-07-2026 14:37:29] [I] V84-FIXTURE-SAVED
+[10-07-2026 14:37:29] [I] Shutting down server.

@@ -14,7 +14,11 @@ import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.storage.*;
+import mindustry.world.blocks.ExplosionShield;
+import mindustry.logic.Ranged;
 import mindustry.world.meta.*;
+import mindustry.ui.Bar;
+import mindustry.logic.LAccess;
 
 import static mindustry.Vars.*;
 
@@ -102,7 +106,7 @@ public final class CycleParts{
      * <li>the bank is capped at {@link #shieldCapacity} (plus the item bonus) and regenerates at
      *     {@link #regen} per second while it is intact;</li>
      * <li>when the bank empties the dome <b>breaks</b>: it absorbs nothing at all for
-     *     {@link #breakCooldown} ticks, and comes back empty;</li>
+     *     {@link #breakCooldown} ticks, and comes back fully restored;</li>
      * <li>it only works on power; cutting the power drops the dome immediately.</li>
      * </ul>
      *
@@ -117,7 +121,7 @@ public final class CycleParts{
         /** the bank: damage it can swallow before it breaks */
         public float shieldCapacity = 7000f;
         /** bank rebuilt per second while the dome is up */
-        public float regen = 9f;
+        public float regen = 120f;
         /** dead time after a break */
         public float breakCooldown = 60f * 14f;
 
@@ -176,10 +180,24 @@ public final class CycleParts{
         }
 
         @Override
+        public void setBars(){
+            super.setBars();
+            addBar("shield", (WardDomeBuild b) -> new Bar(
+                () -> Core.bundle.format("bar.blackhole-ward-capacity", Strings.fixed(b.shield, 0), Strings.fixed(b.realCapacity(), 0)),
+                () -> b.cooldown > 0f ? brokenColor : domeColor,
+                () -> b.cooldown > 0f ? 0f : Mathf.clamp(b.shield / b.realCapacity())).blink(Color.white));
+            addBar("rebuild", (WardDomeBuild b) -> new Bar(
+                () -> b.cooldown > 0f ? Core.bundle.format("bar.blackhole-ward-rebuild", Strings.fixed(b.cooldown / 60f / (b.liquidBoost() ? liquidRegenBoost : 1f), 1))
+                    : Core.bundle.get(b.efficiency > 0.01f ? "bar.blackhole-ward-ready" : "bar.blackhole-ward-unpowered"),
+                () -> b.cooldown > 0f ? brokenColor : domeColor,
+                () -> 1f - Mathf.clamp(b.cooldown / breakCooldown)));
+        }
+
+        @Override
         public void setStats(){
             super.setStats();
             stats.add(Stat.shieldHealth, shieldCapacity, StatUnit.none);
-            stats.add(Stat.repairSpeed, regen, StatUnit.perSecond);
+            stats.add(Stat.regenerationRate, regen, StatUnit.perSecond);
             stats.add(Stat.range, radius / tilesize, StatUnit.blocks);
             stats.add(Stat.cooldownTime, breakCooldown / 60f, StatUnit.seconds);
             if(boostLiquid != null){
@@ -198,9 +216,9 @@ public final class CycleParts{
             Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, radius, domeColor);
         }
 
-        public class WardDomeBuild extends Building{
+        public class WardDomeBuild extends Building implements Ranged, ExplosionShield{
             /** damage the bank can still take */
-            public float shield;
+            public float shield = shieldCapacity;
             /** ticks of dead time left after a break; > 0 means the dome is down */
             public float cooldown;
             /** ticks left of the item charge */
@@ -226,7 +244,7 @@ public final class CycleParts{
 
             /** the dome is standing and will swallow shots */
             public boolean up(){
-                return cooldown <= 0f && efficiency > 0.01f && shield > 0.001f;
+                return enabled && cooldown <= 0f && efficiency > 0.01f && shield > 0.001f;
             }
 
             @Override
@@ -239,17 +257,20 @@ public final class CycleParts{
                     }
                 }
 
-                if(charge > 0f) charge -= Time.delta;
+                if(charge > 0f) charge = Math.max(0f, charge - Time.delta);
+                shield = Math.min(shield, realCapacity());
 
                 if(cooldown > 0f){
-                    //broken: nothing is absorbed, the bank stays empty until the whole cool-down is over
-                    cooldown -= Time.delta * (liquidBoost() ? liquidRegenBoost : 1f);
-                    shield = 0f;
+                    //v8.4: powered rebuild; return FULL, not with a 0.15 HP bank that breaks again.
+                    if(efficiency > 0.01f && enabled){
+                        cooldown = Math.max(0f, cooldown - edelta() * (liquidBoost() ? liquidRegenBoost : 1f));
+                    }
+                    shield = cooldown <= 0f ? realCapacity() : 0f;
                     warmup = Mathf.lerpDelta(warmup, 0f, 0.08f);
                     return;
                 }
 
-                if(efficiency <= 0.01f){
+                if(efficiency <= 0.01f || !enabled){
                     //no power, no dome. The bank is kept, so a brown-out is not a break.
                     warmup = Mathf.lerpDelta(warmup, 0f, 0.08f);
                     return;
@@ -270,22 +291,33 @@ public final class CycleParts{
                 float rad = realRadius();
                 Groups.bullet.intersect(x - rad, y - rad, rad * 2f, rad * 2f, b -> {
                     if(shield <= 0.001f || cooldown > 0f) return;
-                    if(b.team == team || !b.type.absorbable || !b.within(this, rad)) return;
+                    if(b.team == team || b.absorbed || !b.type.absorbable || !b.within(this, rad)) return;
 
-                    shield -= b.damage;
+                    float damage = Math.max(0f, b.type.shieldDamage(b));
                     hitAlpha = 1f;
                     if(hits.size < 24){
                         hits.add(angleTo(b.x, b.y), 0f);
                     }
                     b.absorb();
 
-                    if(shield <= 0f){
-                        //the bank is gone: the dome collapses and stays down for the full cool-down
-                        shield = 0f;
-                        cooldown = breakCooldown;
-                        AureliaFx.wardBreak.at(x, y, rad, brokenColor);
-                    }
+                    damageShield(damage);
                 });
+            }
+
+            /** Same crash-explosion contract as vanilla ForceProjector (2x crash damage). */
+            @Override public float range(){ return realRadius(); }
+            @Override public boolean absorbExplosion(float ex, float ey, float damage){
+                if(!up() || !within(ex, ey, realRadius())) return false;
+                hitAlpha = 1f;
+                damageShield(Math.max(0f, damage) * 2f);
+                return true;
+            }
+            public void damageShield(float damage){
+                shield = Math.max(0f, shield - damage);
+                if(shield <= 0f){
+                    cooldown = breakCooldown;
+                    AureliaFx.wardBreak.at(x, y, realRadius(), brokenColor);
+                }
             }
 
             @Override
@@ -369,8 +401,17 @@ public final class CycleParts{
 
             @Override
             public boolean shouldConsume(){
-                return cooldown <= 0f;
+                return enabled;
             }
+
+            @Override
+            public double sense(LAccess sensor){
+                if(sensor == LAccess.shield) return cooldown > 0f ? 0f : shield;
+                return super.sense(sensor);
+            }
+
+            @Override
+            public byte version(){ return 1; }
 
             @Override
             public void write(Writes write){
@@ -386,6 +427,14 @@ public final class CycleParts{
                 shield = read.f();
                 cooldown = read.f();
                 charge = read.f();
+                if((Float.isNaN(shield) || Float.isInfinite(shield))) shield = 0f;
+                if((Float.isNaN(cooldown) || Float.isInfinite(cooldown))) cooldown = breakCooldown;
+                if((Float.isNaN(charge) || Float.isInfinite(charge))) charge = 0f;
+                charge = Mathf.clamp(charge, 0f, itemBoostDuration);
+                cooldown = Mathf.clamp(cooldown, 0f, breakCooldown);
+                shield = Mathf.clamp(shield, 0f, realCapacity());
+                //One-time migration from v8.3's empty-on-start/rebuild bug. New saves preserve exact damage.
+                if(revision == 0 && cooldown <= 0f) shield = realCapacity();
             }
         }
     }

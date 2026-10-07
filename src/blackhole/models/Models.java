@@ -87,6 +87,9 @@ public final class Models{
         add(new CycleModels.WasteSilo());
         add(new CycleModels.WardDome());
         add(new CycleModels.CitadelCore());
+        //v8.4: entirely live utility geometry (never baked).
+        add(UtilityModels.furnace);
+        add(UtilityModels.sorter);
         //v7.6 frontier pack
         add(new FrontierModels.CoolantCondenser());
         add(new FrontierModels.GravitonChurn());

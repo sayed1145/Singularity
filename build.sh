@@ -4,7 +4,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"; VENDOR="${VENDOR:-$HOME/.cache/vendor}"
 JAVA_HOME="${JAVA_HOME:-$(find "$VENDOR" -maxdepth 1 -type d -name 'jdk-17*' | head -1)}"
-JAVA="$JAVA_HOME/bin/java"; JAR="$JAVA_HOME/bin/jar"; VERSION="8.3-beta"
+JAVA="$JAVA_HOME/bin/java"; JAR="$JAVA_HOME/bin/jar"; VERSION="8.4-beta"
 MINDUSTRY_JAR="$VENDOR/Mindustry.jar"; R8_JAR="$VENDOR/r8.jar"; ANDROID_JAR="$VENDOR/plat/android-35/android.jar"
 [ -f "$ANDROID_JAR" ] || ANDROID_JAR="$(find "$VENDOR/plat" -name android.jar | head -1)"
 BUILD="$ROOT/build"; OUT="$ROOT/dist"

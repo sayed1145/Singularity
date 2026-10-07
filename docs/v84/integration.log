@@ -1,0 +1,97 @@
+[10-07-2026 14:37:26] [I] [blackhole] 奇点模组已载入类。
+[10-07-2026 14:37:27] [I] [blackhole] 正在加载内容……
+[10-07-2026 14:37:27] [I] [blackhole/aegis] 2 imported Titans, 2 materials, 2 research routes, 20 blocks registered.
+[10-07-2026 14:37:28] [I] [blackhole/merge] Astro Detainer + RBMK White Reactor + Voxel Industry + Voxel Outpost registered inside this jar
+[10-07-2026 14:37:28] [I] [blackhole/merge] re-priced 28 mod blocks in Aurelia resources (22 conversion rules)
+[10-07-2026 14:37:28] [I] [blackhole] 内容加载完成：奇点主线 + 以太泰坦矩阵 + 欧雷利亚远征已注册。
+[10-07-2026 14:37:28] [I] [blackhole] 3D drawers installed on 46 blocks (99 models)
+Oct 07, 2026 2:37:28 PM org.jline.utils.Log logr
+WARNING: Unable to create a system terminal, creating a dumb terminal (enable debug logging for more information)
+[10-07-2026 14:37:29] [I] 1 mods loaded.
+[10-07-2026 14:37:29] [I] [blackhole/aegis] checked: the Titan Bay plans and ten turrets (research lives in the Aurelia tree).
+[10-07-2026 14:37:29] [I] [blackhole/aurelia] custom core + player chassis, zero-start extractor/power chain, authored terrain, three-anchor field network, and Aurelia-only research registered.
+[10-07-2026 14:37:29] [I] [blackhole/merge] re-priced 6 mod blocks in Aurelia resources (22 conversion rules)
+[10-07-2026 14:37:29] [I] [blackhole/merge] 242 mod contents available on Aurelia (+9 vanilla sandbox sources/voids), all other vanilla content hidden there
+[10-07-2026 14:37:29] [I] [blackhole/merge] Aurelia tech tree: +143 nodes (38 research costs converted, 25 free nodes priced), tree now holds 199 nodes
+[10-07-2026 14:37:29] [I] [blackhole/merge] planet purge: 41 mod nodes removed from the Serpulo / Erekir trees, 41 contents repointed at their Aurelia node
+[10-07-2026 14:37:29] [I] [blackhole] own particle effects: 982 vanilla effect references replaced
+[10-07-2026 14:37:29] [I] [blackhole] v8.0 指挥能力：已为 40 个单位补全指令，其中 6 个出厂即自动作业。
+[10-07-2026 14:37:29] [I] [blackhole] v5 科技树、泰坦矩阵与 v6 欧雷利亚远征完整性校验通过。
+[10-07-2026 14:37:29] [I] Server loaded. Type 'help' for help.
+[10-07-2026 14:37:29] [I] [V84-PASS] recipes, official utility inheritance, tech/research costs, localization and commander deletion
+[10-07-2026 14:37:31] [I] [blackhole/aurelia] campaign sector 10 (280x280) generated: 3 spawns in the fair band, about 103 tiles out, 2115 aurite, 1828 lumenite, 1914 resonance, 1304 bed, 8998 water, 25485 silt, ore per quadrant 1396/1778/1400/1440, 6 pockets joined, 53054 new-ground tiles in 7 kinds, 157 wall ore, all connected.
+[10-07-2026 14:37:31] [I] [V84-PASS] map 10: 3 gates, 0 boss encounters / 0 bosses, regular peak 15, wide routes 3
+[10-07-2026 14:37:32] [I] [blackhole/aurelia] campaign sector 41 (272x272) generated: 2 spawns in the fair band, about 100 tiles out, 1718 aurite, 1476 lumenite, 1355 resonance, 1312 bed, 17637 water, 26086 silt, ore per quadrant 1122/1214/1063/1300, 7 pockets joined, 44762 new-ground tiles in 7 kinds, 150 wall ore, all connected.
+[10-07-2026 14:37:32] [I] [V84-PASS] map 41: 2 gates, 1 boss encounters / 1 bosses, regular peak 16, wide routes 2
+[10-07-2026 14:37:33] [I] [blackhole/aurelia] campaign sector 83 (284x284) generated: 2 spawns in the fair band, about 105 tiles out, 2136 aurite, 2019 lumenite, 1693 resonance, 1263 bed, 19679 water, 23905 silt, ore per quadrant 1395/1762/1434/1407, 11 pockets joined, 45665 new-ground tiles in 7 kinds, 150 wall ore, all connected.
+[10-07-2026 14:37:33] [I] [V84-PASS] map 83: 2 gates, 1 boss encounters / 1 bosses, regular peak 18, wide routes 2
+[10-07-2026 14:37:34] [I] [blackhole/aurelia] campaign sector 11 (288x288) generated: 2 spawns in the fair band, about 106 tiles out, 2156 aurite, 1818 lumenite, 1715 resonance, 1274 bed, 22007 water, 31366 silt, ore per quadrant 1421/1687/1353/1378, 10 pockets joined, 51602 new-ground tiles in 7 kinds, 150 wall ore, all connected.
+[10-07-2026 14:37:34] [I] [V84-PASS] map 11: 2 gates, 1 boss encounters / 1 bosses, regular peak 18, wide routes 2
+[10-07-2026 14:37:35] [I] [blackhole/aurelia] campaign sector 18 (284x284) generated: 2 spawns in the fair band, about 105 tiles out, 1863 aurite, 1673 lumenite, 1504 resonance, 1333 bed, 23199 water, 23573 silt, ore per quadrant 1230/1229/1512/1219, 8 pockets joined, 43316 new-ground tiles in 7 kinds, 150 wall ore, all connected.
+[10-07-2026 14:37:35] [I] [V84-PASS] map 18: 2 gates, 1 boss encounters / 1 bosses, regular peak 18, wide routes 2
+[10-07-2026 14:37:36] [I] [blackhole/aurelia] campaign sector 32 (292x292) generated: 2 spawns in the fair band, about 108 tiles out, 2106 aurite, 1766 lumenite, 1449 resonance, 1269 bed, 17407 water, 22525 silt, ore per quadrant 1593/1273/1309/1299, 1 pockets joined, 51580 new-ground tiles in 7 kinds, 153 wall ore, all connected.
+[10-07-2026 14:37:36] [I] [V84-PASS] map 32: 2 gates, 1 boss encounters / 1 bosses, regular peak 20, wide routes 2
+[10-07-2026 14:37:37] [I] [blackhole/aurelia] campaign sector 13 (300x300) generated: 2 spawns in the fair band, about 111 tiles out, 1793 aurite, 1656 lumenite, 864 resonance, 1321 bed, 17610 water, 22253 silt, ore per quadrant 1296/1054/1043/1090, 6 pockets joined, 52838 new-ground tiles in 7 kinds, 170 wall ore, all connected.
+[10-07-2026 14:37:37] [I] [V84-PASS] map 13: 2 gates, 1 boss encounters / 1 bosses, regular peak 18, wide routes 2
+[10-07-2026 14:37:38] [I] [blackhole/aurelia] campaign sector 59 (288x288) generated: 3 spawns in the fair band, about 106 tiles out, 2166 aurite, 1723 lumenite, 1129 resonance, 1281 bed, 17056 water, 26570 silt, ore per quadrant 1290/1169/1483/1226, 2 pockets joined, 47808 new-ground tiles in 7 kinds, 150 wall ore, all connected.
+[10-07-2026 14:37:38] [I] [V84-PASS] map 59: 3 gates, 1 boss encounters / 1 bosses, regular peak 21, wide routes 3
+[10-07-2026 14:37:38] [I] [blackhole/aurelia] campaign sector 30 (300x300) generated: 3 spawns in the fair band, about 111 tiles out, 1795 aurite, 1708 lumenite, 1681 resonance, 1281 bed, 20879 water, 26970 silt, ore per quadrant 1601/1247/1304/1236, 3 pockets joined, 53770 new-ground tiles in 7 kinds, 204 wall ore, all connected.
+[10-07-2026 14:37:38] [I] [V84-PASS] map 30: 3 gates, 1 boss encounters / 1 bosses, regular peak 24, wide routes 3
+[10-07-2026 14:37:39] [I] [blackhole/aurelia] campaign sector 52 (296x296) generated: 4 spawns in the fair band, about 109 tiles out, 2059 aurite, 1868 lumenite, 1550 resonance, 1263 bed, 21063 water, 26340 silt, ore per quadrant 1359/1349/1328/1612, 7 pockets joined, 51212 new-ground tiles in 7 kinds, 171 wall ore, all connected.
+[10-07-2026 14:37:39] [I] [V84-PASS] map 52: 4 gates, 1 boss encounters / 1 bosses, regular peak 20, wide routes 4
+[10-07-2026 14:37:39] [I] [blackhole/aurelia] campaign sector 33 (292x292) generated: 4 spawns in the fair band, about 108 tiles out, 1956 aurite, 1859 lumenite, 1597 resonance, 1285 bed, 16173 water, 24228 silt, ore per quadrant 1613/1324/1324/1318, 9 pockets joined, 49500 new-ground tiles in 7 kinds, 167 wall ore, all connected.
+[10-07-2026 14:37:39] [I] [V84-PASS] map 33: 4 gates, 1 boss encounters / 1 bosses, regular peak 20, wide routes 4
+[10-07-2026 14:37:40] [I] [blackhole/aurelia] campaign sector 4 (292x292) generated: 3 spawns in the fair band, about 108 tiles out, 1675 aurite, 1682 lumenite, 1238 resonance, 1325 bed, 24591 water, 19980 silt, ore per quadrant 1136/1094/1377/1145, 4 pockets joined, 44260 new-ground tiles in 7 kinds, 157 wall ore, all connected.
+[10-07-2026 14:37:40] [I] [V84-PASS] map 4: 3 gates, 1 boss encounters / 1 bosses, regular peak 27, wide routes 3
+[10-07-2026 14:37:40] [I] [blackhole/aurelia] campaign sector 50 (292x292) generated: 4 spawns in the fair band, about 108 tiles out, 1668 aurite, 1477 lumenite, 1048 resonance, 1299 bed, 19726 water, 22864 silt, ore per quadrant 966/1132/1041/1209, 5 pockets joined, 46958 new-ground tiles in 7 kinds, 155 wall ore, all connected.
+[10-07-2026 14:37:40] [I] [V84-PASS] map 50: 4 gates, 2 boss encounters / 2 bosses, regular peak 32, wide routes 4
+[10-07-2026 14:37:41] [I] [blackhole/aurelia] campaign sector 24 (304x304) generated: 3 spawns in the fair band, about 112 tiles out, 1774 aurite, 1806 lumenite, 1327 resonance, 1272 bed, 25967 water, 28543 silt, ore per quadrant 1238/1212/1173/1434, 8 pockets joined, 48954 new-ground tiles in 7 kinds, 150 wall ore, all connected.
+[10-07-2026 14:37:41] [I] [V84-PASS] map 24: 3 gates, 2 boss encounters / 2 bosses, regular peak 27, wide routes 3
+[10-07-2026 14:37:41] [I] [blackhole/aurelia] campaign sector 89 (308x308) generated: 4 spawns in the fair band, about 113 tiles out, 1840 aurite, 1890 lumenite, 1596 resonance, 1330 bed, 29002 water, 25397 silt, ore per quadrant 1324/1604/1293/1258, 23 pockets joined, 51562 new-ground tiles in 7 kinds, 153 wall ore, all connected.
+[10-07-2026 14:37:41] [I] [V84-PASS] map 89: 4 gates, 2 boss encounters / 2 bosses, regular peak 20, wide routes 4
+[10-07-2026 14:37:42] [I] [blackhole/aurelia] campaign sector 5 (300x300) generated: 4 spawns in the fair band, about 111 tiles out, 1850 aurite, 1608 lumenite, 1402 resonance, 1267 bed, 13489 water, 23705 silt, ore per quadrant 1187/1285/1427/1140, 6 pockets joined, 52131 new-ground tiles in 7 kinds, 179 wall ore, all connected.
+[10-07-2026 14:37:42] [I] [V84-PASS] map 5: 4 gates, 2 boss encounters / 2 bosses, regular peak 36, wide routes 4
+[10-07-2026 14:37:42] [I] [blackhole/aurelia] campaign sector 87 (316x316) generated: 3 spawns in the fair band, about 116 tiles out, 1435 aurite, 1530 lumenite, 1187 resonance, 1297 bed, 21088 water, 31528 silt, ore per quadrant 1011/1015/1231/1077, 4 pockets joined, 61911 new-ground tiles in 7 kinds, 182 wall ore, all connected.
+[10-07-2026 14:37:42] [I] [V84-PASS] map 87: 3 gates, 2 boss encounters / 2 bosses, regular peak 27, wide routes 3
+[10-07-2026 14:37:43] [I] [blackhole/aurelia] campaign sector 1 (316x316) generated: 4 spawns in the fair band, about 116 tiles out, 2702 aurite, 2078 lumenite, 2140 resonance, 1286 bed, 10550 water, 31558 silt, ore per quadrant 2045/1740/1648/1658, 11 pockets joined, 63407 new-ground tiles in 7 kinds, 171 wall ore, all connected.
+[10-07-2026 14:37:43] [I] [V84-PASS] map 1: 4 gates, 2 boss encounters / 2 bosses, regular peak 36, wide routes 4
+[10-07-2026 14:37:43] [I] [blackhole/aurelia] campaign sector 14 (312x312) generated: 3 spawns in the fair band, about 115 tiles out, 1760 aurite, 1823 lumenite, 1376 resonance, 1279 bed, 10297 water, 35469 silt, ore per quadrant 1384/1187/1375/1187, 6 pockets joined, 65978 new-ground tiles in 7 kinds, 174 wall ore, all connected.
+[10-07-2026 14:37:43] [I] [V84-PASS] map 14: 3 gates, 2 boss encounters / 2 bosses, regular peak 27, wide routes 3
+[10-07-2026 14:37:44] [I] [blackhole/aurelia] campaign sector 17 (316x316) generated: 3 spawns in the fair band, about 116 tiles out, 1690 aurite, 1260 lumenite, 1283 resonance, 1278 bed, 18615 water, 29621 silt, ore per quadrant 1151/1026/1252/999, 11 pockets joined, 57071 new-ground tiles in 7 kinds, 195 wall ore, all connected.
+[10-07-2026 14:37:44] [I] [V84-PASS] map 17: 3 gates, 2 boss encounters / 2 bosses, regular peak 27, wide routes 3
+[10-07-2026 14:37:44] [I] [blackhole/aurelia] campaign sector 21 (320x320) generated: 5 spawns in the fair band, about 118 tiles out, 2021 aurite, 1588 lumenite, 1624 resonance, 1270 bed, 28113 water, 29835 silt, ore per quadrant 1249/1548/1262/1369, 17 pockets joined, 56231 new-ground tiles in 7 kinds, 195 wall ore, all connected.
+[10-07-2026 14:37:44] [I] [V84-PASS] map 21: 5 gates, 2 boss encounters / 2 bosses, regular peak 25, wide routes 5
+[10-07-2026 14:37:45] [I] [blackhole/aurelia] campaign sector 61 (312x312) generated: 4 spawns in the fair band, about 115 tiles out, 1948 aurite, 2014 lumenite, 1605 resonance, 1290 bed, 16522 water, 33308 silt, ore per quadrant 1636/1365/1383/1338, 8 pockets joined, 59951 new-ground tiles in 7 kinds, 155 wall ore, all connected.
+[10-07-2026 14:37:45] [I] [V84-PASS] map 61: 4 gates, 2 boss encounters / 2 bosses, regular peak 36, wide routes 4
+[10-07-2026 14:37:45] [I] [blackhole/aurelia] campaign sector 81 (312x312) generated: 4 spawns in the fair band, about 115 tiles out, 2147 aurite, 2057 lumenite, 1662 resonance, 1284 bed, 18593 water, 29603 silt, ore per quadrant 1426/1766/1432/1433, 3 pockets joined, 61788 new-ground tiles in 7 kinds, 191 wall ore, all connected.
+[10-07-2026 14:37:46] [I] [V84-PASS] map 81: 4 gates, 3 boss encounters / 3 bosses, regular peak 36, wide routes 4
+[10-07-2026 14:37:46] [I] [blackhole/aurelia] campaign sector 73 (324x324) generated: 4 spawns in the fair band, about 119 tiles out, 1715 aurite, 1670 lumenite, 1409 resonance, 1317 bed, 19514 water, 33097 silt, ore per quadrant 1212/1181/1180/1393, 12 pockets joined, 62091 new-ground tiles in 7 kinds, 172 wall ore, all connected.
+[10-07-2026 14:37:46] [I] [V84-PASS] map 73: 4 gates, 3 boss encounters / 3 bosses, regular peak 36, wide routes 4
+[10-07-2026 14:37:47] [I] [blackhole/aurelia] campaign sector 37 (316x316) generated: 4 spawns in the fair band, about 116 tiles out, 1598 aurite, 1399 lumenite, 1230 resonance, 1325 bed, 25228 water, 25949 silt, ore per quadrant 1297/1037/1055/1020, 6 pockets joined, 55045 new-ground tiles in 7 kinds, 182 wall ore, all connected.
+[10-07-2026 14:37:47] [I] [V84-PASS] map 37: 4 gates, 3 boss encounters / 3 bosses, regular peak 36, wide routes 4
+[10-07-2026 14:37:47] [I] [blackhole/aurelia] campaign sector 60 (336x336) generated: 4 spawns in the fair band, about 124 tiles out, 1611 aurite, 1479 lumenite, 1017 resonance, 1372 bed, 34111 water, 31885 silt, ore per quadrant 1042/1000/1075/1206, 13 pockets joined, 64259 new-ground tiles in 7 kinds, 216 wall ore, all connected.
+[10-07-2026 14:37:47] [I] [V84-PASS] map 60: 4 gates, 3 boss encounters / 3 bosses, regular peak 36, wide routes 4
+[10-07-2026 14:37:48] [I] [blackhole/aurelia] campaign sector 80 (332x332) generated: 4 spawns in the fair band, about 122 tiles out, 1893 aurite, 2117 lumenite, 1520 resonance, 1263 bed, 16324 water, 33556 silt, ore per quadrant 1346/1324/1387/1680, 4 pockets joined, 69134 new-ground tiles in 7 kinds, 207 wall ore, all connected.
+[10-07-2026 14:37:48] [I] [V84-PASS] map 80: 4 gates, 3 boss encounters / 3 bosses, regular peak 36, wide routes 4
+[10-07-2026 14:37:48] [I] [blackhole/aurelia] campaign sector 47 (340x340) generated: 5 spawns in the fair band, about 125 tiles out, 1862 aurite, 1776 lumenite, 1372 resonance, 1369 bed, 20591 water, 37159 silt, ore per quadrant 1253/1312/1189/1434, 22 pockets joined, 69451 new-ground tiles in 7 kinds, 178 wall ore, all connected.
+[10-07-2026 14:37:48] [I] [V84-PASS] map 47: 5 gates, 3 boss encounters / 3 bosses, regular peak 45, wide routes 5
+[10-07-2026 14:37:49] [I] [blackhole/aurelia] campaign sector 72 (328x328) generated: 5 spawns in the fair band, about 121 tiles out, 1503 aurite, 1509 lumenite, 1049 resonance, 1309 bed, 20279 water, 30914 silt, ore per quadrant 1048/1064/1080/1080, 12 pockets joined, 66470 new-ground tiles in 7 kinds, 211 wall ore, all connected.
+[10-07-2026 14:37:49] [I] [V84-PASS] map 72: 5 gates, 3 boss encounters / 3 bosses, regular peak 45, wide routes 5
+[10-07-2026 14:37:49] [I] [blackhole/aurelia] campaign sector 91 (340x340) generated: 5 spawns in the fair band, about 125 tiles out, 1911 aurite, 1809 lumenite, 1103 resonance, 1306 bed, 12901 water, 39103 silt, ore per quadrant 1181/1235/1261/1356, 10 pockets joined, 75007 new-ground tiles in 7 kinds, 210 wall ore, all connected.
+[10-07-2026 14:37:50] [I] [V84-PASS] map 91: 5 gates, 3 boss encounters / 4 bosses, regular peak 45, wide routes 5
+[10-07-2026 14:37:50] [I] [blackhole/aurelia] campaign sector 43 (348x348) generated: 5 spawns in the fair band, about 128 tiles out, 1757 aurite, 1465 lumenite, 1546 resonance, 1315 bed, 12052 water, 39955 silt, ore per quadrant 1216/1432/1189/1177, 14 pockets joined, 79513 new-ground tiles in 7 kinds, 246 wall ore, all connected.
+[10-07-2026 14:37:50] [I] [V84-PASS] map 43: 5 gates, 3 boss encounters / 4 bosses, regular peak 40, wide routes 5
+[10-07-2026 14:37:51] [I] [blackhole/aurelia] campaign sector 65 (336x336) generated: 5 spawns in the fair band, about 124 tiles out, 2007 aurite, 1479 lumenite, 1304 resonance, 1325 bed, 26525 water, 26998 silt, ore per quadrant 1188/1164/1227/1447, 11 pockets joined, 66114 new-ground tiles in 7 kinds, 236 wall ore, all connected.
+[10-07-2026 14:37:51] [I] [V84-PASS] map 65: 5 gates, 3 boss encounters / 4 bosses, regular peak 40, wide routes 5
+[10-07-2026 14:37:51] [I] [V84-PASS] ALL 32 campaign maps: 31 noninitial boss sectors, 20 multi-encounter sectors; unique terrain, balanced ores, water, clearance, wide paths, finite single-gate bosses and bounded regular waves
+[10-07-2026 14:37:51] [I] [blackhole/aurelia] campaign sector 41 (272x272) generated: 2 spawns in the fair band, about 100 tiles out, 1718 aurite, 1476 lumenite, 1355 resonance, 1312 bed, 17637 water, 26086 silt, ore per quadrant 1122/1214/1063/1300, 7 pockets joined, 44762 new-ground tiles in 7 kinds, 150 wall ore, all connected.
+[10-07-2026 14:37:51] [I] [blackhole/v8.4] campaign sector 41 upgraded: 1 boss encounters, final encounter wave 17
+[10-07-2026 14:37:51] [I] [V84-PASS] blocked legacy routes: shielded flying boss fallback, existing terrain/structures untouched
+[10-07-2026 14:37:52] [I] [blackhole/aurelia] campaign sector 10 (280x280) generated: 3 spawns in the fair band, about 103 tiles out, 2115 aurite, 1828 lumenite, 1914 resonance, 1304 bed, 8998 water, 25485 silt, ore per quadrant 1396/1778/1400/1440, 6 pockets joined, 53054 new-ground tiles in 7 kinds, 157 wall ore, all connected.
+[10-07-2026 14:37:52] [I] [V84-PASS] live production: new coolant forges alloy; tidewater 21.6/sec -> demineralized water 19.2/sec; old liquids rejected
+[10-07-2026 14:37:52] [I] [V84-PASS] incinerator: cold/hot/power/disable, item+liquid destruction and incinerable guard; inverse sorter: straight/side/alternation/full/enemy/config/save
+[10-07-2026 14:37:52] [I] [V84-PASS] shield: full start, 120 HP/s, shieldDamage, friendly/nonabsorbable/disabled guards, crash explosions, power pause, 840-tick full rebuild, coolant 443-tick rebuild, shard cap/expiry, sensor, numeric bar bindings, revisions 0/1
+[10-07-2026 14:37:52] [I] [V84-PASS] real .msav save/load roundtrip preserves damaged shield and inverse-sorter configuration
+[10-07-2026 14:37:52] [I] [V84-PASS] INTEGRATION COMPLETE: 6837 assertions passed
+[10-07-2026 14:37:52] [I] V84-ALL-PASSED
+[10-07-2026 14:37:52] [I] Shutting down server.

@@ -37,7 +37,7 @@ public class VoxelBlocks{
             ambientSoundVolume = 0.07f;
             drawer = new DrawModel(ForgeModel.instance);
             consumeItems(with(Items.silicon, 3, Items.titanium, 2));
-            consumeLiquid(Liquids.cryofluid, 0.08f);
+            consumeLiquid(blackhole.AureliaFrontier.auroraCoolant, 0.08f);
             consumePower(2.6f);
         }};
 

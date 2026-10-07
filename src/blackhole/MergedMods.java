@@ -40,7 +40,6 @@ public final class MergedMods{
         if(parent != null){
             TechNode fab = new TechNode(parent, AstroContent.fabricator, AstroContent.fabricator.researchRequirements());
             new TechNode(fab, AstroContent.detainer, AstroContent.detainer.researchRequirements());
-            new TechNode(fab, AstroContent.commander, AstroContent.commander.researchRequirements());
         }
         //---- Voxel Industry (v7.5)
         VoxelItems.load();

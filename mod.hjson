@@ -6,8 +6,8 @@ description:
   工业垃圾测试版
   Industrial Junk Beta
   '''
-subtitle: "8.3-beta · 工业废料六步回收链 · 三级核心「堡垒城」· 守护穹顶 · 地下水井提速 2.5 倍 · 核心分级采矿 · 天文拘留者面板修复"
-version: "8.3-beta"
+subtitle: "8.4-beta · 战役 Boss · 守护穹顶修复 · 实时 3D 焚化炉与反向分类器 · 配方修正"
+version: "8.4-beta"
 // Java 模组要求主版本号 >= 154（游戏内 isOutdated 校验），v7 常见的 "146" 会被判过期
 minGameVersion: "160.5"
 main: "blackhole.BlackHoleMod"

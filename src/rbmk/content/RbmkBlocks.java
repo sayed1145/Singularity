@@ -47,7 +47,7 @@ public class RbmkBlocks{
             requirements(Category.liquid, with(Items.copper,180,Items.lead,220,Items.silicon,160,Items.metaglass,120,Items.titanium,100));
             size=3; health=1100; craftTime=60f; liquidCapacity=120f;
             hasLiquids=true; outputLiquid=new LiquidStack(RbmkLiquids.demineralizedWater,.32f);
-            consumeLiquid(Liquids.water,.36f); consumePower(5.2f);
+            consumeLiquid(blackhole.AureliaContent.tidewater,.36f); consumePower(5.2f);
             craftEffect=Fx.none; updateEffect=Fx.none;
             drawer=new DrawModel(WaterTreatmentModel.instance);
             ambientSound=Sounds.loopHum; ambientSoundVolume=.07f;
