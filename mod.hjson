@@ -1,0 +1,15 @@
+name: "blackhole"
+displayName: "奇点 · Singularity"
+author: "sayed1145 — 构想 / 架构设计 / 真机测试 · NLM — AI 工程实现（辅助）"
+description:
+  '''
+  工业垃圾测试版
+  Industrial Junk Beta
+  '''
+subtitle: "8.6-release · 锚钉炮射速1.25/伤害4.5（造价不变）· 锚钉手蛇式分节移动·三炮（主炮162 + 变种58/84）· 血量12000 · T5造价"
+version: "8.6-release"
+// Java 模组要求主版本号 >= 154（游戏内 isOutdated 校验），v7 常见的 "146" 会被判过期
+minGameVersion: "160.5"
+main: "blackhole.BlackHoleMod"
+java: true
+hidden: false

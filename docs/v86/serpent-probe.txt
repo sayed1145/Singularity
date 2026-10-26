@@ -1,0 +1,12 @@
+spike-warden serpent rig
+  bones=21 pieces=57 faces=528 half=12.6 height=4.6
+  segments=7 spacing=2.9 waveAmp=13.0 waveScl=11.0 wavePhase=0.9 mag=0.4 scl=4.0 phase=5.0
+  segmentRotSpeed=2.6 segmentMaxRot=55.0 crawlSlowdown=0.72 crawlSlowdownFrac=0.6
+  plate y-extent per segment: [0] -2.30..3.35 [1] -1.95..1.95 [2] -1.90..1.90 [3] -1.85..1.85 [4] -1.78..1.78 [5] -1.70..1.70 [6] -1.70..1.70
+
+  NaN offsets: 0
+  worst gap between consecutive plates: 0->1 -0.885 1->2 -0.489 2->3 -0.391 3->4 -0.273 4->5 -0.126 5->6 -0.047
+  worst overall: -0.047 (segment 5->6), most negative (deepest overlap): -1.750
+  closest non-neighbour sections: 5.078 (sections 1 and 3) - must exceed the plate width
+
+  VERDICT: body stays joined - every plate overlaps its neighbour at every phase and bend

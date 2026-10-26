@@ -1,0 +1,86 @@
+{
+  "type": "ItemTurret",
+  "name": "Halo",
+  "description": "A late-game anti-air launcher that releases guided missile salvos. Surge-alloy missiles arc electricity on impact.",
+  "category": "turret",
+  "research": {
+    "parent": "disperse",
+    "requirements": [
+      "beryllium/720",
+      "tungsten/490",
+      "silicon/570",
+      "oxide/260",
+      "surge-alloy/180"
+    ]
+  },
+  "size": 3,
+  "health": 1400,
+  "requirements": [
+    "beryllium/360",
+    "tungsten/240",
+    "silicon/280",
+    "oxide/120",
+    "surge-alloy/65"
+  ],
+  "range": 305,
+  "reload": 43,
+  "rotateSpeed": 4.5,
+  "shootCone": 18,
+  "shootY": 12,
+  "recoil": 1.5,
+  "maxAmmo": 45,
+  "inaccuracy": 3,
+  "targetGround": false,
+  "heatColor": "bd9ce7",
+  "shootSound": "shootMissileLarge",
+  "shoot": {
+    "shots": 3,
+    "shotDelay": 5
+  },
+  "ammoTypes": {
+    "tungsten": {
+      "type": "MissileBulletType",
+      "speed": 5.7,
+      "damage": 56,
+      "lifetime": 56,
+      "width": 9,
+      "height": 11,
+      "ammoMultiplier": 4,
+      "homingPower": 0.11,
+      "homingRange": 105,
+      "collidesGround": false,
+      "collidesTiles": false,
+      "splashDamage": 52,
+      "splashDamageRadius": 27,
+      "hitEffect": "flakExplosionBig",
+      "frontColor": "f2f5e8",
+      "backColor": "d6c3a0",
+      "hitColor": "d6c3a0",
+      "trailColor": "d6c3a0"
+    },
+    "surge-alloy": {
+      "type": "MissileBulletType",
+      "speed": 5.9,
+      "damage": 82,
+      "lifetime": 55,
+      "width": 10,
+      "height": 13,
+      "ammoMultiplier": 3,
+      "homingPower": 0.14,
+      "homingRange": 110,
+      "collidesGround": false,
+      "collidesTiles": false,
+      "splashDamage": 75,
+      "splashDamageRadius": 35,
+      "lightning": 2,
+      "lightningLength": 5,
+      "lightningDamage": 18,
+      "lightningColor": "c9aeff",
+      "hitEffect": "flakExplosionBig",
+      "frontColor": "fff7f2",
+      "backColor": "b791e8",
+      "hitColor": "c9aeff",
+      "trailColor": "c9aeff"
+    }
+  }
+}

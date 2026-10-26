@@ -1,0 +1,73 @@
+{
+  "type": "ItemTurret",
+  "name": "Needlefall",
+  "description": "A quick-firing twin-barrel turret. Copper rounds are inexpensive; silicon rounds track moving targets.",
+  "category": "turret",
+  "research": {
+    "parent": "duo",
+    "requirements": [
+      "copper/210",
+      "graphite/140",
+      "silicon/90"
+    ]
+  },
+  "size": 2,
+  "health": 490,
+  "requirements": [
+    "copper/85",
+    "graphite/55",
+    "silicon/35"
+  ],
+  "range": 175,
+  "reload": 9,
+  "rotateSpeed": 11,
+  "shootCone": 15,
+  "shootY": 9,
+  "recoil": 0.9,
+  "inaccuracy": 2.5,
+  "maxAmmo": 52,
+  "heatColor": "79cbd6",
+  "shootSound": "shootDuo",
+  "ammoUseEffect": "casing1",
+  "shoot": {
+    "type": "ShootAlternate",
+    "barrels": 2,
+    "spread": 7
+  },
+  "ammoTypes": {
+    "copper": {
+      "type": "BasicBulletType",
+      "speed": 5,
+      "damage": 10,
+      "lifetime": 36,
+      "width": 6,
+      "height": 9,
+      "ammoMultiplier": 4,
+      "frontColor": "f4d5ac",
+      "backColor": "d49a72",
+      "hitColor": "d49a72",
+      "hitEffect": "hitBulletColor",
+      "despawnEffect": "hitBulletColor"
+    },
+    "silicon": {
+      "type": "BasicBulletType",
+      "speed": 4.8,
+      "damage": 15,
+      "lifetime": 38,
+      "width": 7,
+      "height": 10,
+      "ammoMultiplier": 5,
+      "reloadMultiplier": 1.1,
+      "homingPower": 0.07,
+      "homingRange": 64,
+      "trailLength": 5,
+      "trailWidth": 1.2,
+      "frontColor": "f4f6e7",
+      "backColor": "a9c783",
+      "trailColor": "a9c783",
+      "hitColor": "a9c783",
+      "hitEffect": "hitBulletColor",
+      "despawnEffect": "hitBulletColor"
+    }
+  }
+}

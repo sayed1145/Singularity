@@ -1,0 +1,61 @@
+{
+  "type": "PowerTurret",
+  "name": "Prism Lance",
+  "description": "Charges a long piercing beam that cuts through ground targets. Requires a continuous power supply.",
+  "category": "turret",
+  "research": {
+    "parent": "lancer",
+    "requirements": [
+      "copper/280",
+      "lead/350",
+      "titanium/290",
+      "metaglass/230",
+      "silicon/360"
+    ]
+  },
+  "size": 3,
+  "health": 1000,
+  "requirements": [
+    "copper/120",
+    "lead/145",
+    "titanium/110",
+    "metaglass/90",
+    "silicon/145"
+  ],
+  "range": 220,
+  "reload": 116,
+  "rotateSpeed": 3.6,
+  "shootCone": 8,
+  "shootY": 12,
+  "recoil": 2.4,
+  "shake": 2,
+  "targetAir": false,
+  "moveWhileCharging": false,
+  "heatColor": "b6acff",
+  "shootSound": "shootLancer",
+  "chargeSound": "chargeLancer",
+  "shootEffect": "lancerLaserShoot",
+  "smokeEffect": "none",
+  "shoot": {
+    "firstShotDelay": 34
+  },
+  "consumes": {
+    "power": 8
+  },
+  "shootType": {
+    "type": "LaserBulletType",
+    "damage": 205,
+    "length": 227,
+    "width": 12,
+    "pierceCap": 5,
+    "buildingDamageMultiplier": 0.5,
+    "collidesAir": false,
+    "colors": [
+      "8069c477",
+      "a79af5",
+      "f3f0ff"
+    ],
+    "hitColor": "b6acff",
+    "hitEffect": "hitLancer"
+  }
+}

@@ -1,0 +1,30 @@
+v8.5.6 刷怪审计（无头服务器内实测，非估算）
+SpawnGroup.getSpawned() 按 v160.5 反编译后的原样复刻：
+    if(spacing == 0) spacing = 1;
+    if(wave < begin || wave > end || (wave - begin) % spacing != 0) return 0;
+    return Math.min(unitAmount + (int)((wave - begin) / spacing / unitScaling), max);
+
+roster: 30 slots; 31 distinct units appear in at least one threat profile
+  （31 > 30 是因为拘留者 Detainer 在 threat>=0.55 时作为独立 boss 组额外加入）
+  -> 没有单位被漏掉
+
+threat wave  | 8.5.5 avg/max       | 8.5.6 avg/max       | avg x
+--------------------------------------------------------------------------
+0.13   16    |      5.1 /      11 |      5.1 /      11 | 1.000   <- 新手图完全不变
+0.20   18    |      5.2 /      11 |      5.3 /      11 | 1.032
+0.30   22    |      5.8 /      12 |      5.8 /      12 | 1.000
+0.34   24    |      5.9 /      11 |      6.0 /      12 | 1.021
+0.45   32    |      6.8 /      15 |      7.1 /      17 | 1.041
+0.60   45    |      8.7 /      22 |      9.6 /      23 | 1.097
+0.75   60    |     10.9 /      25 |     12.8 /      32 | 1.169
+0.92   79    |     14.3 /      45 |     17.1 /      54 | 1.193   <- 终局图
+
+空波检查（8.5.6）：8 个威胁档、296 波，空波 0
+  threat 0.13: 0 empty of 16 waves
+  threat 0.20: 0 empty of 18 waves
+  threat 0.30: 0 empty of 22 waves
+  threat 0.34: 0 empty of 24 waves
+  threat 0.45: 0 empty of 32 waves
+  threat 0.60: 0 empty of 45 waves
+  threat 0.75: 0 empty of 60 waves
+  threat 0.92: 0 empty of 79 waves

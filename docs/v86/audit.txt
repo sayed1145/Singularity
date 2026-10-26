@@ -1,0 +1,26 @@
+===== v8.5.7 AUDIT =====
+[anchor-spike] blackhole-anchor-spike  size=3  health=1520
+    reload=67.2t   (was 84 -> x1.25 = 67.2)
+    range=300.0
+    bullet damage=153.0   (was 34 -> x4.5 = 153.0)
+    absorbable=false  reflectable=false
+    build cost: blackhole-lumenitex460, blackhole-auritex320, blackhole-prism-glassx170, blackhole-resonance-shardx70, blackhole-star-marrowx8
+
+[spike-warden] blackhole-spike-warden
+    health=12000.0   (was 2350; asked for 8000 < hp < 15000)
+    armor=12.0  speed=0.78  hitSize=16.0
+    entity class=CrawlUnit   isCrawlc=true
+    segmentRotSpeed=2.6  segmentMaxRot=55.0  crawlSlowdown=0.72  crawlSlowdownFrac=0.6  crushDamage=0.0
+    weapons=3
+    [0] reload=60.0t  damage=162.0  absorbable=false  reflectable=false  shotsPerVolley=3  bulletRange=440.0
+    [1] reload=26.666664t  damage=58.0  absorbable=false  reflectable=false  shotsPerVolley=1  bulletRange=440.0
+    [2] reload=26.666664t  damage=84.0  absorbable=false  reflectable=false  shotsPerVolley=1  bulletRange=440.0
+    combined single-target DPS = 805.5
+      plan unit=blackhole-mote time=11.0s matches=false
+      plan unit=blackhole-lattice-crawler time=42.0s matches=false
+      plan unit=blackhole-spike-warden time=130.0s matches=true
+
+[plan] factory=blackhole-resonance-cradle  time=130.0s  cost=blackhole-lumenitex640, blackhole-auritex420, blackhole-prism-glassx180, blackhole-prism-alloyx260, blackhole-resonance-shardx150, blackhole-concord-corex48, blackhole-star-marrowx40
+    factories seen: [ground-factory(3) air-factory(2) naval-factory(2) tank-fabricator(1) ship-fabricator(1) mech-fabricator(1) blackhole-horizon-assembler(2) blackhole-citadel-yard(2) blackhole-titan-bay-s(2) blackhole-aurelia-fabricator(21) blackhole-tide-dock(4) blackhole-resonance-cradle(3) blackhole-astro-fabricator(1) blackhole-voxel-assembler(3) ]
+    total blocks in content: 615
+===== END AUDIT =====

@@ -1,0 +1,20 @@
+# ---- build output ----------------------------------------------------------
+# build/ holds intermediate artefacts (compiled classes, the intermediate dex,
+# the packaging stage). The distributable JAR in dist/ IS tracked on purpose.
+build/
+out/
+target/
+
+# ---- python tooling --------------------------------------------------------
+__pycache__/
+*.py[cod]
+
+# ---- editor / OS -----------------------------------------------------------
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ---- local test servers / scratch -----------------------------------------
+/mt*/

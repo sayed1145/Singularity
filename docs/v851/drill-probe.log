@@ -1,0 +1,35 @@
+[10-25-2026 12:11:25] [I] [blackhole] 奇点模组已载入类。
+[10-25-2026 12:11:26] [I] [blackhole] 正在加载内容……
+[10-25-2026 12:11:26] [I] [blackhole/aegis] 2 imported Titans, 2 materials, 2 research routes, 20 blocks registered.
+[10-25-2026 12:11:26] [I] [blackhole/merge] Astro Detainer + RBMK White Reactor + Voxel Industry + Voxel Outpost registered inside this jar
+[10-25-2026 12:11:26] [I] [blackhole/merge] re-priced 28 mod blocks in Aurelia resources (22 conversion rules; 1 Hawking coolant repair)
+[10-25-2026 12:11:26] [I] [blackhole] 内容加载完成：奇点主线 + 以太泰坦矩阵 + 欧雷利亚远征已注册。
+[10-25-2026 12:11:26] [I] [blackhole] 3D drawers installed on 46 blocks (99 models)
+Oct 25, 2026 12:11:26 PM org.jline.utils.Log logr
+WARNING: Unable to create a system terminal, creating a dumb terminal (enable debug logging for more information)
+[10-25-2026 12:11:27] [I] 1 mods loaded.
+[10-25-2026 12:11:27] [I] [blackhole/aegis] checked: the Titan Bay plans and ten turrets (research lives in the Aurelia tree).
+[10-25-2026 12:11:27] [I] [blackhole/aurelia] custom core + player chassis, zero-start extractor/power chain, authored terrain, three-anchor field network, and Aurelia-only research registered.
+[10-25-2026 12:11:27] [I] [blackhole/merge] re-priced 6 mod blocks in Aurelia resources (22 conversion rules; 0 Hawking coolant repair)
+[10-25-2026 12:11:27] [I] [blackhole/merge] 245 mod contents available on Aurelia (+9 vanilla sandbox sources/voids), all other vanilla content hidden there
+[10-25-2026 12:11:27] [I] [blackhole/merge] Aurelia tech tree: +144 nodes (35 research costs converted, 20 objectives rewritten, 0 objectives dropped, 0 requirement stacks rewritten, 26 nodes repriced), tree now holds 200 nodes
+[10-25-2026 12:11:27] [I] [blackhole/merge] planet purge: 41 mod nodes removed from the Serpulo / Erekir trees, 41 contents repointed at their Aurelia node
+[10-25-2026 12:11:27] [I] [blackhole] own particle effects: 989 vanilla effect references replaced
+[10-25-2026 12:11:27] [I] [blackhole] v8.0 指挥能力：已为 40 个单位补全指令，其中 6 个出厂即自动作业。
+[10-25-2026 12:11:27] [I] [blackhole] v5 科技树、泰坦矩阵与 v6 欧雷利亚远征完整性校验通过。
+[10-25-2026 12:11:27] [I] [sing/diag] 诊断输出已写入 /var/tmp/diag-drills.txt（0 字节）
+[10-25-2026 12:11:27] [I] Server loaded. Type 'help' for help.
+[10-25-2026 12:11:28] [I] [blackhole/aurelia] campaign sector 0 (288x288) generated: 3 spawns in the fair band, about 106 tiles out, 1525 aurite, 1601 lumenite, 1241 resonance, 473 waste, 178 star-marrow, 1318 bed, 11045 water, 24095 silt, ore per quadrant 1243/1532/1226/1189, 8 pockets joined, 50063 new-ground tiles in 7 kinds, 172 wall ore, all connected.
+[10-25-2026 12:11:28] [I] [none/base.js]: SECTOR-OK
+[10-25-2026 12:11:28] [I] undefined
+[10-25-2026 12:11:28] [I] DRILLPROBE t=1
+[10-25-2026 12:11:28] [I] [none/base.js]: PLACED-OK
+[10-25-2026 12:11:28] [I] undefined
+[10-25-2026 12:11:30] [I] DRILLPROBE t=121 | blackhole-lumen-extractor warm=0.0 clock=0.0 eff=0.0 items=0 | blackhole-lumen-extractor warm=0.0 clock=90.034 eff=1.0 items=1
+[10-25-2026 12:11:32] [I] DRILLPROBE t=241 | blackhole-lumen-extractor warm=0.0 clock=0.0 eff=0.0 items=0 | blackhole-lumen-extractor warm=0.0 clock=210.059 eff=1.0 items=2
+[10-25-2026 12:11:34] [I] DRILLPROBE t=361 | blackhole-lumen-extractor warm=0.0 clock=0.0 eff=0.0 items=0 | blackhole-lumen-extractor warm=0.0 clock=330.065 eff=1.0 items=4
+[10-25-2026 12:11:36] [I] DRILLPROBE t=481 | blackhole-lumen-extractor warm=0.0 clock=0.0 eff=0.0 items=0 | blackhole-lumen-extractor warm=0.0 clock=450.073 eff=1.0 items=6
+[10-25-2026 12:11:38] [I] DRILLPROBE t=601 | blackhole-lumen-extractor warm=0.0 clock=0.0 eff=0.0 items=0 | blackhole-lumen-extractor warm=0.0 clock=570.024 eff=1.0 items=8
+[10-25-2026 12:11:40] [I] DRILLPROBE t=721 | blackhole-lumen-extractor warm=0.0 clock=0.0 eff=0.0 items=0 | blackhole-lumen-extractor warm=0.0 clock=690.045 eff=1.0 items=9
+[10-25-2026 12:11:42] [I] DRILLPROBE t=841 | blackhole-lumen-extractor warm=0.0 clock=0.0 eff=0.0 items=0 | blackhole-lumen-extractor warm=0.0 clock=810.028 eff=1.0 items=11
+[10-25-2026 12:11:42] [I] Shutting down server.
