@@ -1,7 +1,10 @@
 # ---- build output ----------------------------------------------------------
 # build/ holds intermediate artefacts (compiled classes, the intermediate dex,
-# the packaging stage). The distributable JAR in dist/ IS tracked on purpose.
+# the packaging stage).
+# dist/ holds the built JAR - it is deliberately NOT tracked: binaries are
+# published as GitHub Release assets instead (see README "Download").
 build/
+dist/
 out/
 target/
 
