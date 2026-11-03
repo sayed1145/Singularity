@@ -140,7 +140,6 @@ public final class Bake{
         info.append(bakeUnit(dir, "lumen-medic", blackhole.models.ForgeUnits.lumenMedic(new Ship3D("lumen-medic")), 1f));
         info.append(bakeUnit(dir, "aurite-wright", blackhole.models.ForgeUnits.auriteWright(new Tank3D("aurite-wright")), 1f));
         //v8.1
-        info.append(bakeUnit(dir, "lumen-hauler", blackhole.models.LogixUnits.lumenHauler(new Ship3D("lumen-hauler")), 1f));
         info.append(bakeUnit(dir, "aurite-vanguard", blackhole.models.LogixUnits.auriteVanguard(new Tank3D("aurite-vanguard")), 1f));
         info.append(bakeUnit(dir, "tide-tender", blackhole.models.LogixUnits.tideTender(new Ship3D("tide-tender")), 1f));
         //v8.2

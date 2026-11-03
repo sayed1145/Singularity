@@ -65,6 +65,10 @@ public class BlackHoleMod extends Mod{
         OwnFx.scrub("blackhole-");
         //v8.0: derive every unit's command list from what it can actually do (mine / build / carry / heal)
         UnitCapabilities.apply();
+        //v8.7.2: every number the patch touched is checked against the live content (arc slider bounds,
+        //the accelerator that overdrives again, the two waste shells, the sky net shell, the black hole
+        //gravity field, the gravity well range, the titan body, the damage numbers, the ranges)
+        V873Audit.check();
         //v8.2: launching to another sector must cost Aurelia items, not the vanilla core-shard fallback
         AureliaLaunch.install();
         Log.info("[blackhole] v5 科技树、泰坦矩阵与 v6 欧雷利亚远征完整性校验通过。");
@@ -108,6 +112,9 @@ public class BlackHoleMod extends Mod{
 
         //v8.3：工业废料循环（六步回收链）+ 三级核心「欧雷莉亚堡垒」+ 守护力场穹顶
         AureliaCycle.load();
+
+        //v8.7：工业废料弹（星环 / 天罗）。必须在 AureliaCycle 之后 —— 废料在那儿创建。
+        WasteAmmo.load();
         AureliaUtilities.load();
 
         //v8.5.2：反拘留者兵器（锚钉炮 + 锚钉手）

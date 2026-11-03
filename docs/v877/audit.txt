@@ -1,0 +1,48 @@
+===== Singularity 8.7.7 AUDIT (Mindustry v160.5 headless) =====
+  [blackhole] ?????????
+  [blackhole] ????????
+  [blackhole] ??????????? + ?????? + ??????????
+  [blackhole] 3D drawers installed on 48 blocks (98 models)
+  [blackhole] own particle effects: 1003 vanilla effect references replaced
+  [blackhole] v8.0 ??????? 40 ?????????? 6 ?????????
+  [blackhole] v5 ????????? v6 ??????????????
+  [mod] version=8.8-Release  minGame=160.5
+  [ui-slider] min=8 max=400 OK oldOrder=JavaException: java.lang.IllegalArgumentException: max must be > min. min,max: 58.0, 8.0
+  [well-removed] gravity-well=null = gone tilelookup=null = gone
+  [ui-panel] configurable=true saveConfig=true configKeys=1
+  [accelerator] speedBoost=1.5 hasBoost=false phase=0 statLines=getModule|enclosingConstructor|isSealed|getResource|isLocalClass|getCanonicalName|isSynthetic|getMethod|memberClass|isInstance|cast|getDeclaredFields|declaredAnnotationsByType|declaredConstructors|getEnclosingMethod|annotationPresent|getSigners|superclass|record|isInterface|canonicalName|arrayType|method|protectionDomain|asSubclass|module|descriptorString|getField|enum|field|getComponentType|getRecordComponents|isArray|isPrimitive|wait|isAnnotation|classLoader|annotationsByType|getDeclaredConstructors|primitive|isAnnotationPresent|methods|typeName|declaredMethods|genericInterfaces|isAssignableFrom|typeParameters|notify|getDeclaringClass|getDeclaredMethods|permittedSubclasses|enumConstants|toGenericString|annotatedInterfaces|getClasses|annotation|componentType|isRecord|getDeclaredConstructor|enclosingClass|getAnnotations|nestMembers|declaredConstructor|getDeclaredAnnotationsByType|equals|nestHost|toString|getGenericSuperclass|declaredMethod|anonymousClass|getClass|nestmateOf|getName|instance|annotations|declaredField|describeConstable|isMemberClass|declaredFields|getPermittedSubclasses|getTypeParameters|getPackage|package|getNestHost|resource|sealed|getInterfaces|constructor|getAnnotatedInterfaces|newInstance|enclosingMethod|declaringClass|synthetic|constructors|declaredClasses|getFields|getAnnotation|getDeclaredAnnotation|name|resourceAsStream|getSimpleName|getPackageName|fields|getMethods|getProtectionDomain|hidden|desiredAssertionStatus|notifyAll|classes|getGenericInterfaces|getNestMembers|getClassLoader|interface|modifiers|annotatedSuperclass|getDeclaredAnnotations|getAnnotationsByType|getConstructors|array|hashCode|getAnnotatedSuperclass|getModifiers|packageName|getTypeName|getEnclosingConstructor|class|isNestmateOf|getSuperclass|getDeclaredField|declaredAnnotations|interfaces|declaredAnnotation|genericSuperclass|getResourceAsStream|isEnum|getDeclaredMethod|localClass|getConstructor|isHidden|getEnumConstants|signers|recordComponents|simpleName|getDeclaredClasses|assignableFrom|isAnonymousClass|getEnclosingClass speedIncreaseStat=false boostEffectStat=false
+  [waste-ammo] [halo] dmg=40 splash=58 reloadMul=1 bdm=1 ammoMul=5 maxAmmo=45 [sky-net] dmg=20 splash=58 reloadMul=1 bdm=1 ammoMul=5 maxAmmo=48 
+  [sky-net] lumenShell=true dmg=13 splash=31 ammoMul=5
+  [citadel] [0 ] dmg=110 splash=150 reload=450 [1 ] dmg=45 splash=0 reload=22 [2 ] dmg=45 splash=0 reload=22 [3 ] dmg=80 splash=60 reload=84 [4 ] dmg=80 splash=60 reload=84 
+  [lumen-spark] dmg=36 range=150
+  [glass-shell] ammo=blackhole-prism-glass dmg=21 splash=46 frags=5 fragDmg=21
+  [railgun] range=360 tiles=45
+  [titan] range=480 maxRange=480 tiles=60 [w0 blackhole-cataclysm reach=484] [w1 blackhole-sweeper reach=168] [w2 blackhole-sweeper reach=168]
+  [titan-body] class=sixfold.SixfoldMod$7 super=blackhole.g3d.Walker3D hitFx=mindustry.entities.Effect hitFx=mindustry.entities.Effect hitFx=mindustry.entities.Effect
+  [removed] [removed] hauler=null (null = gone) spark=true cargoStation=true
+  [removed] supplyPost=false bufferPost=false logisticsVault=false latticeLink=false
+  [coolant] [blackhole-horizon-assembler] liquid=blackhole-aurora-coolant amount=0.11999999731779099 [blackhole-citadel-yard] liquid=blackhole-aurora-coolant amount=0.30000001192092896 auroraCoolant=blackhole-aurora-coolant
+  [cryofluid-users] differential-generator thorium-reactor impact-reactor exponential-reconstructor tetrative-reconstructor hyper-processor 
+  [plans] [blackhole-horizon-assembler] blackhole-lensing[blackhole-resonance-shardx42,blackhole-degenerate-matterx40,] blackhole-ergosphere[blackhole-hawking-dustx50,blackhole-resonance-shardx84,blackhole-degenerate-matterx70,] [blackhole-citadel-yard] blackhole-accretor[blackhole-auritex108,blackhole-resonance-shardx98,blackhole-degenerate-matterx90,] blackhole-citadel[blackhole-resonance-shardx434,blackhole-degenerate-matterx400,blackhole-concord-corex84,blackhole-singularity-corex55,] 
+  [sifter] drillTime=50 size=2 speed=4.8/s tank=10
+  [extractor] hasLiquids=false liquidCapacity=10 drillTime=74 size=2 speed=1.6216216216216217/s
+  [wallbore] drillTime=96 size=2 speed=1.25/s tank=10
+  [blackhole] shellFound=true holeFound=true pullRadius=230 pullForce=5.400000095367432 buildingDamage=45 endRadius=27 lifetime=660 rimSpeed=0.10000000149011612 coreSpeed=0.4000000059604645 class=
+  [waste-fx] muzzleLife=6 hitLife=24 muzzleLayer=110 hitLayer=110 trailLen=6 trailWidth=1.600000023841858
+  [gravity-live] setup hole=336 unit=337 d0=96 blk=blackhole-lumen-mender foeHp0=80 friendHp0=80
+  [gravity-live] d=15 dead=false hp=100 dragged=true PASS | [blackhole-build] foeHp=-13 friendHp=80 PASS
+  [absorb-time] blackhole worst=290.00s avg=130.00s profile=0.10000000149011612->0.4000000059604645 tiles/s
+  [gravity-field] exists=true
+  [cargo] itemCapacity=2000 perItem=100 itemTypes=20 configurable=true saveConfig=true configKeys=1 rangeTiles=58 longRangeTiles=600
+  [cargo-live] copper=50 total=50 maxAccepted=100 acceptStack(200)=50 target=100
+  [cargo-cfg] rangeTiles=120 longRange=true radius=4800px
+  [cargo-cfg] back to default rangeTiles=58 longRange=false radius=464px
+  [event-horizon] ammoTypes=2 marrow reloadMul=3 dmg=320 splash=190
+  [ward] base=7000 shardBoost=5000 regenBoost=2.5
+  [ward-live] realCapacity=12000 shieldAfterUpdate=12000
+  [mine] [blackhole-mote tier=3 mine=blackhole-silt,blackhole-lumenite,blackhole-aurite] [blackhole-lattice-crawler tier=-1 mine=copper,lead,titanium,thorium] 
+  [cfg-save] set rangeTiles=120 longRange=true
+  [cfg-reload] rangeTiles=120 longRange=true perItem=100
+  [self-check] [blackhole/v8.7.7] self-check passed: arc slider bounds, accelerator +50% (unboostable), waste shells (halo 40 / sky-net 20, load x5, no extra fire rate, no building reduction), sky net lumenite shell 13, black hole gravity field (230 px, eats buildings), gravity well deleted outright (block + model + tech node + cost, removal verified), black hole crawling absorption 0.1-0.4 tiles/s ramping tile-by-tile to a 1-tile core capped at 0.4, waste firing effects quiet, titan body rolled back, citadel 45, lumen spark 36, metaglass 21, railgun 45 tiles, titan 60 tiles, hauler removed.
+  [content] blocks=610 items=45 units=110
+===== END AUDIT =====

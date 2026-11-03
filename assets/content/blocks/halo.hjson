@@ -1,7 +1,7 @@
 {
   "type": "ItemTurret",
   "name": "Halo",
-  "description": "A late-game anti-air launcher that releases guided missile salvos. Surge-alloy missiles arc electricity on impact.",
+  "description": "A late-game anti-air launcher that releases guided missile salvos. Surge-alloy missiles arc electricity on impact, and industrial waste can be loaded as a fission shell that flies further and reloads faster.",
   "category": "turret",
   "research": {
     "parent": "disperse",

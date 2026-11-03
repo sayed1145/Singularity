@@ -1,7 +1,7 @@
 {
   "type": "ItemTurret",
   "name": "Sky Net",
-  "description": "A dedicated anti-air burst turret. Metaglass shells fragment into a cloud of anti-air shards.",
+  "description": "A dedicated anti-air burst turret. Metaglass shells fragment into a cloud of anti-air shards, and industrial waste can be loaded as a cheap fission shell.",
   "category": "turret",
   "research": {
     "parent": "scatter",
@@ -39,7 +39,7 @@
     "lead": {
       "type": "FlakBulletType",
       "speed": 4.5,
-      "damage": 5,
+      "damage": 13,
       "lifetime": 54,
       "width": 7,
       "height": 9,
@@ -54,7 +54,7 @@
     "metaglass": {
       "type": "FlakBulletType",
       "speed": 4.8,
-      "damage": 7,
+      "damage": 21,
       "lifetime": 52,
       "width": 8,
       "height": 10,
@@ -69,7 +69,7 @@
       "fragBullet": {
         "type": "BasicBulletType",
         "speed": 3.1,
-        "damage": 7,
+        "damage": 21,
         "lifetime": 18,
         "width": 4,
         "height": 7,

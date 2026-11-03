@@ -141,7 +141,6 @@ public final class AureliaMerge{
         addCost(AureliaCycle.prismReformer, marrow, 3);
         addCost(AureliaCycle.wardDome, marrow, 4);
         addCost(AureliaCycle.citadelCore, marrow, 12);
-        addCost(AureliaFrontier.gravityWell, marrow, 3);
         addCost(BHBlocks.quasarLance, marrow, 3);
 
         //顶级单位：终端机与三台泰坦。找到哪个工厂在生产它们就改哪个方案。
@@ -260,31 +259,48 @@ public final class AureliaMerge{
             //ammo: an item turret on Aurelia must eat Aurelia items
             if(b instanceof ItemTurret t && t.ammoTypes != null && t.ammoTypes.size > 0) t.ammoTypes = convertAmmo(t.ammoTypes);
         }
-        int coolantPatches = repairHawkingCoolant();
+        int coolantPatches = repairCoolants();
         //v8.5.5: 星髓石炮弹必须在方块循环**之后**挂 —— convertAmmo() 会把整张弹药表换掉。
         MarrowAmmo.attach(AureliaContent.starMarrow);
-        Log.info("[blackhole/merge] re-priced @ mod blocks in Aurelia resources (@ conversion rules; @ Hawking coolant repair)", recosted, rules.size, coolantPatches);
+        //v8.7: 工业废料弹药（星环 / 天罗）—— 同样必须在 convertAmmo() 之后挂
+        WasteAmmo.attach(AureliaCycle.industrialWaste);
+        Log.info("[blackhole/merge] re-priced @ mod blocks in Aurelia resources (@ conversion rules; @ coolant repair)",
+            recosted, rules.size, coolantPatches);
     }
 
     /**
      * The Singularity blocks are registered before Aurelia Frontier creates Aurora Coolant.  Rebind the
-     * pre-init liquid consumer here, when both contents exist, so the actual recipe and its stats use
+     * pre-init liquid consumers here, when both contents exist, so the actual recipe and its stats use
      * Aurora Coolant rather than vanilla cryofluid.  This is deliberately idempotent because recost() also
      * runs at mod init after consumers have been frozen.
+     *
+     * <p>v8.7: 除了霍金冷凝器，视界装配厂和奇点船坞的单位制造配方也换成了极光冷冻液。
+     * 三者原本都写着原版冷冻液（{@code Liquids.cryofluid}）—— 在欧雷利亚没有原版冷冻液，
+     * 配方就是死的。
      */
-    private static int repairHawkingCoolant(){
-        Block condenser = BHBlocks.hawkingCondenser;
-        if(condenser == null || AureliaFrontier.auroraCoolant == null) return 0;
-        ConsumeLiquid current = condenser.findConsumer(c -> c instanceof ConsumeLiquid liquid &&
+    private static int repairCoolants(){
+        int patched = 0;
+        patched += rebindCoolant(BHBlocks.hawkingCondenser, 0.12f);
+        patched += rebindCoolant(BHBlocks.horizonAssembler, 0.12f);
+        patched += rebindCoolant(BHBlocks.citadelYard, 0.3f);
+        return patched;
+    }
+
+    /** 把一个方块上的原版冷冻液消耗器换成极光冷冻液；返回 1 表示确实换过。 */
+    private static int rebindCoolant(Block b, float amount){
+        if(b == null || AureliaFrontier.auroraCoolant == null) return 0;
+        ConsumeLiquid current = b.findConsumer(c -> c instanceof ConsumeLiquid liquid &&
             (liquid.liquid == Liquids.cryofluid || liquid.liquid == AureliaFrontier.auroraCoolant));
+        //already rebound - recost() runs twice, the second pass must not touch a frozen consumer list
         if(current != null && current.liquid == AureliaFrontier.auroraCoolant) return 0;
-        //Consumer arrays are immutable after Block.init(). A non-Aurora consumer at that time is an ordering
-        //error, not something silently left as an inaccessible coolant recipe.
-        if(condenser.consumers.length != 0){
-            throw new IllegalStateException("Hawking condenser coolant was not repaired before init");
+        //Consumer arrays are immutable after Block.init(). If init already ran, the consumer list is
+        //frozen and the recipe can no longer be swapped - that is an ordering error, not something
+        //silently left as an inaccessible coolant recipe.
+        if(b.consumers.length != 0){
+            throw new IllegalStateException(b.name + " coolant was not repaired before init");
         }
-        condenser.removeConsumers(c -> c instanceof ConsumeLiquid liquid && liquid.liquid == Liquids.cryofluid);
-        condenser.consumeLiquid(AureliaFrontier.auroraCoolant, 0.12f);
+        b.removeConsumers(c -> c instanceof ConsumeLiquid liquid && liquid.liquid == Liquids.cryofluid);
+        b.consumeLiquid(AureliaFrontier.auroraCoolant, amount);
         return 1;
     }
 
@@ -484,9 +500,8 @@ public final class AureliaMerge{
         attach(aureliaNodes.get(tideDock, cradle), AureliaFrontier.tideLancer);
 
         attach(aureliaNodes.get(shardVolley, AureliaTech.root), AureliaFrontier.tempestCoil);
-        TechNode well = attach(aureliaNodes.get(arcMortar, aureliaNodes.get(prismPylon, AureliaTech.root)), AureliaFrontier.gravityWell);
-        attach(well, AureliaFrontier.aegisLattice);
-        attach(aureliaNodes.get(lumenProcessor, AureliaTech.root), AureliaFrontier.latticeLink);
+        //v8.7.5: the gravity well is gone - its old tree neighbour hangs off the same parent now
+        attach(aureliaNodes.get(arcMortar, aureliaNodes.get(prismPylon, AureliaTech.root)), AureliaFrontier.aegisLattice);
 
         //3.6 v7.7 bastion pack: the brick first (it gates the whole line), then the walls off the wall node,
         //then the dynamo off the gravity line, then the tier-2 core and its units off the core node.
@@ -539,18 +554,16 @@ public final class AureliaMerge{
         attach(aureliaNodes.get(AureliaTerra.terraBorer, fabNode), AureliaForge.auriteWright);
 
         //3.10 v8.1 logistics pack: the network nodes hang off the hub that drives them, the liquid tier off the
-        //conduit line, the gates off the router, and the three new units off the units they stand next to.
+        //conduit line, the gates off the router, and the new units off the units they stand next to.
+        //v8.7.1: the lumen hauler is gone - the hub and the two ground/naval units are what is left.
         TechNode netHub = aureliaNodes.get(AureliaForge.cargoStation, AureliaTech.root);
-        TechNode supply = attach(netHub, AureliaLogix.supplyPost);
-        attach(supply, AureliaLogix.bufferPost);
-        attach(netHub, AureliaLogix.logiVault);
+        //v8.7: 供货台 / 缓存台 / 物流仓库已删除 —— 网络只剩中枢站与需求点。
         TechNode conduitNode = aureliaNodes.get(AureliaContent.lumenConduit, AureliaTech.root);
         TechNode tankNode = attach(conduitNode, AureliaLogix.liquidTank);
         attach(tankNode, AureliaLogix.reservoir);
         attach(tankNode, AureliaLogix.liquidRelay);
         TechNode gate = attach(aureliaNodes.get(AureliaContent.lumenRouter, AureliaTech.root), AureliaLogix.overflowGate);
         attach(gate, AureliaLogix.underflowGate);
-        attach(aureliaNodes.get(AureliaForge.lumenMedic, fabNode), AureliaLogix.lumenHauler);
         attach(aureliaNodes.get(AureliaNova.auriteLancer, fabNode), AureliaLogix.auriteVanguard);
         attach(aureliaNodes.get(AureliaFrontier.tideLancer, fabNode), AureliaLogix.tideTender);
 
@@ -579,7 +592,8 @@ public final class AureliaMerge{
 
         //3.13 v8.5.2: the anti-Detainer pair. The turret hangs off the resonance line (it is a resonance
         //weapon), the gunner off the lattice crawler, which is the cradle's other product.
-        TechNode anchor = attach(aureliaNodes.get(AureliaFrontier.latticeLink, AureliaTech.root), AnchorContent.anchorSpike);
+        //v8.7: 晶格链路删掉了，锚钉炮改挂在晶格蠕者下面（同一条摇篮线）
+        TechNode anchor = attach(aureliaNodes.get(AureliaFrontier.latticeCrawler, AureliaTech.root), AnchorContent.anchorSpike);
         attach(anchor, AnchorContent.spikeWarden);
 
         //v8.4 utilities use natural, early Aurelia tech branches.

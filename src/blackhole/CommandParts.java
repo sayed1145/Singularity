@@ -61,8 +61,27 @@ public final class CommandParts{
         @Override
         public void setStats(){
             super.setStats();
-            //the ceiling is what matters for balance: two projectors on the same building do not add up
-            stats.add(Stat.boostEffect, (speedBoost + speedBoostPhase) * 100f, StatUnit.percent);
+            //the ceiling is what matters for balance: two projectors on the same building do not add up.
+            //
+            //v8.7.2: the lumen accelerator is back to overdriving the buildings around it (speedBoost 1.5
+            //= +50%), but it still cannot be boosted itself (no booster slot, no pulse). So the panel must
+            //show the truth: the vanilla "+50%" (Stat.speedIncrease) stays, and the total multiplier is
+            //printed as 150% - not the 225% the old line claimed.
+            if(speedBoost <= 1f && !hasBoost){
+                stats.remove(Stat.speedIncrease);
+                stats.remove(Stat.boostEffect);
+            }else{
+                //v8.7: hasBoost = false 的时候没有脉冲强化，面板不能再把 speedBoostPhase 算进去 ——
+                //流明加速器此前显示 225%，实际只有 150%。
+                stats.add(Stat.boostEffect, (speedBoost + (hasBoost ? speedBoostPhase : 0f)) * 100f, StatUnit.percent);
+            }
+        }
+
+        @Override
+        public void setBars(){
+            super.setBars();
+            //the vanilla projector draws a "boost" bar; with no boost it would sit at 0% forever
+            if(speedBoost <= 1f && !hasBoost) removeBar("boost");
         }
 
         public class OverBuild extends OverdriveBuild{

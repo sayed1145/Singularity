@@ -205,6 +205,16 @@ public class SixfoldMod extends Mod{
         }};
     }
 
+    /*
+     * v8.7.2 —— 炽霄泰坦的机身特效回退到最初的版本。
+     *
+     * 8.7 给它加了一层机身特效（热浪鳍 / 余烬光环 / 熔核脉冲，PyroclastFx），
+     * 8.7.2 把这一层整个删掉：炽霄泰坦重新变成一台没有任何代码机身特效的裸 Walker3D
+     * （余烬光环、鳍、熔核这些观感本来就烘焙在 3D 模型/精灵里），也就是 8.6 及更早的样子。
+     *
+     * 攻击特效不受影响：{@link LegacyEmber} 仍然逐字保持 6.1 的样子。
+     */
+
     private static void loadPyroclast(){
         pyroclast = new blackhole.g3d.Walker3D("pyroclast-titan"){{
             builder = blackhole.models.TitanModels::pyroclast;
@@ -217,6 +227,10 @@ public class SixfoldMod extends Mod{
             speed = 0.62f;
             rotateSpeed = 2.1f;
             drag = 0.12f;
+            //v8.7.1: the attack range is cut to 60 tiles (60 * 8 = 480 px). The panel used to promise 77.2
+            //tiles while the two flame sweepers held the unit itself down to 20.5 tiles; now the unit, the
+            //main gun and the panel all say the same thing - 60 tiles.
+            range = 60f * 8f;
             stepDamage = 70f;
             stepRange = 34f;
             stepSnd = Sounds.walkerStep;
@@ -253,7 +267,9 @@ public class SixfoldMod extends Mod{
                     sprite = "blackhole-ember-shell";
                     width = 15f;
                     height = 15f;
-                    lifetime = 84f;
+                    //v8.7.1: 7.4 * 65.4 = 484 px of reach - the shell now dies at the edge of the 60 tile
+                    //range instead of 77 tiles out, so the gun cannot overshoot what the unit can engage.
+                    lifetime = 65.4f;
                     trailLength = 9;
                     trailWidth = 2.1f;
                     shrinkY = 0f;
@@ -266,7 +282,8 @@ public class SixfoldMod extends Mod{
                     statusDuration = 300f;
                     frontColor = Color.valueOf("f2e6d8");
                     backColor = trailColor = Color.valueOf("ff9e5c");
-                    hitEffect = despawnEffect = EmberEffects.burst;
+                    //v8.7: 主炮命中特效逐字回退到 6.1（一个扩散环 + 四根岩浆辐条）
+                    hitEffect = despawnEffect = LegacyEmber.legacyBurst;
                     fragBullets = 8;
                     fragVelocityMin = 0.4f;
                     fragBullet = new BasicBulletType(3.2f, 46f){{
@@ -278,7 +295,8 @@ public class SixfoldMod extends Mod{
                         statusDuration = 180f;
                         frontColor = Color.valueOf("f2e6d8");
                         backColor = trailColor = Color.valueOf("e05545");
-                        hitEffect = despawnEffect = EmberEffects.vent;
+                        //v8.7: 破片命中同样是 6.1 的三根热辐射笔画
+                        hitEffect = despawnEffect = LegacyEmber.legacyVent;
                     }};
                 }};
             }});
@@ -307,7 +325,8 @@ public class SixfoldMod extends Mod{
                     statusDuration = 200f;
                     frontColor = Color.valueOf("f2e6d8");
                     backColor = trailColor = Color.valueOf("e05545");
-                    shootEffect = hitEffect = despawnEffect = EmberEffects.vent;
+                    //v8.7: 扫射器的炮口/命中特效逐字回退到 6.1
+                    shootEffect = hitEffect = despawnEffect = LegacyEmber.legacyVent;
                 }};
             }});
         }};

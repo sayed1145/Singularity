@@ -76,7 +76,8 @@ public final class OutpostContent{
             ));
             size = 4;
             health = 3850;
-            range = 260f;
+            //v8.7.1: the range goes up to 45 tiles (45 * 8 = 360 px, it used to be 260 px = 32.5 tiles)
+            range = 45f * 8f;
             reload = 110f;
             rotateSpeed = 2.2f;
             shootCone = 3f;

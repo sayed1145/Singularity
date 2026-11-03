@@ -26,18 +26,14 @@ import static mindustry.Vars.*;
  * v7.6 block types built around mechanics neither vanilla nor the merged mods have.
  *
  * <ul>
- * <li>{@link Cableway} - 星索缆道. A ropeway: two towers are linked over a long distance and item pods glide along
+ * <li>{@link Cableway} - 星索缆道. (v8.7.5: the 引力阱 of 7.6 through 8.7.4 was deleted outright below - its
+ * job is done by the black hole of {@code BHBullets}, which is the mod's only unit-pulling gravity now.) A ropeway: two towers are linked over a long distance and item pods glide along
  * the rope <i>above</i> everything in between - walls, water, buildings, enemy lines. Unlike a bridge it does not
  * need a chain of hops and unlike a mass driver it never stops to batch: a loaded pod leaves as soon as it is
  * full, so the line delivers a steady stream at a throughput no conveyor on the planet reaches.</li>
- * <li>{@link GravityWell} - 引力阱. Not a turret: it bends the ground under hostile units. Everything hostile in
- * range is dragged towards the centre and held there, and whatever reaches the crushing radius is ground down.
- * It cannot shoot, cannot hit air, and friendly units pass through untouched.</li>
  * <li>{@link AegisLattice} - 晶格回馈阵. A defensive bank: it swallows hostile projectiles over an area, stores
  * their damage, and when the bank fills it fires the whole lot back out as a ring-shaped shockwave. The more the
  * enemy shoots at it the harder it hits back, and it is useless against an enemy that does not shoot.</li>
- * <li>{@link LatticeLink} - 晶格链路. Logic memory that every other lattice link of the same team shares. Two
- * processors on opposite sides of the map read and write the same cells without a single link in between.</li>
  * </ul>
  *
  * Everything here keeps its state on its own building, uses only public vanilla calls ({@code Bullet.absorb},
@@ -296,121 +292,6 @@ public final class FrontierParts{
     }
 
     // =================================================================================================
-    // 引力阱 - Gravity Well
-    // =================================================================================================
-
-    /** Drags hostile ground units into its centre and crushes whatever reaches it. */
-    public static class GravityWell extends Block{
-        public float radius = 112f, crushRadius = 22f;
-        /** pull strength at the rim, damage per second inside the crushing radius */
-        public float pull = 1.4f, crushDps = 95f;
-        public float shake = 0.6f;
-        public StatusEffect apply;
-        public float applyDuration = 24f;
-        public Color wellColor = Color.valueOf("b69cff");
-
-        public BlockModel model;
-
-        public GravityWell(String name){
-            super(name);
-            update = true;
-            solid = true;
-            hasPower = true;
-            group = BlockGroup.projectors;
-            envEnabled = Env.any;
-            buildType = GravityWellBuild::new;
-        }
-
-        @Override
-        public void load(){
-            super.load();
-            model = Models.get(name);
-            if(model != null) model.load();
-        }
-
-        @Override
-        public TextureRegion[] icons(){
-            return new TextureRegion[]{Core.atlas.find(name + "-preview", region)};
-        }
-
-        @Override
-        public void getRegionsToOutline(Seq<TextureRegion> out){
-        }
-
-        @Override
-        public void setStats(){
-            super.setStats();
-            stats.add(Stat.range, radius / tilesize, StatUnit.blocks);
-            stats.add(Stat.damage, crushDps, StatUnit.perSecond);
-        }
-
-        @Override
-        public void drawPlace(int x, int y, int rotation, boolean valid){
-            super.drawPlace(x, y, rotation, valid);
-            Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, radius, wellColor);
-        }
-
-        public class GravityWellBuild extends Building{
-            public float warmup, spin;
-
-            @Override
-            public void updateTile(){
-                warmup = Mathf.lerpDelta(warmup, efficiency > 0f ? 1f : 0f, 0.04f);
-                spin += warmup * Time.delta;
-                if(warmup < 0.05f) return;
-
-                float dt = Time.delta * warmup;
-                Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, u -> {
-                    if(u.dead || u.type.flying || u.isBoss() && u.hitSize > 40f) return;
-                    float d = u.dst(this);
-                    if(d > radius || d < 0.01f) return;
-                    float f = (1f - d / radius);
-                    Tmp.v1.set(x - u.x, y - u.y).setLength(pull * f * u.mass() * 0.05f * dt);
-                    u.impulse(Tmp.v1);
-                    if(apply != null) u.apply(apply, applyDuration);
-                    if(d < crushRadius){
-                        u.damageContinuousPierce(crushDps / 60f * warmup);
-                        if(Mathf.chanceDelta(0.12f)) AureliaFx.detainAbsorb.at(u.x, u.y, u.angleTo(this), wellColor);
-                    }
-                });
-                if(shake > 0f && Mathf.chanceDelta(0.05f)) Effect.shake(shake, 6f, this);
-            }
-
-            @Override
-            public void draw(){
-                if(model != null) model.draw(this); else super.draw();
-                if(warmup <= 0.02f) return;
-                Draw.z(Layer.effect);
-                Draw.blend(Blending.additive);
-                //three counter-rotating field rings plus in-falling motes: the well is visible, not guessed
-                for(int i = 0; i < 3; i++){
-                    float rr = radius * (0.95f - i * 0.22f);
-                    Draw.color(wellColor, 0.10f * warmup + 0.05f);
-                    Lines.stroke(1.2f - i * 0.25f);
-                    Lines.poly(x, y, 6 + i * 3, rr, spin * (i % 2 == 0 ? 0.5f : -0.7f));
-                }
-                for(int i = 0; i < 10; i++){
-                    float f = Mathf.mod(spin * 0.01f + i / 10f, 1f);
-                    float a = i * 36f + spin * 0.6f;
-                    float rr = radius * (1f - f);
-                    Draw.color(wellColor, (1f - f) * 0.7f * warmup);
-                    Fill.circle(x + Mathf.cosDeg(a) * rr, y + Mathf.sinDeg(a) * rr, 1.1f * (1f - f) + 0.4f);
-                }
-                Draw.color(wellColor, 0.35f * warmup);
-                Fill.poly(x, y, 6, crushRadius * 0.35f + Mathf.absin(spin, 7f, 1.2f), -spin);
-                Draw.blend();
-                Draw.reset();
-            }
-
-            @Override
-            public void drawSelect(){
-                Drawf.dashCircle(x, y, radius, wellColor);
-                Drawf.dashCircle(x, y, crushRadius, Color.valueOf("ff8d6b"));
-            }
-        }
-    }
-
-    // =================================================================================================
     // 晶格回馈阵 - Aegis Lattice
     // =================================================================================================
 
@@ -579,118 +460,6 @@ public final class FrontierParts{
         }
     }
 
-    // =================================================================================================
-    // 晶格链路 - Lattice Link (shared logic memory)
-    // =================================================================================================
+    //v8.7: 晶格链路（LatticeLink）已删除 —— 同一阵营共享的逻辑内存不再提供。
 
-    /**
-     * Logic memory shared by every lattice link of the same team, anywhere on the map.
-     *
-     * <p>Vanilla memory cells are local: a processor can only reach the cell it is linked to, so moving a number
-     * across the map means a chain of processors. A lattice link is a window into one team-wide bank - write cell
-     * 7 here, read cell 7 at the other end of the sector. It is not a memory cell subclass (v8 keeps that memory
-     * private); it implements the logic read/write interfaces itself over the shared bank.
-     */
-    public static class LatticeLink extends Block{
-        /** one bank per team, created on demand and dropped when a new world loads */
-        static final ObjectMap<Team, double[]> banks = new ObjectMap<>();
-        static boolean hooked;
-
-        public int memoryCapacity = 64;
-
-        public LatticeLink(String name){
-            super(name);
-            update = true;
-            solid = true;
-            destructible = true;
-            group = BlockGroup.logic;
-            drawDisabled = false;
-            envEnabled = Env.any;
-            buildType = LatticeLinkBuild::new;
-            if(!hooked){
-                hooked = true;
-                Events.on(EventType.WorldLoadEvent.class, e -> banks.clear());
-            }
-        }
-
-        @Override
-        public void setStats(){
-            super.setStats();
-            stats.add(Stat.memoryCapacity, memoryCapacity, StatUnit.none);
-        }
-
-        public double[] bank(Team team){
-            double[] bank = banks.get(team);
-            if(bank == null || bank.length != memoryCapacity) banks.put(team, bank = new double[memoryCapacity]);
-            return bank;
-        }
-
-        public class LatticeLinkBuild extends Building implements mindustry.logic.LReadable, mindustry.logic.LWritable{
-            @Override
-            public boolean readable(mindustry.logic.LExecutor exec){
-                return true;
-            }
-
-            @Override
-            public void read(mindustry.logic.LVar position, mindustry.logic.LVar output){
-                int address = position.numi();
-                double[] bank = bank(team);
-                output.setnum(address < 0 || address >= bank.length ? 0d : bank[address]);
-            }
-
-            @Override
-            public boolean writable(mindustry.logic.LExecutor exec){
-                return true;
-            }
-
-            @Override
-            public void write(mindustry.logic.LVar position, mindustry.logic.LVar value){
-                int address = position.numi();
-                double[] bank = bank(team);
-                if(address >= 0 && address < bank.length) bank[address] = value.num();
-            }
-
-            @Override
-            public double sense(mindustry.logic.LAccess sensor){
-                if(sensor == mindustry.logic.LAccess.memoryCapacity) return memoryCapacity;
-                return super.sense(sensor);
-            }
-
-            @Override
-            public boolean collide(Bullet other){
-                return false;
-            }
-
-            @Override
-            public void draw(){
-                super.draw();
-                //a slow pulse marks it as a networked block rather than a local one
-                Draw.z(Layer.blockOver);
-                Draw.color(Color.valueOf("b69cff"), 0.35f + Mathf.absin(Time.time + x + y, 18f, 0.25f));
-                Lines.stroke(0.8f);
-                Lines.poly(x, y, 6, block.size * tilesize * 0.3f, Time.time * 0.4f);
-                Draw.reset();
-            }
-
-            @Override
-            public void write(Writes write){
-                super.write(write);
-                //the bank belongs to the team, but one link persists it so a reload keeps the numbers
-                double[] bank = bank(team);
-                write.s(bank.length);
-                for(double v : bank) write.d(v);
-            }
-
-            @Override
-            public void read(Reads read, byte revision){
-                super.read(read, revision);
-                int n = read.s();
-                double[] bank = bank(team);
-                for(int i = 0; i < n; i++){
-                    double v = read.d();
-                    if(i < bank.length) bank[i] = v;
-                }
-            }
-        }
-    }
 }

@@ -164,9 +164,17 @@ public final class AureliaCommand{
             size = 2;
             health = 320;
             range = 11f * 8f;
+            //v8.7.2: 恢复"超速"本身 —— speedBoost 回到原版的 1.5，也就是周围建筑 +50% 速度。
+            //它仍然不可强化：没有强化道具槽（hasBoost = false），也没有脉冲强化（speedBoostPhase = 0），
+            //面板上显示的就是真实的 +50%（见 CommandParts.ModelOverdrive.setStats）。
             speedBoost = 1.5f;
             useTime = 300f;
+            //v8.7: 去掉强化选项 —— 没有强化道具，也没有脉冲强化。
+            //
+            //原版 OverdriveProjector 的 speedBoostPhase 默认是 0.75（脉冲强化），
+            //hasBoost = false 只会关掉道具槽，脉冲那一层还要自己写 0 才真的没有。
             hasBoost = false;
+            speedBoostPhase = 0f;
             consumePower(3.2f);
             baseColor = AureliaFx.lumen;
             phaseColor = AureliaFx.resonance;

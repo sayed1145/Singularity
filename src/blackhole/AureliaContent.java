@@ -738,6 +738,10 @@ public final class AureliaContent{
             drillEffectChance = 0.05f;
             rotateSpeed = 3f;
             envEnabled = Env.any;
+            //v8.7: 去掉液体槽。原版 Drill 在构造函数里写死了 hasLiquids = true，所以每一台钻机
+            //（哪怕根本不喝液体）都会在面板上显示一个空的储液格。这台机器只吃矿石，不喝任何液体。
+            hasLiquids = false;
+            liquidBoostIntensity = 1f;
         }});
 
         // ------------------------------------------------------------------ crafting
@@ -833,7 +837,8 @@ public final class AureliaContent{
             recoil = 1f;
             consumePower(1.2f);
             shootSound = BHSounds.pulse;
-            shootType = new BasicBulletType(6f, 18f){{
+            //v8.7.1: the lumen spark's default damage is doubled - 18 -> 36
+            shootType = new BasicBulletType(6f, 36f){{
                 lifetime = 26f;
                 width = 6f; height = 10f;
                 frontColor = Color.white;

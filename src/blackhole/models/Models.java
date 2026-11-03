@@ -69,9 +69,6 @@ public final class Models{
         add(new ForgeModels.Accumulator());
         add(new ForgeModels.GroundWell());
         //v8.1 logistics / liquid tier
-        add(new LogixModels.SupplyPost());
-        add(new LogixModels.BufferPost());
-        add(new LogixModels.LogiVault());
         add(new LogixModels.LiquidRelay());
         add(new LogixModels.TankSmall());
         add(new LogixModels.TankLarge());
@@ -100,7 +97,6 @@ public final class Models{
         add(new FrontierModels.CoolantCondenser());
         add(new FrontierModels.GravitonChurn());
         add(new FrontierModels.SkylineCableway());
-        add(new FrontierModels.GravityWell());
         add(new FrontierModels.AegisLattice());
         add(new AssemblerModel("resonance-cradle", 2, aurelia));
         //v7.7 bastion pack: ten walls, one power plant, the tier-2 core

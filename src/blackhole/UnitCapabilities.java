@@ -42,6 +42,16 @@ public final class UnitCapabilities{
         boolean heals = healer(u);
         boolean fighter = fighter(u);
 
+        //v8.7: 单位点了"挖矿"却什么都不挖 —— 因为原版 UnitType.mineItems 的默认值是
+        //铜 / 铅 / 钛 / 钍这四种原版矿物，而欧雷利亚上一份都没有。
+        //
+        //引擎那边（Mindustry v160.5 MinerAI）在"自动"姿态下是这样挑目标的：
+        //    targetItem = unit.type.mineItems.min(i -> indexer.hasOre(i) && unit.canMine(i), ...);
+        //列表里没有欧雷利亚的矿物 → targetItem 永远是 null → 单位站着不动。
+        //所以这里把每个会挖矿的单位能挖的欧雷利亚矿物写回去：默认就能自动挖矿，
+        //和原版一致，不需要玩家指定具体矿物。
+        if(canMine) u.mineItems = mineable(u);
+
         Seq<UnitCommand> cmds = new Seq<>();
         add(cmds, UnitCommand.moveCommand);
         if(canMine) add(cmds, UnitCommand.mineCommand);
@@ -93,6 +103,32 @@ public final class UnitCapabilities{
 
     private static void add(Seq<UnitCommand> out, UnitCommand c){
         if(c != null && !out.contains(c)) out.add(c);
+    }
+
+    /**
+     * v8.7: 欧雷利亚上真正躺在地里的矿物，按单位自己的钻机等级过滤。
+     *
+     * <ul>
+     *   <li>淤砂（硬度 0）—— 哪一级都挖得动</li>
+     *   <li>流明矿 / 金辉矿（硬度 2）—— 三级钻机以上</li>
+     *   <li>共振碎片 / 星髓石（硬度 4）—— 四级钻机以上</li>
+     * </ul>
+     */
+    private static Seq<Item> mineable(UnitType u){
+        Seq<Item> out = new Seq<>();
+        Item[] ores = {
+            AureliaContent.silt,
+            AureliaContent.lumenite,
+            AureliaContent.aurite,
+            AureliaContent.resonanceShard,
+            AureliaContent.starMarrow
+        };
+        for(Item item : ores){
+            if(item == null) continue;
+            if(u.mineTier >= item.hardness) out.add(item);
+        }
+        //a unit that can mine walls but not floors still gets the floor ores - it simply cannot dig them
+        return out;
     }
 
     /** true if one of the unit's weapons shoots something that heals - only then is "repair" useful */

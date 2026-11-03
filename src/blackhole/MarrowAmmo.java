@@ -35,6 +35,7 @@ import mindustry.world.blocks.defense.turrets.ItemTurret;
  *   <tr><td>范围伤害 / 半径（事件视界炮）</td><td>190 / 34 像素（4.25 格）</td><td>装药更足</td></tr>
  *   <tr><td>射程</td><td>7.5 × 40 = 300 像素（37.5 格）</td><td>介于吸积炮 235 与视界 400 之间</td></tr>
  *   <tr><td>每份矿几发</td><td>4（{@code ammoMultiplier}）</td><td>星髓石稀有，所以一份顶四发</td></tr>
+ *   <tr><td>事件视界炮开火速率</td><td><b>×3（提升 200%）</b></td><td>v8.7：星髓重枪不再拖慢开火</td></tr>
  *   <tr><td>附带状态</td><td>星髓灼印，6 秒</td><td>见 {@link #marrowBrand}</td></tr>
  * </table>
  */
@@ -131,7 +132,14 @@ public final class MarrowAmmo{
             splashDamageRadius = 34f;
             knockback = 3.2f;
             ammoMultiplier = 4f;
-            reloadMultiplier = 0.85f;
+            //v8.7: 装备星髓石不再拖慢开火 —— 改成提升 200%。
+            //
+            //引擎的换算（v160.5 Turret.TurretBuild.updateReload）：
+            //   reloadCounter += delta() * ammoReloadMultiplier() * baseReloadSpeed();
+            //   ammoReloadMultiplier() 就是当前弹种的 reloadMultiplier。
+            //所以 reloadMultiplier = 3f 表示换弹计数走三倍速 —— 开火速率 ×3，即提升 200%。
+            //（旧值 0.85f 是"慢 15%"，和需求相反。）
+            reloadMultiplier = 3f;
             buildingDamageMultiplier = 0.75f;
 
             frontColor = MarrowFx.core;

@@ -42,7 +42,7 @@ import static mindustry.type.ItemStack.with;
 public final class AureliaFrontier{
     public static Liquid auroraCoolant, gravitonSlurry;
     public static Block coolantCondenser, gravitonChurn, fluxConveyor, fluxConduit, skylineCableway,
-        gravityWell, aegisLattice, tempestCoil, resonanceCradle, latticeLink;
+        aegisLattice, tempestCoil, resonanceCradle;
     public static UnitType mote, latticeCrawler, tideLancer;
 
     /** Everything this pack adds, in tech order. */
@@ -308,20 +308,6 @@ public final class AureliaFrontier{
         }});
 
         // ---------------------------------------------------------------- defence with new mechanics
-        gravityWell = add(new FrontierParts.GravityWell("gravity-well"){{
-            requirements(Category.effect, with(lumenite, 280, aurite, 190, prismAlloy, 120, resonanceShard, 80));
-            size = 3;
-            health = 1150;
-            radius = 112f;
-            crushRadius = 24f;
-            pull = 1.5f;
-            crushDps = 95f;
-            apply = latticeGrip;
-            consumePower(4.2f);
-            //graviton slurry deepens the well instead of making it faster
-            consumeLiquid(gravitonSlurry, 0.05f).boost();
-        }});
-
         aegisLattice = add(new FrontierParts.AegisLattice("aegis-lattice"){{
             requirements(Category.effect, with(lumenite, 240, prismGlass, 120, prismAlloy, 140, concordCore, 30));
             size = 3;
@@ -365,12 +351,7 @@ public final class AureliaFrontier{
             envEnabled = Env.any;
         }});
 
-        latticeLink = add(new FrontierParts.LatticeLink("lattice-link"){{
-            requirements(Category.logic, with(prismGlass, 30, aurite, 25, prismAlloy, 10));
-            size = 1;
-            health = 160;
-            memoryCapacity = 64;
-        }});
+        //v8.7: 晶格链路（lattice-link）已删除 —— 见 AureliaMerge.retree()。
     }
 
     /**

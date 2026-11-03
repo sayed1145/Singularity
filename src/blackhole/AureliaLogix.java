@@ -26,14 +26,14 @@ import static mindustry.type.ItemStack.with;
  *     so a pylon line crosses broken ground a conduit cannot.</li>
  * <li><b>Liquid tank / reservoir</b> - the small and large liquid stores the relay network buffers against.</li>
  * <li><b>Overflow and underflow gate</b> - the two sorting gates every belt layout wants.</li>
- * <li><b>Lumen hauler</b> (heavy freight flier that joins any hub network), <b>aurite vanguard</b> (the ground
- *     line-breaker) and <b>tide tender</b> (naval liquid carrier).</li>
+ * <li><b>aurite vanguard</b> (the ground line-breaker) and <b>tide tender</b> (naval liquid carrier).</li>
+ *     <p>v8.7.1: the lumen hauler is gone - a network is scaled by adding hubs, not by adding freight fliers.</p>
  * </ul>
  */
 public final class AureliaLogix{
-    public static Block supplyPost, bufferPost, logiVault, liquidRelay, liquidTank, reservoir, overflowGate, underflowGate;
+    public static Block liquidRelay, liquidTank, reservoir, overflowGate, underflowGate;
 
-    public static Ship3D lumenHauler, tideTender;
+    public static Ship3D tideTender;
     public static Tank3D auriteVanguard;
 
     /** everything this pack adds, in tree order */
@@ -63,32 +63,9 @@ public final class AureliaLogix{
 
     private static void loadUnits(){
         /*
-         * The heavy hauler. Built in the fabricator, not by a station: it flies to the nearest hub on its own
-         * and joins that network, so a second hauler is how you scale a network up instead of spamming hubs.
+         * v8.7.1: the heavy freight flier (lumen hauler) was removed - the hub now prints and keeps its own
+         * drones only, and a network is scaled by building another hub instead of another hauler.
          */
-        lumenHauler = add(new Ship3D("lumen-hauler"){{
-            builder = LogixUnits::lumenHauler;
-            //NOT a building tether: an untethered tether unit despawns on its first tick. The hauler is built
-            //in a factory and joins a network by itself, so it owns its own life.
-            controller = u -> new LogixParts.PorterAI();
-            //v8.2: 流明无人机可被玩家接管、编队指挥，也可由逻辑控制；放手后自动回到物流网继续搬运。
-            isEnemy = false;
-            logicControllable = true;
-            playerControllable = true;
-            allowChangeCommands = true;
-            envDisabled = 0;
-            flying = true;
-            lowAltitude = false;
-            speed = 2.6f;
-            accel = 0.07f;
-            drag = 0.035f;
-            health = 520f;
-            armor = 2f;
-            hitSize = 15f;
-            itemCapacity = 220;
-            engineColor = AureliaFx.lumen;
-            targetAir = targetGround = false;
-        }});
 
         /*
          * The vanguard: the heavy ground line-breaker Aurelia was missing between the lancer and the siege.
@@ -205,18 +182,8 @@ public final class AureliaLogix{
          * The four network nodes. Prices follow the 8.0 line: a node is cheaper than the hub that drives it,
          * and the vault - which is a warehouse - is the expensive one.
          */
-        supplyPost = add(new LogixParts.Supply("lumen-supply-post"){{
-            requirements(Category.distribution, with(lumenite, 55, prismGlass, 30));
-            health = 240;
-        }});
-        bufferPost = add(new LogixParts.Buffer("lumen-buffer-post"){{
-            requirements(Category.distribution, with(lumenite, 80, aurite, 40, prismGlass, 35));
-            health = 300;
-        }});
-        logiVault = add(new LogixParts.Vault("lumen-logistics-vault"){{
-            requirements(Category.distribution, with(lumenite, 210, aurite, 140, prismAlloy, 40));
-            health = 900;
-        }});
+        //v8.7: 供货台（supply post）、缓存台（buffer post）、物流仓库（logistics vault）已删除。
+        //物流网现在只剩两件东西：中枢站（LogixParts.Hub）和需求点（LogixParts.Request）。
 
         /*
          * Wireless liquid transport. The relay is power-free on purpose - it is a levelling network, not a
@@ -260,7 +227,6 @@ public final class AureliaLogix{
 
     private static void loadPlans(){
         mindustry.world.blocks.units.UnitFactory f = (mindustry.world.blocks.units.UnitFactory)aureliaFabricator;
-        f.plans.add(new UnitPlan(lumenHauler, 60f * 34f, with(lumenite, 140, prismGlass, 70, prismAlloy, 20)));
         f.plans.add(new UnitPlan(auriteVanguard, 60f * 52f, with(lumenite, 220, aurite, 190, prismAlloy, 60, resonanceShard, 30)));
         mindustry.world.blocks.units.UnitFactory d = (mindustry.world.blocks.units.UnitFactory)tideDock;
         d.plans.add(new UnitPlan(tideTender, 60f * 40f, with(lumenite, 80, aurite, 70, prismGlass, 45)));

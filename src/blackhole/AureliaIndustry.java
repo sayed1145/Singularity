@@ -69,6 +69,8 @@ public final class AureliaIndustry{
             //和共振筛选机的潮汐水、棱镜采掘场的流明等离子错开，三种矿机三种加速介质。
             //消耗器本身在 applyBoosts() 里挂：极光冷冻液属于 AureliaFrontier，比本包注册得晚。
             liquidBoostIntensity = 1.6f;
+            //v8.7: 同样补上储液槽 —— 没有它，极光冷冻液送不进来，1.6 倍从来没发生过。
+            liquidCapacity = 10f;
         }});
 
         resonanceSifter = add(new blackhole.models.Drill3D("resonance-sifter"){{
@@ -76,7 +78,16 @@ public final class AureliaIndustry{
             size = 2;
             health = 400;
             tier = 3;
-            drillTime = 66f;
+            //v8.7: 重算挖掘速度。
+            //
+            //引擎的公式（v160.5 Drill）：items/s = 60 / drillTime * size²，
+            //接上加速液之后还要再乘 liquidBoostIntensity²（speed 进 warmup，warmup 又乘一次 speed）。
+            //旧值 drillTime = 66 → 60/66*4 = 3.64/s，比流明钻机（74 → 3.24/s）只快 12%，
+            //玩家看着就是"筛选机还不如基础钻机"。现在 66 → 50：
+            //   裸矿   60/50*4 = 4.8/s   （比流明钻机快 48%）
+            //   接潮汐水 4.8 * 1.5² = 10.8/s
+            //仍然低于三阶满配的金辉螺旋钻机（56 刻 / 3×3 → 9.64/s，接冷却液 24.6/s）。
+            drillTime = 50f;
             itemCapacity = 24;
             drawRim = true;
             heatColor = AureliaFx.lumen;
@@ -88,6 +99,10 @@ public final class AureliaIndustry{
             //原来 1.7 显示成 2.89 倍太快，压到 1.5 —— 面板正好 2.25 倍。
             liquidBoostIntensity = 1.5f;
             consumeLiquid(tidewater, 0.06f).boost();
+            //v8.7: 潮汐水要真的送得进来才行。原版 Drill 只写 hasLiquids = true，储液量是 0，
+            //而引擎 transferLiquid() 只会把 min(对方储液上限 - 已有量, 数量) 送过去 ——
+            //上限为 0 意味着潮汐水永远送不进来，加速也就从来没生效过。
+            liquidCapacity = 10f;
         }});
 
         prismHarvester = add(new blackhole.models.Drill3D("prism-harvester"){{
@@ -108,6 +123,8 @@ public final class AureliaIndustry{
             consumePower(2.6f);
             liquidBoostIntensity = 1.5f;
             consumeLiquid(lumenPlasma, 0.08f).boost();
+            //v8.7: 储液槽 —— 没有它流明等离子送不进来（见 resonanceSifter 的注释）
+            liquidCapacity = 10f;
         }});
 
         //the new mechanic: no ore underneath, no ground needed, mines a cone in the direction it faces
@@ -127,6 +144,8 @@ public final class AureliaIndustry{
             //v8.5.1: 汇聚器也能喝液体了 —— 流明等离子给 1.5 倍（面板 2.25 倍）
             liquidBoostIntensity = 1.5f;
             consumeLiquid(lumenPlasma, 0.07f).boost();
+            //v8.7: 储液槽 —— 同上，没有它加速是死的
+            liquidCapacity = 20f;
         }});
 
         // -------------------------------------------------------------- power

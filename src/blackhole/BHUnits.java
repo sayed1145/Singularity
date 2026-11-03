@@ -233,7 +233,7 @@ public class BHUnits{
                 recoil = 1.4f;
                 inaccuracy = 5f;
                 targetGround = false;
-                bullet = BHBullets.accretionSpray;
+                bullet = BHBullets.citadelSpray;
                 shootSound = BHSounds.pulse;
                 //twin AA barrels at +-0.75 of the turret: alternate between exactly those two
                 barrelSpread = 1.5f;
@@ -253,7 +253,7 @@ public class BHUnits{
                 recoil = 2.6f;
                 shake = 1.6f;
                 targetAir = false;
-                bullet = BHBullets.degenerateShell;
+                bullet = BHBullets.citadelShell;
                 shootSound = BHSounds.thump;
             }});
         }};

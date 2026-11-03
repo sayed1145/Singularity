@@ -203,13 +203,20 @@ public final class AureliaForge{
             health = 520;
             range = 6;
             tier = 4;
-            drillTime = 190f;
+            //v8.7: 挖掘速度提到 1.25 / 秒。
+            //
+            //引擎的公式（v160.5 BeamDrill）：每 drillTime 刻从每个朝向格子里各出 1 份，
+            //所以 items/s = 60 / drillTime * size。旧值 190 → 60/190*2 = 0.63/s，
+            //现在 drillTime = 96 → 60/96*2 = 1.25/s（正好是需求里的数字）。
+            drillTime = 96f;
             laserWidth = 0.7f;
             itemCapacity = 20;
             consumePower(1.3f);
             //a splash of plasma makes the cut faster - the optional booster every drill line wants
             consumeLiquid(lumenPlasma, 0.08f).boost();
             optionalBoostIntensity = 2.1f;
+            //v8.7: 储液槽 —— 没有它流明等离子送不进来，2.1 倍加速从来没发生过
+            liquidCapacity = 10f;
         }});
 
         /*
@@ -224,8 +231,8 @@ public final class AureliaForge{
             droneType = lumenDrone;
             droneBuildTime = 60f * 16f;
             droneCap = 3;
-            range = 58f * 8f;
-            itemCapacity = 120;
+            //v8.7: 旧的"总共 120"上限删掉 —— 总容量现在由 Hub 的构造函数按
+            //perItemCapacity(100) × itemTypes(20) = 2000 决定，每种物品各 100。
             consumePower(1.8f);
         }});
         cargoPoint = add(new LogixParts.Request("lumen-cargo-point", 1){{

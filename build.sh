@@ -31,6 +31,9 @@ echo "== dex (d8, android) =="
 
 echo "== packaging =="
 rm -f "$OUT"
+#v8.7: the staging dir has to be cleaned too. Classes of deleted content (the lattice link,
+#the supply post, ...) used to survive here and were packed into the jar as dead weight.
+rm -rf build/stage
 mkdir -p build/stage
 cp -r build/classes/. build/stage/
 if [ -d assets ]; then cp -r assets/. build/stage/; fi

@@ -38,8 +38,8 @@ import static mindustry.Vars.*;
  *
  * <p>Roles:
  * <ul>
- * <li><b>Hub</b> ({@link Hub}) - the brain and the depot. It prints and keeps its own drones, adopts any stray
- *     hauler that has no network, scans every node inside its radius and issues the hauls. It is also an
+ * <li><b>Hub</b> ({@link Hub}) - the brain and the depot. It prints and keeps its own drones, scans every node
+ *     inside its radius and issues the hauls. It is also an
  *     <i>active provider</i>: whatever a belt puts into it is pushed out to whoever needs it.</li>
  * <li><b>Supply post</b> ({@link Supply}) - a <i>passive provider</i>. Belts fill it; drones only take from it
  *     when something actually asked for the item.</li>
@@ -135,7 +135,7 @@ public final class LogixParts{
         }
 
         /**
-         * v8.2: the hauler is a commandable unit. Extending {@link CommandAI} is what makes it selectable and
+         * v8.2: the porter drone is a commandable unit. Extending {@link CommandAI} is what makes it selectable and
          * orderable at all ({@code Unit.isCommandable()} tests for exactly this class), so the drone obeys a
          * player order while one is standing, and falls straight back to hauling when the order is done.
          *
@@ -161,7 +161,7 @@ public final class LogixParts{
         public void updateMovement(){
             if(unit == null) return;
 
-            //a tethered drone belongs to its hub; a free hauler looks for one
+            //a tethered drone belongs to its hub; a free drone looks for one
             if(unit instanceof BuildingTetherc t && t.building() != null) home = t.building();
             if(home != null && !home.isValid()) home = null;
             if(home == null){
@@ -299,9 +299,30 @@ public final class LogixParts{
         public UnitType droneType;
         public int droneCap = 3;
         public float droneBuildTime = 60f * 14f;
-        public float range = 58f * tilesize;
         /** nothing smaller than this is worth a flight */
         public int minHaul = 10;
+
+        /**
+         * v8.7 —— <b>每种物品的存放上限</b>。
+         *
+         * <p>旧版是"总共 100"（{@code itemCapacity = 120}），所有物品加在一起不超过 120，
+         * 放三种东西就没地方了。现在改成每种物品各 100，
+         * 总上限抬到 {@link #perItemCapacity} × 20 种，方便直接当仓库用。
+         */
+        public int perItemCapacity = 100;
+        /** how many different item types the station can hold at full per-item capacity */
+        public int itemTypes = 20;
+
+        /**
+         * v8.7: the transport radius the player can set, in tiles.
+         *
+         * <p>默认仍是 58 格 —— 和 v8.6 完全一样（v160.5 的 {@code tilesize} 是 8 px，
+         * 旧代码写的 {@code 58f * 8f} = 464 px = 58 格，文案没说错）。
+         * 这一版只是把这个半径交给玩家：滑条 8–400 格，或者直接打开超距运输。
+         */
+        public int rangeTiles = 58;
+        /** v8.7: the radius a station reaches when the long-range option is on, in tiles */
+        public int longRangeTiles = 600;
 
         public Hub(String name){
             super(name);
@@ -309,11 +330,16 @@ public final class LogixParts{
             solid = true;
             hasItems = true;
             hasPower = true;
-            configurable = false;
-            itemCapacity = 120;
+            //v8.7: 面板可以手动操作了
+            configurable = true;
+            saveConfig = true;
+            //v8.7: 总容量 = 每种 100 × 20 种
+            itemCapacity = perItemCapacity * itemTypes;
             group = BlockGroup.transportation;
             flags = EnumSet.of(BlockFlag.unitAssembler);
             buildType = HubBuild::new;
+            //v8.7: 配置值打包成一个整数：低 9 位是范围（格），第 10 位是超距运输开关
+            config(Integer.class, (HubBuild tile, Integer cfg) -> tile.applyConfig(cfg));
         }
 
         @Override
@@ -335,14 +361,17 @@ public final class LogixParts{
         @Override
         public void setStats(){
             super.setStats();
-            stats.add(Stat.range, range / tilesize, StatUnit.blocks);
+            stats.add(Stat.range, rangeTiles, StatUnit.blocks);
             stats.add(Stat.itemCapacity, droneCap, StatUnit.none);
+            //v8.7: 每种物品的上限单独写一行（原来的"物品容量"是总数，会误导）
+            stats.remove(Stat.itemCapacity);
+            stats.add(new Stat("cargoCapacity"), perItemCapacity, StatUnit.none);
         }
 
         @Override
         public void drawPlace(int x, int y, int rotation, boolean valid){
             super.drawPlace(x, y, rotation, valid);
-            Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, mindustry.graphics.Pal.accent);
+            Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, rangeTiles * tilesize, mindustry.graphics.Pal.accent);
         }
 
         public class HubBuild extends Building implements LogiNode{
@@ -352,6 +381,32 @@ public final class LogixParts{
             public int dispatched;
             /** diagnostics: nodes seen and requests raised on the last cycle */
             public int lastNodes, lastRequests;
+
+            // ---------------------------------------------------------------- v8.7 player settings
+            /** the transport radius the player set, in tiles */
+            public int rangeTiles = Hub.this.rangeTiles;
+            /** when true the station links to nodes far outside its radius */
+            public boolean longRange = false;
+
+            /**
+             * v8.7: the working radius in world units. The long-range option pushes it out to
+             * {@link #longRangeTiles} - the drones have no distance limit of their own, so a haul
+             * across the map is perfectly legal.
+             */
+            public float radius(){
+                return (longRange ? longRangeTiles : rangeTiles) * tilesize;
+            }
+
+            /** packs the two settings into one integer (the net layer only carries primitives) */
+            public int packConfig(){
+                return (rangeTiles & 0x1ff) | (longRange ? 0x200 : 0);
+            }
+
+            /** applies a packed config value */
+            public void applyConfig(int cfg){
+                rangeTiles = Mathf.clamp(cfg & 0x1ff, 8, 400);
+                longRange = (cfg & 0x200) != 0;
+            }
 
             @Override
             public Building build(){
@@ -413,7 +468,7 @@ public final class LogixParts{
             public void schedule(){
                 //1. collect the nodes of this network
                 Seq<LogiNode> nodes = new Seq<>();
-                indexer.eachBlock(team, x, y, range, b -> b instanceof LogiNode, b -> nodes.add((LogiNode)b));
+                indexer.eachBlock(team, x, y, radius(), b -> b instanceof LogiNode, b -> nodes.add((LogiNode)b));
                 if(!nodes.contains(this)) nodes.add(this);
                 lastNodes = nodes.size;
 
@@ -541,14 +596,45 @@ public final class LogixParts{
                 }
             }
 
+            /**
+             * v8.7: 每种物品各 100，而不是所有物品加起来 120。
+             *
+             * <p>引擎的总容量检查（{@code items.total() < itemCapacity}）被换成了按物品的检查；
+             * 总容量仍然留着当兜底（{@link Hub#itemTypes} 种 × {@link Hub#perItemCapacity}）。
+             */
             @Override
             public boolean acceptItem(Building source, Item item){
-                return items.total() < block.itemCapacity;
+                return items.get(item) < perItemCapacity && items.total() < block.itemCapacity;
             }
 
+            /**
+             * v8.7: 引擎收货时用的上限。改成每种 100 之后，原版那个 {@code block.itemCapacity}
+             * （所有物品加起来 2000）就不再是"每种物品能放多少"，这里把它换掉，
+             * 引擎的 acceptStack 就会自动按每种物品的上限算。
+             */
+            @Override
+            public int getMaximumAccepted(Item item){
+                return perItemCapacity;
+            }
+
+            /** v8.7: the network must know that this station only wants 100 of each item */
+            @Override
+            public int target(Item item){
+                return perItemCapacity;
+            }
+
+            /**
+             * v8.7: 点选站点时把运送范围画出来，并且把范围里的物流节点一起高亮 ——
+             * 玩家一眼就能看见"这台站现在管着哪些点"。
+             */
             @Override
             public void drawSelect(){
-                Drawf.dashCircle(x, y, range, mindustry.graphics.Pal.accent);
+                float rad = radius();
+                Drawf.dashCircle(x, y, rad, mindustry.graphics.Pal.accent);
+                Drawf.dashCircle(x, y, rad * 0.5f, mindustry.graphics.Pal.accent);
+                indexer.eachBlock(team, x, y, rad, b -> b instanceof LogiNode && b != this, b -> {
+                    Drawf.selected(b, mindustry.graphics.Pal.accent);
+                });
             }
 
             @Override
@@ -595,12 +681,57 @@ public final class LogixParts{
             public void write(Writes write){
                 super.write(write);
                 write.f(progress);
+                //v8.7: 玩家设置
+                write.i(packConfig());
             }
 
             @Override
             public void read(Reads read, byte revision){
                 super.read(read, revision);
                 progress = read.f();
+                //v8.7: 玩家设置（旧存档没有这一项，保持默认）
+                if(revision >= 2) applyConfig(read.i());
+            }
+
+            @Override
+            public byte version(){ return 2; }
+
+            // ---------------------------------------------------------------- v8.7 manual operation
+
+            /** v8.7: the player pressed "dispatch now" - run the network cycle immediately */
+            public void dispatchNow(){
+                if(efficiency <= 0.01f || !enabled) return;
+                schedule();
+            }
+
+            /**
+             * v8.7: the station's own panel. The player can set the transport radius, turn the
+             * long-range haul on (nodes outside the radius are linked anyway) and push the drones
+             * out by hand instead of waiting for the next cycle.
+             */
+            @Override
+            public void buildConfiguration(Table table){
+                table.add(Core.bundle.get("bh.cargo.range")).left().row();
+                //v8.7.1 crash fix: Arc's Table.slider signature is (min, max, step, defvalue, listener) - the
+                //VALUE comes last, the range comes first. The old call passed the radius as the MINIMUM and the
+                //lower bound as the MAXIMUM, so Arc's ProgressBar constructor (arc/scene/ui/ProgressBar.java:
+                //"if(min > max) throw new IllegalArgumentException(\"max must be > min...\")") blew up the moment
+                //the panel was opened - on Android that killed the whole game (MobileInput.tap -> tileTapped ->
+                //BlockConfigFragment.showConfig -> buildConfiguration). The bounds are constants now and the
+                //current radius is only the DEFAULT VALUE of the slider.
+                float min = 8f, max = 400f;
+                if(min < max){
+                    table.slider(min, max, 1f, rangeTiles, v -> {
+                        rangeTiles = Math.round(v);
+                        configure(packConfig());
+                    }).growX().row();
+                }
+                table.check(Core.bundle.get("bh.cargo.longrange"), longRange, v -> {
+                    longRange = v;
+                    configure(packConfig());
+                }).left().row();
+                table.button(Core.bundle.get("bh.cargo.dispatch"), this::dispatchNow).growX().row();
+                table.add(Core.bundle.format("bh.cargo.peritemstat", perItemCapacity)).left().row();
             }
         }
     }
@@ -651,71 +782,8 @@ public final class LogixParts{
     }
 
     /** Passive provider: belts fill it, drones only take from it when something asked. */
-    public static class Supply extends Node{
-        public Supply(String name){
-            super(name, 2);
-            itemCapacity = 120;
-            buildType = SupplyBuild::new;
-        }
-
-        public class SupplyBuild extends NodeBuild implements LogiNode{
-            @Override
-            public Building build(){
-                return this;
-            }
-
-            @Override
-            public int role(){
-                return 1;
-            }
-
-            @Override
-            public boolean acceptItem(Building source, Item item){
-                return items.total() < block.itemCapacity;
-            }
-        }
-    }
 
     /** Storage: the dump target for surplus, and the first place a request is served from. */
-    public static class Vault extends Node{
-        public Vault(String name){
-            super(name, 3);
-            itemCapacity = 300;
-            buildType = VaultBuild::new;
-        }
-
-        public class VaultBuild extends NodeBuild implements LogiNode{
-            @Override
-            public Building build(){
-                return this;
-            }
-
-            @Override
-            public int role(){
-                return 3;
-            }
-
-            @Override
-            public int capacity(){
-                return block.itemCapacity * 3;
-            }
-
-            @Override
-            public int target(Item item){
-                return block.itemCapacity * 3;
-            }
-
-            @Override
-            public boolean acceptItem(Building source, Item item){
-                return items.total() < capacity();
-            }
-
-            @Override
-            public int acceptStack(Item item, int amount, Teamc source){
-                return Math.max(0, Math.min(amount, capacity() - items.total()));
-            }
-        }
-    }
 
     /** Requester: one item, kept topped up, handed to whatever the pad touches. */
     public static class Request extends Node{
@@ -815,76 +883,6 @@ public final class LogixParts{
     }
 
     /**
-     * Buffer: a requester that is also a provider. It parks a stock of one item next to where that item is
-     * used, so the short hauls are local and the long hauls happen once.
-     */
-    public static class Buffer extends Node{
-        public Buffer(String name){
-            super(name, 2);
-            itemCapacity = 200;
-            configurable = true;
-            saveConfig = true;
-            clearOnDoubleTap = true;
-            buildType = BufferBuild::new;
-
-            config(Item.class, (BufferBuild build, Item item) -> build.sought = item);
-            configClear((BufferBuild build) -> build.sought = null);
-        }
-
-        public class BufferBuild extends NodeBuild implements LogiNode{
-            public @Nullable Item sought;
-
-            @Override
-            public Building build(){
-                return this;
-            }
-
-            @Override
-            public int role(){
-                return 4;
-            }
-
-            @Override
-            public @Nullable Item want(){
-                return sought;
-            }
-
-            @Override
-            public boolean acceptItem(Building source, Item item){
-                return sought != null && item == sought && items.total() < block.itemCapacity;
-            }
-
-            @Override
-            public int acceptStack(Item item, int amount, Teamc source){
-                if(sought == null || item != sought) return 0;
-                return Math.max(0, Math.min(amount, block.itemCapacity - items.total()));
-            }
-
-            @Override
-            public void buildConfiguration(Table table){
-                ItemSelection.buildTable(block, table, content.items().select(i -> i.unlockedNow() &&
-                    i.name.startsWith("blackhole-")), () -> sought, this::configure, selectionRows, selectionColumns);
-            }
-
-            @Override
-            public Item config(){
-                return sought;
-            }
-
-            @Override
-            public void write(Writes write){
-                super.write(write);
-                write.s(sought == null ? -1 : sought.id);
-            }
-
-            @Override
-            public void read(Reads read, byte revision){
-                super.read(read, revision);
-                int id = read.s();
-                sought = id == -1 ? null : content.item(id);
-            }
-        }
-    }
 
     // =====================================================================================================
     // liquids

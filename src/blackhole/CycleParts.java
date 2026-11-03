@@ -135,8 +135,16 @@ public final class CycleParts{
 
         /** optional item charge */
         public @Nullable Item boostItem;
-        public float itemCapacityBoost = 5200f;
+        public float itemCapacityBoost = 5000f;
         public float itemBoostDuration = 60f * 22f;
+        /**
+         * v8.7: 深库成形之后，护盾回复速度乘这个系数。
+         *
+         * <p>旧值 5200 + 7000 = 12200，而且护盾量只在"充能窗口"（22 秒）内按 12200 计算，
+         * 窗口一过就被 {@code shield = min(shield, realCapacity())} 砍回 7000 ——
+         * 这就是"永远到不了 12000、过程中自动重置回 7000"的两个成因。
+         */
+        public float itemRegenBoost = 2.5f;
 
         public Color domeColor = Color.valueOf("8fe9ff");
         public Color chargeColor = Color.valueOf("b69cff");
@@ -198,7 +206,8 @@ public final class CycleParts{
         @Override
         public void setStats(){
             super.setStats();
-            stats.add(Stat.shieldHealth, shieldCapacity, StatUnit.none);
+            //v8.7: 面板上写满额护盾（7000 + 深库 5000 = 12000），而不是只有底座值
+            stats.add(Stat.shieldHealth, shieldCapacity + (boostItem != null ? itemCapacityBoost : 0f), StatUnit.none);
             stats.add(Stat.regenerationRate, regen, StatUnit.perSecond);
             stats.add(Stat.range, radius / tilesize, StatUnit.blocks);
             stats.add(Stat.cooldownTime, breakCooldown / 60f, StatUnit.seconds);
@@ -225,6 +234,13 @@ public final class CycleParts{
             public float cooldown;
             /** ticks left of the item charge */
             public float charge;
+            /**
+             * v8.7: 深库是否已经成形。
+             *
+             * <p>装过共振碎片之后，穹顶的护盾库就是 12000，而且<b>不会因为充能窗口结束而掉回 7000</b>。
+             * 这个标志会写进存档。
+             */
+            public boolean deepBank;
             /** 0..1 smoothed "the dome is standing" value, used for drawing only */
             public float warmup;
             /** 0..1 flash after a hit */
@@ -237,7 +253,8 @@ public final class CycleParts{
             }
 
             public float realCapacity(){
-                return shieldCapacity + (charge > 0f ? itemCapacityBoost : 0f);
+                //v8.7: 深库一旦成形就一直在，不会再掉回 7000
+                return shieldCapacity + (deepBank ? itemCapacityBoost : 0f);
             }
 
             public boolean liquidBoost(){
@@ -282,10 +299,14 @@ public final class CycleParts{
                 if(boostItem != null && charge <= 0f && items.has(boostItem)){
                     items.remove(boostItem, 1);
                     charge = itemBoostDuration;
+                    //v8.7: 第一片碎片把护盾库撑到 12000，之后不再退回 7000
+                    deepBank = true;
                 }
 
                 float cap = realCapacity();
-                shield = Math.min(cap, shield + regen / 60f * Time.delta * efficiency * (liquidBoost() ? liquidRegenBoost : 1f));
+                shield = Math.min(cap, shield + regen / 60f * Time.delta * efficiency
+                    * (liquidBoost() ? liquidRegenBoost : 1f)
+                    * (deepBank ? itemRegenBoost : 1f));
                 warmup = Mathf.lerpDelta(warmup, 1f, 0.05f);
 
                 if(shield <= 0.001f) return;
@@ -413,7 +434,7 @@ public final class CycleParts{
             }
 
             @Override
-            public byte version(){ return 1; }
+            public byte version(){ return 2; }
 
             @Override
             public void write(Writes write){
@@ -421,6 +442,8 @@ public final class CycleParts{
                 write.f(shield);
                 write.f(cooldown);
                 write.f(charge);
+                //v8.7: 深库标志
+                write.bool(deepBank);
             }
 
             @Override
@@ -429,6 +452,8 @@ public final class CycleParts{
                 shield = read.f();
                 cooldown = read.f();
                 charge = read.f();
+                //v8.7: 旧存档没有这个字段 —— 只有护盾确实超过底座值时才当作已经成形
+                deepBank = revision >= 2 ? read.bool() : (shield > shieldCapacity + 1f);
                 if((Float.isNaN(shield) || Float.isInfinite(shield))) shield = 0f;
                 if((Float.isNaN(cooldown) || Float.isInfinite(cooldown))) cooldown = breakCooldown;
                 if((Float.isNaN(charge) || Float.isInfinite(charge))) charge = 0f;

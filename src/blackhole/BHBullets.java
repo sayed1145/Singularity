@@ -9,13 +9,14 @@ import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.Vars;
 
 public class BHBullets{
     public static BulletType
         collapsarShell, singularityWell,
-        microHole, hawkingLance, accretionSpray,
+        microHole, hawkingLance, accretionSpray, citadelSpray,
         frameDragShot, quasarBeam,
-        degenerateShell,
+        degenerateShell, citadelShell,
         citadelCollapsar, citadelWell;
 
     public static void load(){
@@ -133,6 +134,23 @@ public class BHBullets{
             homingRange = 70f;
         }};
 
+        //v8.7 堡垒号专用速射弹：吸积喷流的复制品，伤害 30 -> 40。
+        //accretionSpray 是吸积炮和另外两台单位共用的，不能直接改 —— 所以这里单独开一种。
+        //v8.7.1: 40 -> 45。
+        citadelSpray = new BasicBulletType(5.4f, 45f){{
+            lifetime = 33f;
+            width = 8f;
+            height = 14f;
+            backColor = BHPal.rim;
+            frontColor = Color.white;
+            trailLength = 10;
+            trailWidth = 1.7f;
+            trailColor = BHPal.accretion;
+            hitEffect = despawnEffect = BHFx.degenerateHit;
+            homingPower = 0.09f;
+            homingRange = 70f;
+        }};
+
         // 参考系拖曳炮：高速动能弹，附带击退
         frameDragShot = new BasicBulletType(7.2f, 58f){{
             lifetime = 30f;
@@ -193,6 +211,23 @@ public class BHBullets{
             knockback = 1.2f;
         }};
 
+        //v8.7 堡垒号专用榴弹：简并榴弹的复制品，直伤 70 -> 80，范围伤害 55 -> 60。
+        citadelShell = new BasicBulletType(4.2f, 80f){{
+            lifetime = 42f;
+            width = 11f;
+            height = 16f;
+            backColor = BHPal.degenerate;
+            frontColor = Color.white;
+            trailLength = 12;
+            trailWidth = 2.1f;
+            trailColor = BHPal.degenerate;
+            splashDamage = 60f;
+            splashDamageRadius = 34f;
+            hitEffect = despawnEffect = BHFx.degenerateHit;
+            hitShake = 1.6f;
+            knockback = 1.2f;
+        }};
+
         // 平台主炮种下的黑洞（比炮塔版稍小、持续稍短）
         citadelWell = new GrowingHoleBulletType(){{
             lifetime = 60f * 8f;
@@ -206,7 +241,8 @@ public class BHBullets{
             lensStrength = 1.1f;
         }};
 
-        citadelCollapsar = new BasicBulletType(3.4f, 90f){{
+        //v8.7: 堡垒号主炮 直伤 90 -> 110，范围伤害 140 -> 150
+        citadelCollapsar = new BasicBulletType(3.4f, 110f){{
             lifetime = 62f;
             width = 13f;
             height = 19f;
@@ -222,7 +258,7 @@ public class BHBullets{
             pierceArmor = true;
             hittable = false;
             absorbable = false;
-            splashDamage = 140f;
+            splashDamage = 150f;
             splashDamageRadius = 52f;
             hitEffect = BHFx.collapse;
             despawnEffect = BHFx.collapse;
@@ -247,7 +283,13 @@ public class BHBullets{
     // ================================================================
     public static class GrowingHoleBulletType extends BulletType{
         public float startRadius = 3f, endRadius = 24f;
+        /** 引力范围（px）：黑洞真正的引力场半径，范围内的单位会被拖进视界 */
         public float pullRadius = 200f, pullForce = 5f;
+        /** v8.7.7: 吸收速度剖面（格/秒）—— 最外缘 {@link #rimSpeed} 维持 0.1 不变，由外向内逐格递增，
+         *  最里一格恒为 {@link #coreSpeed}；0.1 与 0.4 让整条剖面从头到尾都是一场慢速爬行。 */
+        public float rimSpeed = 0.1f, coreSpeed = 0.4f;
+        /** 对周围建筑的每秒伤害（同样随体积增长） */
+        public float buildingDamage = 45f;
         public float lensStrength = 1.2f;
         /** 生长曲线指数，<1 表示前期长得快 */
         public float growPow = 0.62f;
@@ -284,14 +326,21 @@ public class BHBullets{
             // 半径越大，吞噬范围与力度同步增长
             float grow = r / Math.max(0.001f, endRadius);
             float pr = pullRadius * (0.45f + grow * 0.55f);
-            float pf = pullForce * (0.5f + grow * 0.5f);
+
+            //v8.7.2: 每帧扫一次引力租约，把引力源已经放开的单位高度还回去
+            GravityField.update();
 
             Units.nearbyEnemies(b.team, b.x - pr, b.y - pr, pr * 2f, pr * 2f, u -> {
                 float dst = u.dst(b);
                 if(dst > pr) return;
-                float scl = 1f - dst / pr;
-                Tmp.v1.set(b.x - u.x, b.y - u.y).nor().scl(pf * scl * scl * 9f * Time.delta);
-                u.impulse(Tmp.v1);
+                //v8.7.7: 最外缘每秒 0.1 格（不变），从外到内按归一化深度线性逐格递增，最里一格（8 px）恒为每秒 0.4 格。
+                //tiles = rim + (core - rim) * clamp((pr - d) / (pr - 8))，d 为单位到视心的距离——单调不减的爬升剖面。
+                //范围本身不是固定值：pr = pullRadius * (0.45 + grow * 0.55)，跟着黑洞的半径一起长大。
+                //单位自己的速度仍然保留并叠加在搬运量上，所以跑得快的能挣脱。
+                float scl = Mathf.clamp((pr - dst) / Math.max(1f, pr - 8f));
+                float tiles = Mathf.lerp(rimSpeed, coreSpeed, scl);
+                float px = tiles * 8f * (0.5f + 0.5f * grow);
+                GravityField.pull(b.id, u, b.x, b.y, px, r * 1.45f);
 
                 // 越过视界 -> 被撕碎
                 if(dst < r * 1.45f){
@@ -300,6 +349,16 @@ public class BHBullets{
                         BHFx.devour.at(u.x, u.y, b.angleTo(u), BHPal.accretion);
                     }
                 }
+            });
+
+            //v8.7.2: 黑洞也会啃周围的建筑（范围攻击的一部分）——只打敌方建筑，友方建筑不受影响。
+            //注意：indexer.eachBlock(team, …) 给的是"该队自己的"建筑，所以这里传 null（扫描全部），
+            //再用过滤条件挑出敌方的建筑。
+            Vars.indexer.eachBlock(null, b.x - pr, b.y - pr, pr * 2f, build -> build.team != b.team, build -> {
+                float d = Mathf.dst(build.x, build.y, b.x, b.y);
+                if(d > pr || build.team == b.team) return;
+                float scl = 1f - d / pr;
+                build.damage(buildingDamage * scl * scl * Time.delta * (0.4f + grow));
             });
 
             // 吞噬敌方弹幕
@@ -320,6 +379,13 @@ public class BHBullets{
             if(Mathf.chanceDelta(0.25f)){
                 Effect.shake(grow * 1.6f, 5f, b.x, b.y);
             }
+        }
+
+        @Override
+        public void removed(Bullet b){
+            //v8.7.2: 黑洞消失时把还攥着的单位放掉（高度要还回去）
+            GravityField.releaseOwner(b.id);
+            super.removed(b);
         }
 
         @Override
@@ -347,6 +413,8 @@ public class BHBullets{
     public static class TravellingHoleBulletType extends BulletType{
         public float holeRadius = 3f;
         public float pullRadius = 80f, pullForce = 2f;
+        /** v8.7.3: 慢速吸收剖面（格/秒）—— 边缘 {@link #rimSpeed}，最里 {@link #coreSpeed} */
+        public float rimSpeed = 2f, coreSpeed = 12f;
         public float lensStrength = 0.8f;
         public float tilt = 0.75f;
 
@@ -366,8 +434,9 @@ public class BHBullets{
                 float dst = u.dst(b);
                 if(dst > pr) return;
                 float scl = 1f - dst / pr;
-                Tmp.v1.set(b.x - u.x, b.y - u.y).nor().scl(pullForce * scl * scl * 8f * Time.delta);
-                u.impulse(Tmp.v1);
+                //v8.7.3: 慢速吸收 —— 边缘 2 格/秒，最里 12 格/秒，绝不瞬间吞人
+                float tiles = Mathf.lerp(rimSpeed, coreSpeed, scl);
+                GravityField.pull(b.id, u, b.x, b.y, tiles * 8f, holeRadius * 2.1f);
                 if(dst < holeRadius * 2.1f){
                     u.damagePierce(damage * 0.2f * Time.delta);
                     BHFx.devour.at(u.x, u.y, b.angleTo(u), BHPal.accretion);
@@ -377,6 +446,13 @@ public class BHBullets{
             if(Mathf.chanceDelta(0.5f)){
                 BHFx.accretionSpark.at(b.x, b.y, holeRadius, BHPal.accretion);
             }
+        }
+
+        @Override
+        public void removed(Bullet b){
+            //v8.7.2: 微黑洞消失时把还攥着的单位放掉
+            GravityField.releaseOwner(b.id);
+            super.removed(b);
         }
 
         @Override

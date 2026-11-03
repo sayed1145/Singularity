@@ -8,7 +8,9 @@ import blackhole.g3d.Kit.*;
 import static blackhole.g3d.Kit.*;
 
 /**
- * v8.1 unit rigs: the heavy hauler, the ground vanguard and the tanker.
+ * v8.1 unit rigs: the ground vanguard and the tanker.
+ *
+ * <p>v8.7.1: the lumen hauler is gone - the logistics network scales by adding hubs instead.
  *
  * <p>Kit rules as always - one solid hull, plates bolted onto it, every moving part on a bone that hangs off
  * the body, nothing floating and nothing crossing another part.
@@ -17,61 +19,6 @@ public final class LogixUnits{
     private LogixUnits(){}
 
     static final Color canopy = Color.valueOf("5a86c8"), tide = Color.valueOf("3f7fc0");
-
-    /**
-     * Lumen hauler: the heavy freight flier. A long open frame with four container bays and a lift fan at each
-     * corner - the shape says "load carrier" at a glance and it is clearly bigger than the little drone.
-     */
-    public static Rig lumenHauler(Ship3D t){
-        Style s = aurelia;
-        Rig r = new Rig();
-        int root = r.bone(-1, 0, 0, 0);
-        int body = t.BODY = r.bone(root, 0, 0, 0);
-
-        Mesh m = r.part(body);
-        hull(m, s).hexa(true, -3.2f, -6.4f, -0.7f, 3.2f, -6.4f, -0.7f, 2.4f, 6.8f, -0.6f, -2.4f, 6.8f, -0.6f,
-            -2.6f, -5.6f, 1.5f, 2.6f, -5.6f, 1.5f, 1.7f, 6.0f, 1.2f, -1.7f, 6.0f, 1.2f);
-        r.shadow(0);
-        int hullI = r.lastIndex();
-
-        //cockpit at the nose
-        m = r.part(body);
-        glass(m, canopy).taper(0, 4.6f, 1.15f, 1.3f, 1.9f, 1.55f, 0.6f, 1.0f, 0, -0.25f, false);
-        r.on(hullI);
-
-        //two container bays along the spine, each its own box, with a gap between them
-        for(int i = 0; i < 2; i++){
-            float cy = i == 0 ? 1.6f : -2.8f;
-            m = r.part(body);
-            dark(m, s).cbevel(0, cy, 1.4f, 2.1f, 1.8f, 1.5f, 0.22f);
-            r.on(hullI);
-            int crate = r.lastIndex();
-            m = r.part(body);
-            trim(m, s).box(-2.15f, cy - 0.3f, 1.6f, 2.15f, cy + 0.3f, 2.7f);
-            r.on(crate).detail();
-        }
-        m = r.part(body);
-        team(m).box(-1.2f, -5.4f, 1.51f, 1.2f, -4.2f, 1.56f);
-        r.on(hullI).detail();
-
-        //four lift arms with fans, one per corner, all clear of the bays
-        for(int i = 0; i < 4; i++){
-            float sx = (i & 1) == 0 ? -1 : 1, sy = (i & 2) == 0 ? -1 : 1;
-            m = r.part(body);
-            hull2(m, s).hexa(true, sx * 2.4f, sy * 2.6f, -0.2f, sx * 2.4f, sy * 4.0f, -0.2f, sx * 5.4f, sy * 4.4f, -0.1f, sx * 5.4f, sy * 3.0f, -0.1f,
-                sx * 2.4f, sy * 2.6f, 0.6f, sx * 2.4f, sy * 4.0f, 0.6f, sx * 5.4f, sy * 4.4f, 0.4f, sx * 5.4f, sy * 3.0f, 0.4f);
-            r.shadow(1);
-            int arm = r.lastIndex();
-            m = r.part(body);
-            steel(m, s).at(sx * 5.4f, sy * 3.7f, 0.15f).lathe(10, 0, 1.25f, 0f, 1.25f, 0.4f, 0.7f, 0.7f);
-            r.on(arm).detail();
-            t.engine(body, sx * 5.4f, sy * 3.7f, 0.15f, 0.8f);
-        }
-
-        r.half = 7.5f;
-        r.height = 3.4f;
-        return r.finish();
-    }
 
     /**
      * Aurite vanguard: the line-breaker. A wide tracked hull with a sloped glacis, a single heavy turret and a

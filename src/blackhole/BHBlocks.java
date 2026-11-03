@@ -396,6 +396,9 @@ public class BHBlocks{
                     ItemStack.with(Items.silicon, 120, BHItems.hawkingDust, 50, BHItems.degenerateMatter, 70))
             );
             consumeLiquid(Liquids.cryofluid, 0.12f);
+            //v8.7: 没有储液槽就收不到液体 —— 配方里写的冷却液永远送不进来。
+            //液体本身由 AureliaMerge.rebindCoolant() 换成极光冷冻液。
+            liquidCapacity = 40f;
         }};
 
         /**
@@ -417,6 +420,8 @@ public class BHBlocks{
                         BHItems.degenerateMatter, 400, BHItems.singularityCore, 55))
             );
             consumeLiquid(Liquids.cryofluid, 0.3f);
+            //v8.7: 同上 —— 必须有储液槽，极光冷冻液才送得进来
+            liquidCapacity = 60f;
         }};
     }
 

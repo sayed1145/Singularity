@@ -336,8 +336,10 @@ public final class AureliaCycle{
             liquidRadiusBoost = 8f * 8f;
             liquidRegenBoost = 1.9f;
             boostItem = resonanceShard;
-            itemCapacityBoost = 5200f;
+            //v8.7: 深库 —— 7000 + 5000 = 12000 护盾，而且不会再自动回落成 7000
+            itemCapacityBoost = 5000f;
             itemBoostDuration = 60f * 22f;
+            itemRegenBoost = 2.5f;
         }});
 
         // ---------------------------------------------------------------- the tier-3 core
